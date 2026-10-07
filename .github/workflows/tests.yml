@@ -1,0 +1,30 @@
+name: Tests
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-26.04
+    strategy:
+      fail-fast: false
+      matrix:
+        config: [debug, release]
+    env:
+      CXX: g++-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++-15 cmake ninja-build
+
+      - name: Configure
+        run: cmake --preset default
+
+      - name: Build
+        run: cmake --build --preset ${{ matrix.config }}
+
+      - name: Test
+        run: ctest --preset ${{ matrix.config }} --output-on-failure
