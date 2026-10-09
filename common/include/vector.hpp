@@ -23,3 +23,19 @@ namespace common{
 [[nodiscard]] constexpr vec2d operator-(point const & a, point const & b) noexcept{
     return vec2d{a.getx()-b.getx(),a.gety()-b.gety()};
 }
+[[nodiscard]] constexpr point operator+(point const & a, vec2d const & v) noexcept{
+    return point{a.getx()+v.getx(),a.gety()+v.gety()};
+}
+[[nodiscard]] constexpr vec2d operator+(vec2d const & a, vec2d const & b) noexcept{
+    return vec2d{a.getx()+b.getx(),a.gety()+b.gety()};
+}
+[[nodiscard]] constexpr vec2d operator*(vec2d const & a, double b) noexcept{
+    return vec2d{a.getx()*b,a.gety()*b};
+}
+[[nodiscard]] constexpr vec2d operator*(double b, vec2d const & a ) noexcept{
+    return vec2d{a.getx()*b,a.gety()*b};
+}
+
+}
+
+#endif
