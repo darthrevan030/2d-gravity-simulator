@@ -1,21 +1,26 @@
+
 #ifndef DIRECTORY_FILENAME_HPP
 #define DIRECTORY_FILENAME_HPP
 #include<vector>
+
+#include <cmath>
 namespace common {
 
 }
-[[nodiscard]] inline point compute_force(point const & p1, double m1, point const & p2, double m2) {
-  (void)p1;
-  (void)m1;
-  (void)p2;
-  (void)m2;
-  return point{0.0, 0.0};
+[[nodiscard]] inline vec2d compute_force(point const & p1, double m1, point const & p2, double m2) {
+  vec2d difvec=p2-p1;
+  double const dist_sq = difvec.getx()*difvec.getx() + difvec.gety()*difvec.gety();
+  if (dist_sq<EPSILON*EPSILON){
+    return vec2d{0,0};}
+
+  double vec3norm=dist_sq*(std::sqrt(dist_sq));
+
+  double scalar1=G*(1/vec3norm)*m1*m2;
+
+  return difvec*scalar1;
 }
-inline void update_kinematics(point & pos, point & vel, point const & accel, double dt) {
-  (void)pos;
-  (void)vel;
-  (void)accel;
-  (void)dt;
+inline void update_kinematics(point & pos, vec2d & vel, vec2d const & accel, double dt) {
+  vec2d acceleration=
 }
 
 /**
@@ -31,5 +36,5 @@ inline void apply_rebound(point & pos, point & vel, double radius, double width,
   (void)height;
 }
 
-
+}
 #endif
