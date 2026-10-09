@@ -11,6 +11,8 @@ namespace common {
   public:
     double x = 0.0;
     double y = 0.0;
+    [[nodiscard]] constexpr double getx() const noexcept { return x; }
+    [[nodiscard]] constexpr double gety() const noexcept { return y; }
   };
 
   inline std::istream & operator>>(std::istream & is, point & p) {
