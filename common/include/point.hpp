@@ -13,6 +13,21 @@ namespace common {
     double y = 0.0;
     [[nodiscard]] constexpr double getx() const noexcept { return x; }
     [[nodiscard]] constexpr double gety() const noexcept { return y; }
+
+    constexpr Point& setx(double newX) noexcept {
+    x = newX;
+    return *this}
+
+    constexpr Point& sety(double newY) noexcept {
+    y = newY;
+    return *this;
+    }
+    }
+
+    constexpr Point& setY(double newY) noexcept {
+        y = newY;
+        return *this;
+    }
   };
 
   inline std::istream & operator>>(std::istream & is, point & p) {
