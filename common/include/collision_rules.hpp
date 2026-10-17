@@ -6,7 +6,7 @@
 #include cmath
 namespace common{
     [[nodiscard]] inline bool checkcollision(point p1,double r1,point p2, double r2){
-        if ((r1+r2)<sqrt(pow(p1.x-p2.x,2)+pow(p1.y-p2.y,2))){
+        if ((r1+r2)>sqrt(pow(p1.x-p2.x,2)+pow(p1.y-p2.y,2))){
             return True
         }
     }
