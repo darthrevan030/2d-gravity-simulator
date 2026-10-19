@@ -15,11 +15,11 @@ namespace common{
         }
         [[nodiscard]] constexpr double getx() const noexcept{return x;}
         [[nodiscard]] constexpr double gety() const noexcept{return y;}
-        [[nodiscard]]  double norm2d() const noexcept {return sqrt(x*x+y*y);}
+        [[nodiscard]]  double norm2d() const noexcept {return std::sqrt(x*x+y*y);}
 
         constexpr vec2d& setx(double newX) noexcept {
         x = newX;
-        return *this}
+        return *this;}
 
         constexpr vec2d& sety(double newY) noexcept {
         y = newY;
