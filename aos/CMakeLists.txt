@@ -1,10 +1,8 @@
 add_executable(grav-aos)
 target_sources(grav-aos PRIVATE 
     src/main.cpp
-#    include/file1.hpp
-#    src/file1.cpp
-#    include/file2.hpp
-#    src/file2.cpp
+    include/particle.hpp
+    src/particle.cpp
 )
 
 target_include_directories(grav-aos PRIVATE 
