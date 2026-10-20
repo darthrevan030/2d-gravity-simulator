@@ -1,14 +1,37 @@
-#ifndef COMMON_INPUT_PARSER_HPP
-#define COMMON_INPUT_PARSER_HPP
+#include <sstream>
 
-#include "particle_record.hpp"
-#include <istream>
-#include <vector>
+#include <optional> 
 
-namespace common {
+#include <string>
 
-[[nodiscard]] std::vector<particle_record> parse_input_stream(std::istream & input, double width, double height);
+#include<cmath>
 
-}  // namespace common
+std::optional<particle_record> parse_line(std::string const & line , double width, double height){
+  std::istringstream iss{line};
+  double mass = 0.0;
+  double radius = 0.0;
+  double posx=0.0;
+  double posy=0.0;
+  double velx=0.0;
+  double vely=0.0;
+  
 
-#endif
+  if (!(iss >> mass >> radius >> posx >> posy >> velx >> vely)) {
+
+     return std::nullopt;
+    
+    }   // check if there are 6 parameters on the line
+  char extra = 0;
+  if (iss >> extra) { return std::nullopt; }       // check if there is anything left on teh line
+
+
+  if (!(std::isfinite(mass) && std::isfinite(radius)  && std::isfinite(posx)  && std::isfinite(posy)  && std::isfinite(velx) && std::isfinite(vely))) { 
+    
+    
+    return std::nullopt; 
+  
+  
+  }
+  if ((mass<=0)||(radius<=0)||(posx<0)||(posx>width)||(posy<0)||(posy>height)){return std::nullopt;}
+  return particle_record(mass, radius, posx, posy, velx, vely);
+}
