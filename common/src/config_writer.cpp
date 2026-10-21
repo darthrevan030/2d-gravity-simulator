@@ -12,7 +12,8 @@ void write_particle(std::ostream & out, particle_record const & p){
 }
 void write_header(std::ostream & out,double width, double height, size_t timestep, size_t particle_number){
     out << std::format("{:.3f} {:.3f} {} {} \n", width, height, timestep, particle_number);
- }}
+ }
+}
 bool write_config(std::filesystem::path const & output_path,
                                 std::vector<particle_record> const & particles, double width, double height, size_t timestep){
     std::ofstream out{output_path};
