@@ -1,9 +1,10 @@
-#ifndef DIRECTORY_FILENAME_HPP
-#define DIRECTORY_FILENAME_HPP
-#include<vector>
-#include<point.hpp>
-#include<vector.hpp>
+#ifndef DCOMMON_PHYSICS_HPP
+#define COMMON_PHYSICS_HPP
 
+#include<vector>
+#include "point.hpp"
+#include "vector.hpp"
+#include "constants.hpp"
 #include <cmath>
 namespace common {
 
