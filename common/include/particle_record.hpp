@@ -4,7 +4,7 @@
 #define COMMON_PARTICLE_RECORD_HPP
 
 #include "point.hpp"
-
+#include "vector.hpp"
 namespace common{
 
 struct particle_record{
