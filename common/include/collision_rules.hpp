@@ -10,7 +10,7 @@ namespace common{
             return true;
         }
     
-    return false
+    return false;
 }
 inline void merge_particles(particle_record & absorber, particle_record const & absorbed) {
   (void)absorber;
