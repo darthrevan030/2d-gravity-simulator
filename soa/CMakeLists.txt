@@ -3,6 +3,7 @@ target_sources(grav-soa PRIVATE
     src/main.cpp
     include/particle_system.hpp
     src/particle_system.cpp
+    src/collisions.cpp
 )
 
 target_include_directories(grav-soa PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
