@@ -3,6 +3,8 @@
 
 #include <cstddef>
 #include <vector>
+#include <gsl/gsl> // gives gsl::at (safe "x[i] and gsl::index - the type for positions")
+
 
 namespace soa {
     // values of one particle exaclty as it appears on one line of the input file
@@ -38,5 +40,18 @@ namespace soa {
     // # of particles in system
     [[nodiscard]] std::size_t particle_count(particle_system const & system);
 
+    // true if particles i and j overlap: their distance is less than the sum of their radii
+    // returns yes/no, read-only access to all particles position of partcile 1, position of particle 2
+    [[nodiscard]] bool particles_collide(particle_system const & system, gsl::index i, gsl::index j);
+    
+    // true if: when particles i and j collide, particle i absorbs particle j
+    // rules in order: greater mass wins --> greater radius --> smaller positions (==smaller id)
+    [[nodiscard]] bool first_absorbs_second(particle_system const & system, gsl::index i, gsl::index j);
+
+    // merges particles: absorbed into absorber: add masses, add velocities
+    // absorber keeps its own radius and position, absorbed particle removed later
+    // not const: absorb changes the absorber's mass and velocity
+    void absorb(particle_system & system, gsl::index absorber, gsl::index absorbed);
+    
 }
 #endif
