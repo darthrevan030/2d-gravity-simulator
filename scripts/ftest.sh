@@ -6,7 +6,10 @@
 # Test groups
 #   1. Error cases      wrong argument count / bad values / missing input
 #                       -> exit code != 0, message on stderr prefixed "grav-xxx:"
+#   2. Hand cases       ftest/cases/<name>/: small inputs, one rule each
 #
+# Each case folder holds: args, input.txt, expected/{init,final}_config.txt.
+# Outputs are compared with tools/compare.py (values within 0.001).
 # Every run happens in a fresh temp directory with its own input/input.txt,
 # so the repository's input/ folder is never touched.
 set -uo pipefail
@@ -15,6 +18,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 AOS="$ROOT/out/build/default/aos/Release/grav-aos"
 SOA="$ROOT/out/build/default/soa/Release/grav-soa"
+COMPARE="$ROOT/tools/compare.py"
 for b in "$AOS" "$SOA"; do
   [[ -x "$b" ]] || { echo "missing binary: $b" >&2; exit 1; }
 done
@@ -88,6 +92,37 @@ for bin in "$AOS" "$SOA"; do
   else
     fail "$exe missing_input: expected non-zero exit + stderr message"
   fi
+done
+
+# ---------------------------------------------------------------------------
+# run_case <case dir>: run both binaries on the case, compare with expected/
+run_case() {
+  local case_dir="$1" name bin exe d f msg start secs
+  name="$(basename "$case_dir")"
+  read -r -a args <"$case_dir/args"
+  for bin in "$AOS" "$SOA"; do
+    exe="$(basename "$bin")"
+    d="$(fresh_dir "${exe}_${name}" "$case_dir/input.txt")"
+    start=$(date +%s.%N)
+    if ! run_in "$d" "$bin" "${args[@]}"; then
+      fail "$exe $name: non-zero exit" "$(cat "$d/stderr.txt")"; continue
+    fi
+    secs=$(awk -v s="$start" -v e="$(date +%s.%N)" 'BEGIN { printf "%.2f", e - s }')
+    for f in init_config.txt final_config.txt; do
+      if [[ ! -f "$d/$f" ]]; then
+        fail "$exe $name: $f not written"; continue 2
+      fi
+      if ! msg="$(python3 "$COMPARE" "$d/$f" "$case_dir/expected/$f" 2>&1)"; then
+        fail "$exe $name: $f" "$msg"; continue 2
+      fi
+    done
+    ok "$exe $name (${secs}s)"
+  done
+}
+
+echo "== 2. Hand cases"
+for case_dir in "$ROOT"/ftest/cases/*/; do
+  run_case "$case_dir"
 done
 
 # ---------------------------------------------------------------------------
