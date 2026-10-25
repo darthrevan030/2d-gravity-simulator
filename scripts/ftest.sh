@@ -4,7 +4,7 @@
 # Usage: ./ftest.sh
 #
 # Test groups
-#   1. Error cases      wrong argument count / bad values
+#   1. Error cases      wrong argument count / bad values / missing input
 #                       -> exit code != 0, message on stderr prefixed "grav-xxx:"
 #
 # Every run happens in a fresh temp directory with its own input/input.txt,
@@ -78,6 +78,17 @@ error_case "height_zero"       100 1000 0 0.25
 error_case "dt_negative"       100 1000 500 -0.25
 error_case "dt_zero"           100 1000 500 0
 error_case "dt_not_number"     100 1000 500 xyz
+
+# Team decision: missing input/input.txt is an error (not specified in the statement).
+for bin in "$AOS" "$SOA"; do
+  exe="$(basename "$bin")"
+  d="$(fresh_dir "err_${exe}_no_input")"
+  if ! run_in "$d" "$bin" 10 100 100 0.1 && [[ -s "$d/stderr.txt" ]]; then
+    ok "$exe missing_input"
+  else
+    fail "$exe missing_input: expected non-zero exit + stderr message"
+  fi
+done
 
 # ---------------------------------------------------------------------------
 echo
