@@ -7,6 +7,7 @@
 #   1. Error cases      wrong argument count / bad values / missing input
 #                       -> exit code != 0, message on stderr prefixed "grav-xxx:"
 #   2. Hand cases       ftest/cases/<name>/: small inputs, one rule each
+#   3. Reference cases  ftest/reference/<name>/: instructor's inputs and outputs
 #
 # Each case folder holds: args, input.txt, expected/{init,final}_config.txt.
 # Outputs are compared with tools/compare.py (values within 0.001).
@@ -124,6 +125,9 @@ echo "== 2. Hand cases"
 for case_dir in "$ROOT"/ftest/cases/*/; do
   run_case "$case_dir"
 done
+
+echo "== 3. Instructor reference cases"
+run_case "$ROOT/ftest/reference/1k"
 
 # ---------------------------------------------------------------------------
 echo
