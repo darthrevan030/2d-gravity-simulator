@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Functional tests for grav-aos and grav-soa (the real executables).
 #
-# Usage: ./ftest.sh [--full]
+# Usage: ./ftest.sh [--no-build] [--full]
+#   --no-build  use existing binaries in out/build/default/{aos,soa}/Release
 #   --full      also run the instructor's 10K reference case (~1 min)
 #
 # Test groups
@@ -17,13 +18,19 @@
 set -uo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BUILD=1
 FULL=0
 for arg in "$@"; do
   case "$arg" in
+    --no-build) BUILD=0 ;;
     --full) FULL=1 ;;
-    *) echo "usage: $0 [--full]" >&2; exit 2 ;;
+    *) echo "usage: $0 [--no-build] [--full]" >&2; exit 2 ;;
   esac
 done
+
+if (( BUILD )); then
+  (cd "$ROOT" && cmake --preset default >/dev/null && cmake --build --preset release) || exit 1
+fi
 
 AOS="$ROOT/out/build/default/aos/Release/grav-aos"
 SOA="$ROOT/out/build/default/soa/Release/grav-soa"
