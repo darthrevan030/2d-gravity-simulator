@@ -17,7 +17,7 @@
 # so the repository's input/ folder is never touched.
 set -uo pipefail
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BUILD=1
 FULL=0
 for arg in "$@"; do
