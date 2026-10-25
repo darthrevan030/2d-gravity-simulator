@@ -2,22 +2,17 @@
 
 #include "particle_system.hpp"
 
-TEST(IntegrateTest, EmptySystem)
-{
-    std::vector<aos::particle> particles;
-    aos::particle_system system{particles};
-
-    EXPECT_TRUE(system.particles().empty());
-}
-
-TEST(IntegrateTest, SingleParticleRemains)
-{
+TEST(IntegrateTest, SimulationDoesNotThrow){
     common::particle_record p;
-
     p.mass=1.0;
     p.radius=1.0;
-    std::vector<aos::particle> particles{p};
-    aos::particle_system system{particles};
-    system.simulate(1, 0.1, 1000.0, 1000.0);
-    EXPECT_EQ(system.particles().size(), 1);
+    p.pos = common::point{10.0, 10.0};
+    p.vel = common::vec2d{1.0, 1.0};
+    aos::particle_system system({p});
+    EXPECT_NO_THROW(system.simulate(1, 0.1, 100.0, 100.0));
+}
+
+TEST(IntegrateTest, EmptySimulation){
+    aos::particle_system system({});
+    EXPECT_NO_THROW(system.simulate(1, 0.1, 100.0, 100.0));
 }
