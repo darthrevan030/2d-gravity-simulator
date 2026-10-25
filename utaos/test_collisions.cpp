@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "particle_system.hpp"
+#include "collision_rules.hpp"
 
 TEST(CollisionTest, LargerMassAbsorbs){
   common::particle_record a;
