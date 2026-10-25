@@ -10,7 +10,7 @@
 
 # Usage: sbatch scripts/run_perf.sh [--reps R] [--ref-only] [--tag LABEL] [--valgrind]
 #   --reps R     perf stat repetitions per point (default 5)
-#   --ref-only   only the instructor's 1K/10K reference cases
+#   --ref-only   only prof's 1K/10K reference cases
 #   --tag L      label stored in every row (e.g. "baseline", "O3-lto")
 #   --valgrind   instead of perf stat, run cachegrind and callgrind on the 1K input
 #                (20 iterations); writes perf/results/<tool>_<impl>_<jobid>.{out,log,txt}
