@@ -8,10 +8,13 @@
 # Must be submitted with sbatch from the repo root: the measurements have to run
 # on an exclusive compute node, not on the frontend.
 
-# Usage: sbatch scripts/run_perf.sh [--reps R] [--ref-only] [--tag LABEL]
+# Usage: sbatch scripts/run_perf.sh [--reps R] [--ref-only] [--tag LABEL] [--valgrind]
 #   --reps R     perf stat repetitions per point (default 5)
 #   --ref-only   only the instructor's 1K/10K reference cases
 #   --tag L      label stored in every row (e.g. "baseline", "O3-lto")
+#   --valgrind   instead of perf stat, run cachegrind and callgrind on the 1K input
+#                (20 iterations); writes perf/results/<tool>_<impl>_<jobid>.{out,log,txt}
+#                (.log has the cachegrind I/D1/LL ref and miss totals, .txt the annotation)
 
 # Scenarios (all inputs come from the prof's files):
 #   reference   1K (500 it) and 10K (100 it), the provided cases
@@ -37,11 +40,13 @@ fi
 ROOT="$SLURM_SUBMIT_DIR"
 REPS=5
 REF_ONLY=0
+VALGRIND=0
 TAG="run"
 while [ $# -gt 0 ]; do
   case "$1" in
     --reps) REPS="$2"; shift ;;
     --ref-only) REF_ONLY=1 ;;
+    --valgrind) VALGRIND=1 ;;
     --tag) TAG="$2"; shift ;;
     *) echo "unknown option $1" >&2; exit 2 ;;
   esac
@@ -72,6 +77,24 @@ mkdir -p "$ROOT/perf/results"
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
 mkdir -p "$WORK/input"
+
+# If --valgrind is specified, run the binaries under valgrind's cachegrind and callgrind tools, using the first 1000 lines of the 1K input file. The output files will be in perf/results/ with names like cachegrind_aos_<jobid>.out and callgrind_soa_<jobid>.out. The script will exit after running valgrind.
+if [ "$VALGRIND" -eq 1 ]; then
+  command -v valgrind >/dev/null || { echo "ERROR: valgrind not available." >&2; exit 1; }
+  head -n 1000 "$INPUT_1K" >"$WORK/input/input.txt"
+  for impl in aos soa; do
+    if [ "$impl" = aos ]; then bin="$AOS"; else bin="$SOA"; fi
+    for tool in cachegrind callgrind; do
+      if [ "$tool" = cachegrind ]; then annotate=cg_annotate; else annotate=callgrind_annotate; fi
+      out="$ROOT/perf/results/${tool}_${impl}_${JOB}.out"
+      (cd "$WORK" && valgrind --tool="$tool" --"$tool"-out-file="$out" \
+         --log-file="${out%.out}.log" "$bin" 20 1000 1000 0.25 >/dev/null)
+      "$annotate" "$out" >"${out%.out}.txt" || true
+      echo "  $impl $tool -> $out"
+    done
+  done
+  exit 0
+fi
 
 OUT="$ROOT/perf/results/perf_${JOB}.csv"
 echo "tag,impl,scenario,n,iterations,reps,time_s,time_rsd_pct,energy_j,energy_rsd_pct,power_w,final_objects" >"$OUT"
