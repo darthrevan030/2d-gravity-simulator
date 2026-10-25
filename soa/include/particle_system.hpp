@@ -53,5 +53,10 @@ namespace soa {
     // not const: absorb changes the absorber's mass and velocity
     void absorb(particle_system & system, gsl::index absorber, gsl::index absorbed);
     
+    // motion: for every particle: if it touches or crosses a wall, put it back on that wall and make its velocity point
+    // into the box (rebound effect)
+    void bounce_off_walls(particle_system & system, double width, double height);
 }
 #endif
+
+
