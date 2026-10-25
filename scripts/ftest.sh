@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Functional tests for grav-aos and grav-soa (the real executables).
 #
-# Usage: ./ftest.sh
+# Usage: ./ftest.sh [--full]
+#   --full      also run the instructor's 10K reference case (~1 min)
 #
 # Test groups
 #   1. Error cases      wrong argument count / bad values / missing input
@@ -16,6 +17,13 @@
 set -uo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+FULL=0
+for arg in "$@"; do
+  case "$arg" in
+    --full) FULL=1 ;;
+    *) echo "usage: $0 [--full]" >&2; exit 2 ;;
+  esac
+done
 
 AOS="$ROOT/out/build/default/aos/Release/grav-aos"
 SOA="$ROOT/out/build/default/soa/Release/grav-soa"
@@ -128,6 +136,11 @@ done
 
 echo "== 3. Instructor reference cases"
 run_case "$ROOT/ftest/reference/1k"
+if (( FULL )); then
+  run_case "$ROOT/ftest/reference/10k"
+else
+  echo "  skip 10k (use --full)"
+fi
 
 # ---------------------------------------------------------------------------
 echo
