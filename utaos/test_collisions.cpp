@@ -14,7 +14,7 @@ TEST(CollisionTest, LargerMassAbsorbs){
   b.pos={1.0, 0.0};
   aos::particle_system system({a, b});
   system.simulate(1, 0.0, 1000.0, 1000.0);
-  EXCEPT_EQ(system.particles().size(), 1);
+  EXPECT_EQ(system.particles().size(), 1);
 }
 
 TEST(CollisionTest, EqualMassLargerRadiusWins){
@@ -30,7 +30,7 @@ TEST(CollisionTest, EqualMassLargerRadiusWins){
   b.pos={1.0, 0.0};
   aos::particle_system system({a, b});
   system.simulate(1, 0.0, 1000.0, 1000.0);
-  EXCEPT_EQ(system.particles().size(), 1);
+  EXPECT_EQ(system.particles().size(), 1);
 }
 
 
