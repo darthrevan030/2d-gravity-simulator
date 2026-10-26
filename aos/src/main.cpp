@@ -19,6 +19,18 @@ int main(int argc, char ** argv) try {
                progargs.time_step());
 
   // Rest of program
+  std::ifstream input{"input/input.txt"};
+  if(!input){
+    throw std::runtime_error{"Couldn't open file"};
+  }
+  auto particles = common::parse_input_stream(input, progars.width(), progars.height());
+  aos::particle_system system{std::move(particles)};
+
+  common::write_config("init_config.txt", system.particles(), progargs.width(), progargs.height(), 0);
+  system.simulate(progargs.num_iterations(), progargs.time_step(), progargs.width(), progargs.height());
+  common::write_config("final_config.txt", system.particles(), progargs.width(), progargs.height(), progargs.num_iterations());
+
+  return EXIT_SUCCESS;
 
 } catch (std::exception const & e) {
   std::cerr << "grav-aos: " << e.what() << '\n';
