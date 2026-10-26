@@ -1,4 +1,4 @@
-#ifndef DCOMMON_PHYSICS_HPP
+#ifndef COMMON_PHYSICS_HPP
 #define COMMON_PHYSICS_HPP
 
 #include<vector>
