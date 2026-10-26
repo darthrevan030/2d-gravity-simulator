@@ -1,3 +1,6 @@
+#ifndef AOS_PARTICLE_SYSTEM_HPP
+#define AOS_PARTICLE_SYSTEM_HPP
+
 #include <cstddef>
 #include <vector>
 
