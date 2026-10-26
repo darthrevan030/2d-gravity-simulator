@@ -10,6 +10,7 @@ particle_system::particle_system(
     std::vector<particle> particles)
     : particles_(std::move(particles))
 {
+    process_collisions();
 }
 
 const std::vector<particle>&
