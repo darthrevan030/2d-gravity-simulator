@@ -1,6 +1,11 @@
 #include <gtest/gtest.h>
 
+#include <cmath>
+
 #include "particle_system.hpp"
+#include "test_helpers.hpp"
+
+using namespace test::make_particle;
 
 TEST(IntegrateTest, SimulationDoesNotThrow){
     common::particle_record p;
