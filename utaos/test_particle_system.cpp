@@ -1,4 +1,4 @@
-#include <gtest/gtest/h>
+#include <gtest/gtest.h>
 #include "particle_system.hpp"
 
 TEST(ParticleSystemTest, ConstructsCorrectly){
