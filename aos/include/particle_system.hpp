@@ -1,3 +1,6 @@
+#ifndef AOS_PARTICLE_SYSTEM_HPP
+#define AOS_PARTICLE_SYSTEM_HPP
+
 #include <cstddef>
 #include <vector>
 
@@ -9,15 +12,17 @@ class particle_system{
 public:
     explicit particle_system(std::vector<particle> particles);
     void simulate(
-      std::size_t iterations;
-      double dt;
-      double width;
+      std::size_t iterations,
+      double dt,
+      double width,
       double height);
-    const std::vector<particle>& particles() const noexcept;
+    [[nodiscard]] std::vector<particle> const & particles() const noexcept;
 
 private:
     std::vector<particle> particles_;
-    std::vector<common::vec2d> compute_accelerations() const;
+    [[nodiscard]] std::vector<common::vec2d> compute_accelerations() const;
     void process_collisions();
 };
 }
+
+#endif
