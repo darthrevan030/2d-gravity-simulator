@@ -12,11 +12,11 @@ class particle_system{
 public:
     explicit particle_system(std::vector<particle> particles);
     void simulate(
-      std::size_t iterations;
-      double dt;
-      double width;
+      std::size_t iterations,
+      double dt,
+      double width,
       double height);
-    [[nodiscard]] std::vector<particle>& particles() const noexcept;
+    [[nodiscard]] std::vector<particle> const & particles() const noexcept;
 
 private:
     std::vector<particle> particles_;
