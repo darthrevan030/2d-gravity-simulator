@@ -1,4 +1,7 @@
 #include <gtest/gtest.h>
+
+#include <vector>
+
 #include "particle_system.hpp"
 #include "collision_rules.hpp"
 
