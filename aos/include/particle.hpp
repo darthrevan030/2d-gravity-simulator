@@ -1,5 +1,10 @@
-#include "particle_recor.hpp"
+#ifndef AOS_PARTICLE_HPP
+#define AOS_PARTICLE_HPP
 
-namespace aos{
-using particle = common::particle_record;
+#include "particle_record.hpp"
+
+namespace aos {
+  using particle = common::particle_record;
 }
+
+#endif
