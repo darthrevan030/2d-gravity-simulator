@@ -8,6 +8,8 @@ set(CURRENT_DIR_SRC_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/test_collisions.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test_integrate.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test_particle_system.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test_reference.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test_equivalence.cpp"
 )
 
 add_unit_test_target(
@@ -16,5 +18,5 @@ add_unit_test_target(
   LIBRARY_FILTER aos
   COVERAGE_DIR coverage-aos
   LIBRARY_TO_LINK common
-  INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/aos/include"
+  INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/aos/include" "${CMAKE_SOURCE_DIR}/testutil"
 )
