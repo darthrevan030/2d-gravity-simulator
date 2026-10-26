@@ -16,11 +16,13 @@ public:
       double dt;
       double width;
       double height);
-    const std::vector<particle>& particles() const noexcept;
+    [[nodiscard]] std::vector<particle>& particles() const noexcept;
 
 private:
     std::vector<particle> particles_;
-    std::vector<common::vec2d> compute_accelerations() const;
+    [[nodiscard]] std::vector<common::vec2d> compute_accelerations() const;
     void process_collisions();
 };
 }
+
+#endif
