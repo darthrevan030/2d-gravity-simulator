@@ -1,8 +1,6 @@
 #ifndef COMMON_COLLISION_RULES_HPP
 #define COMMON_COLLISION_RULES_HPP
 
-#include <cmath>
-
 #include "particle_record.hpp"
 #include "point.hpp"
 #include <cmath>
