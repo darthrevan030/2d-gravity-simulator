@@ -34,7 +34,9 @@ std::optional<particle_record> parse_line(std::string const & line , double widt
   
   }
   if ((mass<=0)||(radius<=0)||(radius>posx)||(posx>width-radius)||(radius>posy)||(posy>height-radius)){return std::nullopt;}
-  return particle_record(mass, radius, posx, posy, velx, vely);
+  common::vec2d vel{velx,vely};
+  common::point pos{posx,posy};
+  return particle_record(mass, radius,pos,vel );
 }}
 std::vector<particle_record> parse_input_stream(std::istream & input, double width, double height){
   std::vector<particle_record> part;

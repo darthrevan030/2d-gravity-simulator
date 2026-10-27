@@ -9,7 +9,7 @@
 namespace common {
 
 [[nodiscard]] bool write_config(std::filesystem::path const & output_path,
-                                std::vector<particle_record> const & particles, double width, double height, size_t timestep);
+                                std::vector<particle_record> const & particles, double width, double height, double timestep);
 
 } 
 

@@ -12,12 +12,12 @@ namespace common {
 [[nodiscard]] inline vec2d compute_force(point const & p1, double m1, point const & p2, double m2) {
   vec2d difvec=p2-p1;
   double const dist_sq = difvec.getx()*difvec.getx() + difvec.gety()*difvec.gety();
-  if (dist_sq<EPSILON*EPSILON){
+  if (dist_sq<common::constants::EPSILON*common::constants::EPSILON){
     return vec2d{0,0};}
 
   double vec3norm=dist_sq*(std::sqrt(dist_sq));
 
-  double scalar1=G*(1/vec3norm)*m1*m2;
+  double scalar1=common::constants::G*(1/vec3norm)*m1*m2;
 
   return difvec*scalar1;
 }
