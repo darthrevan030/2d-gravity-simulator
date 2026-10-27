@@ -30,7 +30,7 @@ namespace aos {
             absorbed = i;
           }
 
-          common::merge_particles(particles_[absorber], particles_[absorbed]);
+          common::merge_particles(particles_.at(absorber), particles_.at(absorbed));
           particles_.erase(particles_.begin() + static_cast<std::ptrdiff_t>(absorbed));
           collision_found = true;
           break;
