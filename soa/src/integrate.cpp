@@ -89,4 +89,17 @@ namespace soa {
         }
     }
 
+    void simulate_step(particle_system & system, simulation_settings const & settings) {
+        compute_accelerations(system); // 1. gravity: every particle's acceleration
+        move_particles(system, settings.time_step); // 2. v = v + a*dt, then p = p + v*dt
+        bounce_off_walls(system, settings.width, settings.height); // 3. push back anything that hit a wall
+        resolve_collisions(system); // 4. merge overlapping particles
+    }
+
+    void run_simulation(particle_system & system, simulation_settings const & settings) {
+        for (std::size_t step = 0; step < settings.iterations; ++step) { // repeat `iterations` times
+            simulate_step(system, settings);
+        }
+    }
+
 } // soa namespace

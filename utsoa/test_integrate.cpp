@@ -218,4 +218,29 @@ TEST(test_integrate, gravity_is_recomputed_not_added_up) {
 }
 
 
+// --- simulate_step and run_simulation testing --
 
+TEST(test_integrate, step_does_gravity_then_movement) {
+    soa::simulation_settings settings;   // box 100 x 100, dt = 1
+    settings.width     = 100.0;
+    settings.height    = 100.0;
+    settings.time_step = 1.0;
+    soa::particle_system system;
+    soa::add_particle(system, resting_particle(1e10, 10.0, 10.0)); // same pair as the gravity test
+    soa::add_particle(system, resting_particle(1e10, 13.0, 14.0));
+    soa::simulate_step(system, settings);
+    EXPECT_NEAR(system.vx.front(), 0.0160176, tolerance);        // v = 0 + a * 1 (gravity happened)
+    EXPECT_NEAR(system.x.front(), 10.0 + 0.0160176, tolerance);  // moved with the NEW velocity
+}
+
+TEST(test_integrate, run_repeats_the_step) {
+    soa::simulation_settings settings;
+    settings.iterations = 3;             // three steps
+    settings.width      = 100.0;
+    settings.height     = 100.0;
+    settings.time_step  = 1.0;
+    soa::particle_system system;
+    soa::add_particle(system, moving_particle(10.0, 25.0, 2.0, 0.0)); // alone: no gravity, far from walls
+    soa::run_simulation(system, settings);
+    EXPECT_EQ(system.x.front(), 16.0);   // 10 + 3 steps * 2
+}

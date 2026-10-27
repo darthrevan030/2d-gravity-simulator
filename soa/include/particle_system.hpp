@@ -35,6 +35,14 @@ namespace soa {
         std::vector<double> ay; // acceleration of y components
     };
 
+    // four command line values together (clang-tidy allows 4 param per function so these will be one)
+    struct simulation_settings{
+        std::size_t iterations = 0; // how many time steps to simulate
+        double width = 0.0; // box width - right
+        double height = 0.0; // box height - top
+        double time_step = 0.0; // dt
+    };
+
     // function for checking: mass and radius must be positive, the whole particle must fit inside the box of given width and height
     [[nodiscard]] bool is_valid_particle(particle_values const & p, double width, double height);
 
@@ -72,6 +80,12 @@ namespace soa {
 
     // gravity: sets every particles acceleration from the pull of all the others
     void compute_accelerations(particle_system & system);
+
+    // one full iteration: gravity --> velocity and position --> walls --> collisions
+    void simulate_step(particle_system & system, simulation_settings const & settings);
+
+    // run settings.iterations step, one after another
+    void run_simulation(particle_system & system, simulation_settings const & settings);
     
 }
 #endif
