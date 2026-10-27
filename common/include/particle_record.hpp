@@ -1,11 +1,12 @@
-//particle record
+// particle record
 
 #ifndef COMMON_PARTICLE_RECORD_HPP
 #define COMMON_PARTICLE_RECORD_HPP
 
 #include "point.hpp"
 #include "vector.hpp"
-namespace common{
+
+namespace common {
 
 struct particle_record{
 double mass{0.0};

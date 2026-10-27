@@ -1,6 +1,8 @@
 add_library(common STATIC)
 target_sources(common PRIVATE
     src/progargs.cpp
+    src/input_parser.cpp
+    src/config_writer.cpp
     include/point.hpp
 )
 
