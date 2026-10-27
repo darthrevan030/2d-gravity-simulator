@@ -8,13 +8,13 @@
 
 namespace common {
 
-  struct particle_record {
-    double mass{0.0};
-    double radius{0.0};
-    point pos{};
-    vec2d vel{};
-  };
+struct particle_record{
+double mass{0.0};
+double radius{0.0};
+point pos;
+vec2d vel;
 
-}  // namespace common
 
+};
+}
 #endif

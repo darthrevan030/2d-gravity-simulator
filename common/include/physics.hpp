@@ -1,23 +1,25 @@
 #ifndef COMMON_PHYSICS_HPP
+#ifndef COMMON_PHYSICS_HPP
 #define COMMON_PHYSICS_HPP
 
 #include<vector>
 #include "point.hpp"
 #include "vector.hpp"
 #include "constants.hpp"
+#include "enclosure.hpp"
 #include <cmath>
 namespace common {
 
 
 [[nodiscard]] inline vec2d compute_force(point const & p1, double m1, point const & p2, double m2) {
-  vec2d difvec=p2-p1;
+  vec2d const difvec=p2-p1;
   double const dist_sq = difvec.getx()*difvec.getx() + difvec.gety()*difvec.gety();
-  if (dist_sq<constants::EPSILON*constants::EPSILON){
+  if (dist_sq<common::constants::EPSILON*common::constants::EPSILON){
     return vec2d{0,0};}
 
-  double vec3norm=dist_sq*(std::sqrt(dist_sq));
+  double const vec3norm=dist_sq*(std::sqrt(dist_sq));
 
-  double scalar1=constants::G*(1/vec3norm)*m1*m2;
+  double const scalar1=common::constants::G*(1/vec3norm)*m1*m2;
 
   return difvec*scalar1;
 }
@@ -34,7 +36,7 @@ inline void update_kinematics(point & pos, vec2d & vel, vec2d const & accel, dou
  * @details Checks <= / >= boundary limits, clamps position inside [r, limit - r],
  *          and reverses velocity direction if moving toward the wall.
  */
-inline void apply_rebound(point & pos, vec2d & vel, double radius, double width, double height) {
+inline void apply_rebound(point & pos, vec2d & vel, double radius, enclosure box) {
 
   if ((pos.getx()-radius)<=0.0){
     pos.setx(0.0+radius);
@@ -43,15 +45,15 @@ inline void apply_rebound(point & pos, vec2d & vel, double radius, double width,
       vel.setx(-1*vel.getx());}
 
 }
-if ((pos.getx()+radius)>=width){
-    pos.setx(width-radius);
+if ((pos.getx()+radius)>=box.width){
+    pos.setx(box.width-radius);
     if (vel.getx()>0.0){
     
       vel.setx(-1*vel.getx());
 
 }}
-if ((pos.gety()+radius)>=height){
-    pos.sety(height-radius);
+if ((pos.gety()+radius)>=box.height){
+    pos.sety(box.height-radius);
     if (vel.gety()>0){
 
     vel.sety(-1*vel.gety());
