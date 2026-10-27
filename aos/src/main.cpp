@@ -1,34 +1,42 @@
 #include <cstdlib>
 #include <exception>
+#include <fstream>
 #include <iostream>
-#include <print>
 #include <span>
+#include <stdexcept>
 #include <string>
+#include <utility>
 #include <vector>
 
+#include <config_writer.hpp>
+#include <enclosure.hpp>
+#include <input_parser.hpp>
 #include <progargs.hpp>
+
+#include "particle_system.hpp"
 
 int main(int argc, char ** argv) try {
   std::span const spnargs{argv, static_cast<std::size_t>(argc)};
   std::vector<std::string> const vecargs{spnargs.begin(), spnargs.end()};
   common::program_arguments const progargs{vecargs};
 
-  std::println("grav-aos:");
-  std::println("\tnum_iterations: {}\n\twidth: {}\n\theight: {}\n\ttime_step: {}",
-               progargs.num_iterations(), progargs.width(), progargs.height(),
-               progargs.time_step());
+  common::enclosure const box{progargs.width(), progargs.height()};
 
-  // Rest of program
   std::ifstream input{"input/input.txt"};
-  if(!input){
-    throw std::runtime_error{"Couldn't open file"};
+  if (!input) {
+    throw std::runtime_error{"cannot open input/input.txt"};
   }
-  auto particles = common::parse_input_stream(input, progargs.width(), progargs.height());
+  auto particles = common::parse_input_stream(input, box);
   aos::particle_system system{std::move(particles)};
 
-  common::write_config("init_config.txt", system.particles(), progargs.width(), progargs.height(), 0);
-  system.simulate(progargs.num_iterations(), progargs.time_step(), progargs.width(), progargs.height());
-  common::write_config("final_config.txt", system.particles(), progargs.width(), progargs.height(), progargs.num_iterations());
+  if (!common::write_config("init_config.txt", system.particles(), box, progargs.time_step())) {
+    throw std::runtime_error{"cannot write init_config.txt"};
+  }
+  system.simulate(progargs.num_iterations(), progargs.time_step(), progargs.width(),
+                  progargs.height());
+  if (!common::write_config("final_config.txt", system.particles(), box, progargs.time_step())) {
+    throw std::runtime_error{"cannot write final_config.txt"};
+  }
 
   return EXIT_SUCCESS;
 
