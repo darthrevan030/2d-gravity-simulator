@@ -4,6 +4,9 @@
 #include <cstddef>
 #include <vector>
 #include <gsl/gsl> // gives gsl::at (safe "x[i] and gsl::index - the type for positions")
+#include <istream> // input read from files
+#include <ostream> // output is written to 
+
 
 
 namespace soa {
@@ -56,6 +59,13 @@ namespace soa {
     // motion: for every particle: if it touches or crosses a wall, put it back on that wall and make its velocity point
     // into the box (rebound effect)
     void bounce_off_walls(particle_system & system, double width, double height);
+
+    // for every particle: new velocity v=v+a*dt; new position p=p+v*dt
+    void move_particles(particle_system & system, double time_step);
+
+    // gravity: sets every particles acceleration from the pull of all the others
+    void compute_accelerations(particle_system & system);
+    
 }
 #endif
 
