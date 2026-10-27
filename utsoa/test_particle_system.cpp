@@ -1,5 +1,7 @@
 #include "particle_system.hpp"
 #include <gtest/gtest.h>
+#include <cstddef>
+#include <vector>
 
 namespace{
     // validity test uses box 100x50 box
@@ -122,4 +124,16 @@ TEST(test_particle_system, all_vectors_always_have_the_same_length){
     particle k would no longer line up across the vectors and the simulation would slightly mix up particles... to mitigate:
     this test catches this. acceleration must grow too, even though they start at 0 the 8th and last vector
     */
+
+    EXPECT_EQ(system.id.size(), 2U); // the new id vector grows too
+}
+
+// test 5: every particle gets the next id, in the order it was added
+TEST(test_particle_system, add_particle_gives_consecutive_ids) {
+    soa::particle_system system;
+    soa::add_particle(system, make_values(1.0, 1.0, 10.0, 10.0)); // id 0
+    soa::add_particle(system, make_values(2.0, 1.0, 20.0, 20.0)); // id 1
+    soa::add_particle(system, make_values(3.0, 1.0, 30.0, 30.0)); // id 2
+    std::vector<std::size_t> const expected_ids{0, 1, 2};         // what the id vector should hold
+    EXPECT_EQ(system.id, expected_ids);                           // compares the whole vector at once
 }

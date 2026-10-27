@@ -17,6 +17,7 @@ namespace soa {
     }
 
     void add_particle(particle_system & system, particle_values const & p){
+        system.id.push_back(particle_count(system)); // id=particle amount before this one (0,1,2...)
         system.mass.push_back(p.mass); // push_back adds one vaue at the end of the vector
         system.radius.push_back(p.radius);
         system.x.push_back(p.x);

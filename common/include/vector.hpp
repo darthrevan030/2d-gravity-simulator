@@ -5,14 +5,15 @@
 #include <cmath>
 namespace common{
     class vec2d{
-        private:
-        double x;
-        double y;
+
         public:
+         double x;
+        double y;
         constexpr vec2d(double x_val=0,double y_val=0):
             x(x_val), y(y_val){
 
         }
+
         [[nodiscard]] constexpr double getx() const noexcept{return x;}
         [[nodiscard]] constexpr double gety() const noexcept{return y;}
         [[nodiscard]]  double norm2d() const noexcept {return std::sqrt(x*x+y*y);}
