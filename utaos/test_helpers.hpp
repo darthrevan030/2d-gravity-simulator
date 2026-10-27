@@ -5,8 +5,9 @@
 
 namespace test {
 
-  [[nodiscard]] inline aos::particle make_particle(double mass, double radius, double x, double y, double vx = 0.0, double vy = 0.0) {
-    return aos::particle{mass, radius, common::point{x, y}, common::vec2d{vx, vy}};
+  [[nodiscard]] inline aos::particle make_particle(double mass, double radius, common::point pos,
+                                                   common::vec2d vel = {}) {
+    return aos::particle{mass, radius, pos, vel};
   }
 
 }  // namespace test
