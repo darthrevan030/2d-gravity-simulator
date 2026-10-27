@@ -25,23 +25,29 @@ void particle_system::simulate(
     double width,
     double height)
 {
+    common::enclosure const box{width, height};
+
     for (std::size_t step = 0; step < iterations; ++step)
     {
         auto accelerations = compute_accelerations();
 
-        for (std::size_t i = 0; i < particles_.size(); ++i)
+        std::size_t const n = particles_.size();
+
+        for (std::size_t i = 0; i < n; ++i)
         {
+            auto & p = particles_.at(i);
+
             common::update_kinematics(
-                particles_.at(i).pos,
-                particles_.at(i).vel,
+                p.pos,
+                p.vel,
                 accelerations.at(i),
                 dt);
 
             common::apply_rebound(
-                particles_.at(i).pos,
-                particles_.at(i).vel,
-                particles_.at(i).radius,
-                common::enclosure{width, height});
+                p.pos,
+                p.vel,
+                p.radius,
+                box);
         }
 
         process_collisions();
