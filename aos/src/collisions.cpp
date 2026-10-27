@@ -13,7 +13,7 @@ namespace aos {
     while (collision_found) {
       collision_found = false;
 
-      for (std::size_t i = 0; i < particles_.size() && !collision_found; ++i) {
+      for (std::size_t i = 0; i < particles_.size() and !collision_found; ++i) {
         for (std::size_t j = i + 1; j < particles_.size(); ++j) {
           if (!common::checkcollision(particles_.at(i).pos, particles_.at(i).radius, particles_.at(j).pos,
                                       particles_.at(j).radius)) {
@@ -23,8 +23,8 @@ namespace aos {
           std::size_t absorber = i;
           std::size_t absorbed = j;
 
-          if (particles_.at(j).mass > particles_.at(i).mass ||
-              (particles_.at(j).mass == particles_.at(i).mass &&
+          if (particles_.at(j).mass > particles_.at(i).mass or
+              (particles_.at(j).mass == particles_.at(i).mass and
                particles_.at(j).radius > particles_.at(i).radius)) {
             absorber = j;
             absorbed = i;
