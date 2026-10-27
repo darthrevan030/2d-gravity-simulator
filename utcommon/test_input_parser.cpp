@@ -22,13 +22,13 @@ TEST(Parser, MalformedLine){
 
   ASSERT_EQ(particles.size(), 2U);
 
-  EXPECT_DOUBLE_EQ(particles[0].mass, 1.0);   // line 1 comes first
-  EXPECT_DOUBLE_EQ(particles[1].mass, 5.0);   // line 3 comes second
-  EXPECT_DOUBLE_EQ(particles[1].radius, 1.0);
-  EXPECT_DOUBLE_EQ(particles[1].pos.getx(), 20.0);
-  EXPECT_DOUBLE_EQ(particles[1].pos.gety(), 30.0);
-  EXPECT_DOUBLE_EQ(particles[1].vel.getx(), -1.0);
-  EXPECT_DOUBLE_EQ(particles[1].vel.gety(), -2.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).mass, 1.0);   // line 1 comes first
+  EXPECT_DOUBLE_EQ(particles.at(1).mass, 5.0);   // line 3 comes second
+  EXPECT_DOUBLE_EQ(particles.at(1).radius, 1.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).pos.getx(), 20.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).pos.gety(), 30.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).vel.getx(), -1.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).vel.gety(), -2.0);
 
 }
 TEST(Parser, IncompleteLastLine){
@@ -37,12 +37,12 @@ TEST(Parser, IncompleteLastLine){
                                "5 1 20 30 -1 ");
   ASSERT_EQ(particles.size(), 1U);
 
-  EXPECT_DOUBLE_EQ(particles[0].mass, 1.0);
-  EXPECT_DOUBLE_EQ(particles[0].radius, 2.0);
-  EXPECT_DOUBLE_EQ(particles[0].pos.getx(), 50.0);
-  EXPECT_DOUBLE_EQ(particles[0].pos.gety(), 50.0);
-  EXPECT_DOUBLE_EQ(particles[0].vel.getx(), 3.0);
-  EXPECT_DOUBLE_EQ(particles[0].vel.gety(), 4.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).mass, 1.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).radius, 2.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).pos.getx(), 50.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).pos.gety(), 50.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).vel.getx(), 3.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).vel.gety(), 4.0);
 
 }
 
@@ -58,19 +58,19 @@ TEST(Parser, NoTrailingNewline){
                                );
   ASSERT_EQ(particles.size(), 2U);
 
-  EXPECT_DOUBLE_EQ(particles[0].mass, 1.0);
-  EXPECT_DOUBLE_EQ(particles[0].radius, 2.0);
-  EXPECT_DOUBLE_EQ(particles[0].pos.getx(), 50.0);
-  EXPECT_DOUBLE_EQ(particles[0].pos.gety(), 50.0);
-  EXPECT_DOUBLE_EQ(particles[0].vel.getx(), 3.0);
-  EXPECT_DOUBLE_EQ(particles[0].vel.gety(), 4.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).mass, 1.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).radius, 2.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).pos.getx(), 50.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).pos.gety(), 50.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).vel.getx(), 3.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).vel.gety(), 4.0);
 
-  EXPECT_DOUBLE_EQ(particles[1].mass, 5.0);
-  EXPECT_DOUBLE_EQ(particles[1].radius, 1.0);
-  EXPECT_DOUBLE_EQ(particles[1].pos.getx(), 20.0);
-  EXPECT_DOUBLE_EQ(particles[1].pos.gety(), 30.0);
-  EXPECT_DOUBLE_EQ(particles[1].vel.getx(), -1.0);
-  EXPECT_DOUBLE_EQ(particles[1].vel.gety(), -2.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).mass, 5.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).radius, 1.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).pos.getx(), 20.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).pos.gety(), 30.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).vel.getx(), -1.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).vel.gety(), -2.0);
 }
 
 TEST(Parser, ExtraWhitespace){
@@ -82,26 +82,26 @@ TEST(Parser, ExtraWhitespace){
 
   ASSERT_EQ(particles.size(), 3U);
 
-  EXPECT_DOUBLE_EQ(particles[0].mass, 1.0);
-  EXPECT_DOUBLE_EQ(particles[0].radius, 2.0);
-  EXPECT_DOUBLE_EQ(particles[0].pos.getx(), 50.0);
-  EXPECT_DOUBLE_EQ(particles[0].pos.gety(), 50.0);
-  EXPECT_DOUBLE_EQ(particles[0].vel.getx(), 3.0);
-  EXPECT_DOUBLE_EQ(particles[0].vel.gety(), 4.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).mass, 1.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).radius, 2.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).pos.getx(), 50.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).pos.gety(), 50.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).vel.getx(), 3.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).vel.gety(), 4.0);
 
-  EXPECT_DOUBLE_EQ(particles[1].mass, 5.0);
-  EXPECT_DOUBLE_EQ(particles[1].radius, 1.0);
-  EXPECT_DOUBLE_EQ(particles[1].pos.getx(), 20.0);
-  EXPECT_DOUBLE_EQ(particles[1].pos.gety(), 30.0);
-  EXPECT_DOUBLE_EQ(particles[1].vel.getx(), -1.0);
-  EXPECT_DOUBLE_EQ(particles[1].vel.gety(), -2.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).mass, 5.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).radius, 1.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).pos.getx(), 20.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).pos.gety(), 30.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).vel.getx(), -1.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).vel.gety(), -2.0);
 
-  EXPECT_DOUBLE_EQ(particles[2].mass, 6.0);
-  EXPECT_DOUBLE_EQ(particles[2].radius, 7.0);
-  EXPECT_DOUBLE_EQ(particles[2].pos.getx(), 80.0);
-  EXPECT_DOUBLE_EQ(particles[2].pos.gety(), 90.0);
-  EXPECT_DOUBLE_EQ(particles[2].vel.getx(), 0.1);
-  EXPECT_DOUBLE_EQ(particles[2].vel.gety(), -0.1);}
+  EXPECT_DOUBLE_EQ(particles.at(2).mass, 6.0);
+  EXPECT_DOUBLE_EQ(particles.at(2).radius, 7.0);
+  EXPECT_DOUBLE_EQ(particles.at(2).pos.getx(), 80.0);
+  EXPECT_DOUBLE_EQ(particles.at(2).pos.gety(), 90.0);
+  EXPECT_DOUBLE_EQ(particles.at(2).vel.getx(), 0.1);
+  EXPECT_DOUBLE_EQ(particles.at(2).vel.gety(), -0.1);}
   TEST(Parser, ExtraTokens){
   auto const particles = parse("1 2 50 50 3 4\n"
                                 "5 1 20 30 -1 -2 6 7\n"
@@ -110,18 +110,18 @@ TEST(Parser, ExtraWhitespace){
                                
                                );
   ASSERT_EQ(particles.size(), 2U);
-  EXPECT_DOUBLE_EQ(particles[0].mass, 1.0);
-  EXPECT_DOUBLE_EQ(particles[0].radius, 2.0);
-  EXPECT_DOUBLE_EQ(particles[0].pos.getx(), 50.0);
-  EXPECT_DOUBLE_EQ(particles[0].pos.gety(), 50.0);
-  EXPECT_DOUBLE_EQ(particles[0].vel.getx(), 3.0);
-  EXPECT_DOUBLE_EQ(particles[0].vel.gety(), 4.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).mass, 1.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).radius, 2.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).pos.getx(), 50.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).pos.gety(), 50.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).vel.getx(), 3.0);
+  EXPECT_DOUBLE_EQ(particles.at(0).vel.gety(), 4.0);
 
-  EXPECT_DOUBLE_EQ(particles[1].mass, 5.0);
-  EXPECT_DOUBLE_EQ(particles[1].radius, 1.0);
-  EXPECT_DOUBLE_EQ(particles[1].pos.getx(), 20.0);
-  EXPECT_DOUBLE_EQ(particles[1].pos.gety(), 30.0);
-  EXPECT_DOUBLE_EQ(particles[1].vel.getx(), -1.0);
-  EXPECT_DOUBLE_EQ(particles[1].vel.gety(), -2.0);}
+  EXPECT_DOUBLE_EQ(particles.at(1).mass, 5.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).radius, 1.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).pos.getx(), 20.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).pos.gety(), 30.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).vel.getx(), -1.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).vel.gety(), -2.0);}
   
 
