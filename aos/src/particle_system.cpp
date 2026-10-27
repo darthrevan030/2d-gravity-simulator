@@ -41,8 +41,7 @@ void particle_system::simulate(
                 particles_.at(i).pos,
                 particles_.at(i).vel,
                 particles_.at(i).radius,
-                width,
-                height);
+                common::enclosure{width, height});
         }
 
         process_collisions();
