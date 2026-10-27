@@ -11,10 +11,10 @@ namespace aos {
     for (std::size_t i = 0; i < particles_.size(); ++i) {
       for (std::size_t j = i + 1; j < particles_.size(); ++j) {
         // force on i points towards j; j feels the opposite
-        auto const force = common::compute_force(particles_[i].pos, particles_[i].mass,
-                                                 particles_[j].pos, particles_[j].mass);
-        acc[i] = acc[i] + force * (1.0 / particles_[i].mass);
-        acc[j] = acc[j] + force * (-1.0 / particles_[j].mass);
+        auto const force = common::compute_force(particles_.at(i).pos, particles_.at(i).mass,
+                                                 particles_.at(j).pos, particles_.at(j).mass);
+        acc.at(i) = acc.at(i) + force * (1.0 / particles_.at(i).mass);
+        acc.at(j) = acc.at(j) + force * (-1.0 / particles_.at(j).mass);
       }
     }
     return acc;
