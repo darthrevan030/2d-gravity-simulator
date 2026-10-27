@@ -7,7 +7,7 @@
 #include<cmath>
 namespace common{
   namespace{
-std::optional<particle_record> parse_line(std::string const & line , double width, double height){
+std::optional<particle_record> parse_line(std::string const & line , enclosure const & box){
   std::istringstream iss{line};
   double mass = 0.0;
   double radius = 0.0;
@@ -26,21 +26,23 @@ std::optional<particle_record> parse_line(std::string const & line , double widt
   if (iss >> extra) { return std::nullopt; }       // check if there is anything left on teh line
 
 
-  if (!(std::isfinite(mass) && std::isfinite(radius)  && std::isfinite(posx)  && std::isfinite(posy)  && std::isfinite(velx) && std::isfinite(vely))) { 
+  if (!(std::isfinite(mass) and std::isfinite(radius)  and std::isfinite(posx)  and std::isfinite(posy)  and std::isfinite(velx) and std::isfinite(vely))) { 
     
     
     return std::nullopt; 
   
   
   }
-  if ((mass<=0)||(radius<=0)||(radius>posx)||(posx>width-radius)||(radius>posy)||(posy>height-radius)){return std::nullopt;}
-  return particle_record(mass, radius, posx, posy, velx, vely);
+  if ((mass<=0) or (radius<=0) or (radius>posx) or (posx>box.width-radius) or (radius>posy) or (posy>box.height-radius)){return std::nullopt;}
+  common::vec2d const vel{velx,vely};
+  common::point const pos{posx,posy};
+  return particle_record(mass, radius,pos,vel );
 }}
-std::vector<particle_record> parse_input_stream(std::istream & input, double width, double height){
+std::vector<particle_record> parse_input_stream(std::istream & input, enclosure const & box){
   std::vector<particle_record> part;
   std:: string line;
   while (std::getline(input,line)){
-    if (auto record= parse_line(line,width ,height)){
+    if (auto record= parse_line(line,box )){
     part.push_back(*record);}
   }
   return part;
