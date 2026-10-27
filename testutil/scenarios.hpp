@@ -20,9 +20,11 @@ namespace testutil {
   };
 
   // Particles are placed so that they lie fully inside the world. A smaller world with the same
-  // particle count gives a denser scenario and therefore more collisions.
+  // particle count gives a denser scenario and therefore more collisions. The time step is 0.1;
+  // callers that need another one overwrite `dt` on the result.
   [[nodiscard]] inline scenario make_scenario(unsigned seed, std::size_t count, double world,
-                                              std::size_t iterations, double dt = 0.1) {
+                                              std::size_t iterations) {
+    double const dt = 0.1;
     std::mt19937 gen{seed};
     std::uniform_real_distribution<double> mass{1e10, 1e13};
     std::uniform_real_distribution<double> radius{1.0, 5.0};
