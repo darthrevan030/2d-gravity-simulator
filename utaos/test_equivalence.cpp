@@ -19,6 +19,7 @@ namespace {
 
   [[nodiscard]] std::vector<aos::particle> to_aos(std::vector<reference::body> const & bodies) {
     std::vector<aos::particle> out;
+    out.reserve(bodies.size());
     for (auto const & b : bodies) {
       out.push_back(aos::particle{b.mass, b.radius, common::point{b.x, b.y}, common::vec2d{b.vx, b.vy}});
     }
@@ -28,7 +29,7 @@ namespace {
   // Runs both implementations on the same scenario and compares every particle.
   // Returns the number of survivors so callers can check collisions really happened.
   std::size_t run_and_compare(testutil::scenario const & s) {
-    auto const expected = reference::simulate(s.bodies, s.iterations, s.dt, s.width, s.height);
+    auto const expected = reference::simulate(s.bodies, {s.iterations, s.dt, s.width, s.height});
 
     aos::particle_system system{to_aos(s.bodies)};
     system.simulate(s.iterations, s.dt, s.width, s.height);
@@ -39,12 +40,12 @@ namespace {
 
     for (std::size_t i = 0; i < expected.size(); ++i) {
       SCOPED_TRACE("particle " + std::to_string(i));
-      expect_close(actual[i].mass, expected[i].mass);
-      expect_close(actual[i].radius, expected[i].radius);
-      expect_close(actual[i].pos.x, expected[i].x);
-      expect_close(actual[i].pos.y, expected[i].y);
-      expect_close(actual[i].vel.x, expected[i].vx);
-      expect_close(actual[i].vel.y, expected[i].vy);
+      expect_close(actual.at(i).mass, expected.at(i).mass);
+      expect_close(actual.at(i).radius, expected.at(i).radius);
+      expect_close(actual.at(i).pos.x, expected.at(i).x);
+      expect_close(actual.at(i).pos.y, expected.at(i).y);
+      expect_close(actual.at(i).vel.x, expected.at(i).vx);
+      expect_close(actual.at(i).vel.y, expected.at(i).vy);
     }
     return actual.size();
   }
@@ -107,8 +108,10 @@ TEST(test_equivalence, zero_iterations_only_merges_initial_overlaps) {
 }
 
 TEST(test_equivalence, small_and_large_time_steps) {
-  for (double dt : {0.001, 0.1, 1.0}) {
+  for (double const dt : {0.001, 0.1, 1.0}) {
     SCOPED_TRACE("dt " + std::to_string(dt));
-    run_and_compare(testutil::make_scenario(7, 10, 500.0, 50, dt));
+    auto s = testutil::make_scenario(7, 10, 500.0, 50);
+    s.dt = dt;
+    run_and_compare(s);
   }
 }
