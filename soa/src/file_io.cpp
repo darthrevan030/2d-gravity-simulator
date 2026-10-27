@@ -1,7 +1,6 @@
 #include "particle_system.hpp"
 
 #include <cmath> // std::isfinite - checking if normal number
-#include <cmath> // std::isfinite (is it a normal number, not inf or nan?)
 #include <cstddef> // std::size_t
 #include <istream> // std::istream, std::getline
 #include <optional> // std::optional ("a value, or nothing")
