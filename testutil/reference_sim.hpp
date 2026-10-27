@@ -48,7 +48,7 @@ namespace reference {
   first_overlapping_pair(std::vector<body> const & bodies) {
     for (std::size_t i = 0; i < bodies.size(); ++i) {
       for (std::size_t j = i + 1; j < bodies.size(); ++j) {
-        if (overlap(bodies[i], bodies[j])) { return std::make_pair(i, j); }
+        if (overlap(bodies.at(i), bodies.at(j))) { return std::make_pair(i, j); }
       }
     }
     return std::nullopt;
@@ -57,13 +57,13 @@ namespace reference {
   inline void merge_all(std::vector<body> & bodies) {
     while (auto const pair = first_overlapping_pair(bodies)) {
       auto const [i, j] = *pair;
-      bool const j_wins = bodies[j].mass > bodies[i].mass ||
-                          (bodies[j].mass == bodies[i].mass && bodies[j].radius > bodies[i].radius);
+      bool const j_wins = bodies.at(j).mass > bodies.at(i).mass or
+                          (bodies.at(j).mass == bodies.at(i).mass and bodies.at(j).radius > bodies.at(i).radius);
       std::size_t const winner = j_wins ? j : i;
       std::size_t const loser = j_wins ? i : j;
-      bodies[winner].mass += bodies[loser].mass;
-      bodies[winner].vx += bodies[loser].vx;
-      bodies[winner].vy += bodies[loser].vy;
+      bodies.at(winner).mass += bodies.at(loser).mass;
+      bodies.at(winner).vx += bodies.at(loser).vx;
+      bodies.at(winner).vy += bodies.at(loser).vy;
       bodies.erase(bodies.begin() + gsl::narrow<std::ptrdiff_t>(loser));
     }
   }
@@ -85,31 +85,37 @@ namespace reference {
     for (std::size_t i = 0; i < bodies.size(); ++i) {
       for (std::size_t j = 0; j < bodies.size(); ++j) {
         if (i == j) { continue; }
-        double const dx = bodies[j].x - bodies[i].x;
-        double const dy = bodies[j].y - bodies[i].y;
+        double const dx = bodies.at(j).x - bodies.at(i).x;
+        double const dy = bodies.at(j).y - bodies.at(i).y;
         double const dist_sq = dx * dx + dy * dy;
         if (dist_sq < epsilon * epsilon) { continue; }
         double const dist = std::sqrt(dist_sq);
-        double const pull = gravity * bodies[j].mass / (dist * dist * dist);
-        ax[i] += pull * dx;
-        ay[i] += pull * dy;
+        double const pull = gravity * bodies.at(j).mass / (dist * dist * dist);
+        ax.at(i) += pull * dx;
+        ay.at(i) += pull * dy;
       }
     }
     for (std::size_t i = 0; i < bodies.size(); ++i) {
-      bodies[i].vx += ax[i] * dt;
-      bodies[i].vy += ay[i] * dt;
-      bodies[i].x += bodies[i].vx * dt;
-      bodies[i].y += bodies[i].vy * dt;
-      bounce(bodies[i].x, bodies[i].vx, bodies[i].radius, width);
-      bounce(bodies[i].y, bodies[i].vy, bodies[i].radius, height);
+      bodies.at(i).vx += ax.at(i) * dt;
+      bodies.at(i).vy += ay.at(i) * dt;
+      bodies.at(i).x += bodies.at(i).vx * dt;
+      bodies.at(i).y += bodies.at(i).vy * dt;
+      bounce(bodies.at(i).x, bodies.at(i).vx, bodies.at(i).radius, width);
+      bounce(bodies.at(i).y, bodies.at(i).vy, bodies.at(i).radius, height);
     }
     merge_all(bodies);
   }
 
-  [[nodiscard]] inline std::vector<body> simulate(std::vector<body> bodies, std::size_t iterations,
-                                                  double dt, double width, double height) {
+  struct run_settings {
+    std::size_t iterations;
+    double dt;
+    double width;
+    double height;
+  };
+
+  [[nodiscard]] inline std::vector<body> simulate(std::vector<body> bodies, run_settings const & run) {
     merge_all(bodies);
-    for (std::size_t it = 0; it < iterations; ++it) { step(bodies, dt, width, height); }
+    for (std::size_t it = 0; it < run.iterations; ++it) { step(bodies, run.dt, run.width, run.height); }
     return bodies;
   }
 
