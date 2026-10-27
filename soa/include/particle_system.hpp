@@ -86,6 +86,12 @@ namespace soa {
 
     // run settings.iterations step, one after another
     void run_simulation(particle_system & system, simulation_settings const & settings);
+
+    // reads particles line by line from the input; malformed lines are ignored, invalid particles discarded
+    [[nodiscard]] particle_system read_particles(std::istream & input, double width, double height);
+
+    // writes the header line and one "id: m r x y vx vy" line per particle, all with 3 decimals
+    void write_particles(std::ostream & output, particle_system const & system, simulation_settings const & settings);
     
 }
 #endif

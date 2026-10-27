@@ -2,6 +2,7 @@ set(COMMON_SRC_FILES
   "${CMAKE_SOURCE_DIR}/soa/src/particle_system.cpp"
   "${CMAKE_SOURCE_DIR}/soa/src/collisions.cpp"
   "${CMAKE_SOURCE_DIR}/soa/src/integrate.cpp"
+  "${CMAKE_SOURCE_DIR}/soa/src/file_io.cpp"
 
 )
 
@@ -9,6 +10,7 @@ set(CURRENT_DIR_SRC_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/test_particle_system.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test_collisions.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test_integrate.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test_file_io.cpp"
 
 )
 
