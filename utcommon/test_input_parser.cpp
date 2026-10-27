@@ -5,13 +5,13 @@
 #include <vector>
 
 #include "input_parser.hpp"
-
+#include "enclosure.hpp"
 namespace {
 
 // Runs the parser on a text, in a 100 x 100 enclosure. No files are needed.
 std::vector<common::particle_record> parse(std::string const & text) {
   std::istringstream input{text};
-  return common::parse_input_stream(input, 100.0, 100.0);
+  return common::parse_input_stream(input, common::enclosure{100.0, 100.0});
 }
 
 }

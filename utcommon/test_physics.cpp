@@ -4,10 +4,12 @@
 #include "physics.hpp"
 #include "point.hpp"
 #include "vector.hpp"
+#include "enclosure.hpp"
 namespace {
 constexpr double width  = 100.0;
 constexpr double height = 100.0;
 constexpr double radius = 1.0;
+constexpr common::enclosure box{width, height};
 } 
 
 TEST(Physics, ForceKnownValue) {
@@ -50,7 +52,7 @@ TEST(Physics, Reboundupperwall){
 
   common::point pos{50.0, 99.5};
   common::vec2d vel{4.0, 5.0};
-  common::apply_rebound(pos,vel,1.0,width,height);
+  common::apply_rebound(pos,vel,1.0,box);
 
   EXPECT_DOUBLE_EQ(pos.getx(), 50.0);   // Horizontal position unchanged
   EXPECT_DOUBLE_EQ(vel.getx(), 4.0);    // Horizontal velocity unchanged
@@ -66,7 +68,7 @@ TEST(Physics, ReboundRightWall) {
   common::point pos{99.5, 50.0};
   common::vec2d vel{4.0, 5.0};
 
-  common::apply_rebound(pos, vel, radius, width, height);
+  common::apply_rebound(pos, vel, radius, box);
 
   EXPECT_DOUBLE_EQ(pos.getx(), 99.0);   // Clamped to width - radius (100 - 1)
   EXPECT_DOUBLE_EQ(vel.getx(), -4.0);   // Horizontal velocity reversed
@@ -78,7 +80,7 @@ TEST(Physics, ReboundLowerWall){
   common::point pos{50.0, 0.5};
   common::vec2d vel{3.0, -2.0};
 
-  common::apply_rebound(pos, vel, 1.0, width,height);
+  common::apply_rebound(pos, vel, 1.0, box);
 
   EXPECT_DOUBLE_EQ(pos.gety(), 1.0);
   EXPECT_DOUBLE_EQ(vel.gety(), 2.0);
@@ -90,7 +92,7 @@ TEST(Physics, ReboundLeftWall){
   common::point pos{0.5, 30.0};
   common::vec2d vel{-2.0, 3.0};
 
-  common::apply_rebound(pos, vel, 1.0, width, height);
+  common::apply_rebound(pos, vel, 1.0, box);
 
   EXPECT_DOUBLE_EQ(pos.getx(), 1.0);
   EXPECT_DOUBLE_EQ(vel.getx(), 2.0);
@@ -101,7 +103,7 @@ TEST(Physics, ReboundBottomLeftCorner) {
   common::point pos{0.5, 0.5};
   common::vec2d vel{-1.0, -1.0};
 
-  common::apply_rebound(pos, vel, 1.0, width, height);
+  common::apply_rebound(pos, vel, 1.0, box);
 
   EXPECT_DOUBLE_EQ(pos.getx(), 1.0);
   EXPECT_DOUBLE_EQ(pos.gety(), 1.0);
