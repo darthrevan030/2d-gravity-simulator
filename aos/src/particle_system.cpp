@@ -32,15 +32,15 @@ void particle_system::simulate(
         for (std::size_t i = 0; i < particles_.size(); ++i)
         {
             common::update_kinematics(
-                particles_[i].pos,
-                particles_[i].vel,
-                accelerations[i],
+                particles_.at(i).pos,
+                particles_.at(i).vel,
+                accelerations.at(i),
                 dt);
 
             common::apply_rebound(
-                particles_[i].pos,
-                particles_[i].vel,
-                particles_[i].radius,
+                particles_.at(i).pos,
+                particles_.at(i).vel,
+                particles_.at(i).radius,
                 width,
                 height);
         }
