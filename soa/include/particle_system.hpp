@@ -24,6 +24,7 @@ namespace soa {
     // one vectory per property - all particles stored as a "stucture of arrays"
     // particle number k is as position k in every vector and k is id so every vector must always have the same length
     struct particle_system{
+        std::vector<std::size_t> id; // original id of each particle, printed in the output files
         std::vector<double> mass; // mass[k] = mass of particle k
         std::vector<double> radius; // radius[k] = radius of particle k
         std::vector<double> x; // position of x coords
@@ -55,6 +56,12 @@ namespace soa {
     // absorber keeps its own radius and position, absorbed particle removed later
     // not const: absorb changes the absorber's mass and velocity
     void absorb(particle_system & system, gsl::index absorber, gsl::index absorbed);
+
+    // removes every particle whose mass was set to 0 (absorbed) from ALL vectors, keeping the order
+    void remove_absorbed(particle_system & system);
+
+    // checks every pair in id order, merges the ones that overlap, then removes the absorbed particles
+    void resolve_collisions(particle_system & system);
     
     // motion: for every particle: if it touches or crosses a wall, put it back on that wall and make its velocity point
     // into the box (rebound effect)
