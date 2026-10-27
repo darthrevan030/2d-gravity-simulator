@@ -7,7 +7,7 @@ namespace common{
 
 namespace{
 void write_particle(std::ostream & out, particle_record const & p){
-    out << std::format("{:.3f} {:.3f} {:.3f} {:.3f} {:.3f} {:.3f}\n", p.mass, p.radius, p.pos.getx(), p.pos.gety(), p.vel.getx(), p.vel.gety()  );
+    out << std::format("{}: {:.3f} {:.3f} {:.3f} {:.3f} {:.3f} {:.3f}\n",p.id, p.mass, p.radius, p.pos.getx(), p.pos.gety(), p.vel.getx(), p.vel.gety()  );
 
 }
 void write_header(std::ostream & out, enclosure box, double timestep, size_t particle_number){
