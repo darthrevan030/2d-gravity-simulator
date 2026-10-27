@@ -23,7 +23,7 @@ int main(int argc, char ** argv) try {
   if(!input){
     throw std::runtime_error{"Couldn't open file"};
   }
-  auto particles = common::parse_input_stream(input, progars.width(), progars.height());
+  auto particles = common::parse_input_stream(input, progargs.width(), progargs.height());
   aos::particle_system system{std::move(particles)};
 
   common::write_config("init_config.txt", system.particles(), progargs.width(), progargs.height(), 0);
