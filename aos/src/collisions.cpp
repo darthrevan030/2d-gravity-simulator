@@ -44,7 +44,7 @@ namespace aos {
         ++kept;
       }
     }
-    particles_.erase(particles_.begin() + static_cast<std::ptrdiff_t>(kept), particles_.end());
+    particles_.erase(particles_.begin() + kept, particles_.end());
   }
 
 }  // namespace aos
