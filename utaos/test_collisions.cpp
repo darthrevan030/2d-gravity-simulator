@@ -6,6 +6,7 @@
 #include "test_helpers.hpp"
 
 using test::make_particle;
+using test::with_id;
 
 namespace {
   // Collisions are resolved when the system is built, so the constructor is enough to test them.
