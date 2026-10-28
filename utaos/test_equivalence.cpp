@@ -3,6 +3,8 @@
 #include <cmath>
 #include <cstddef>
 #include <vector>
+#include <algorithm>
+#include <string>
 
 #include "particle_system.hpp"
 #include "reference_sim.hpp"
