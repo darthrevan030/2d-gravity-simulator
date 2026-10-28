@@ -1,8 +1,14 @@
 #include "particle_system.hpp"
+#include "collision_grid.hpp" // common::collision_grid: finds the particles close enough to collide
+#include "point.hpp"
 #include <gsl/gsl> // gsl::at, gsl::index
-#include <cmath> // std::sqrt 
-#include <cstddef> 
+#include <algorithm> // std::ranges::max
+#include <cmath> // std::sqrt
+#include <cstddef>
 #include <iterator>
+#include <ranges> // std::views::zip
+#include <span>
+#include <vector>
 
 namespace soa{
 
@@ -40,20 +46,29 @@ namespace soa{
             system.ay.resize(count);
         }
 
-        // one "row" of the scan: particle i against every LATER particle j
-        // merges every overlapping pair; stops early if particle i itself gets absorbed
-        // returns true if anything merged
-        bool merge_row(particle_system & system, gsl::index i) {
+        // every particle's centre, for the collision grid
+        std::vector<common::point> centres(particle_system const & system) {
+            std::vector<common::point> out;
+            out.reserve(particle_count(system));
+            for (auto && [x, y] : std::views::zip(system.x, system.y)) { out.push_back({x, y}); }
+            return out;
+        }
+
+        // one "row" of the scan: particle i against the LATER particles j that the grid found near it
+        // (ascending, so the same order as checking every later particle); merges every overlapping pair;
+        // stops early if particle i itself gets absorbed. returns true if anything merged
+        bool merge_row(particle_system & system, gsl::index i, std::span<std::size_t const> later) {
             bool merged = false; // nothing merged yet
-            gsl::index const n = std::ssize(system.mass); // number of positions (dead ones included)
-            for (gsl::index j = i + 1; j < n and is_alive(system, i); ++j) {  // later particles, while i is alive
+            for (std::size_t const later_j : later) {
+                if (not is_alive(system, i)) { break; } // i was absorbed: the rest of its row is skipped
+                auto const j = gsl::narrow_cast<gsl::index>(later_j);
                 if (not is_alive(system, j) or not particles_collide(system, i, j)) { continue; }  // skip this pair
                 if (first_absorbs_second(system, i, j)) {  // i wins
                     absorb(system, i, j);
                     gsl::at(system.mass, j) = 0.0;  // tombstone: j is gone, keep checking i against the rest
                 } else { // j wins
                     absorb(system, j, i);
-                    gsl::at(system.mass, i) = 0.0;  // tombstone: i is gone, the loop condition ends this row
+                    gsl::at(system.mass, i) = 0.0;  // tombstone: i is gone, the next check ends this row
                 }
                 merged = true;
             }
@@ -116,10 +131,15 @@ namespace soa{
     }
 
     void resolve_collisions(particle_system & system) {
-        bool any_merged    = false;
-        gsl::index const n = std::ssize(system.mass);
-        for (gsl::index i = 0; i < n; ++i) { // every row, in id order
-            if (merge_row(system, i)) { any_merged = true; }
+        if (particle_count(system) < 2) { return; } // nothing can collide
+        // nothing moves during the pass, so a grid built once stays valid for all of it
+        auto const points = centres(system);
+        common::collision_grid const grid{points, std::ranges::max(system.radius)};
+        std::vector<std::size_t> later; // reused for every row
+        bool any_merged = false;
+        for (std::size_t i = 0; i < particle_count(system); ++i) { // every row, in id order
+            grid.later_neighbours(i, later);
+            if (merge_row(system, gsl::narrow_cast<gsl::index>(i), later)) { any_merged = true; }
         }
         if (any_merged) { remove_absorbed(system); } // only do the removal pass if something merged
     }
