@@ -49,7 +49,7 @@ TEST(test_collisions, equal_mass_and_radius_lower_index_absorbs) {
 
 TEST(test_collisions, merge_adds_velocities) {
   auto const system = build({make_particle(10.0, 1.0, {50.0, 50.0}, {1.0, 0.0}),
-                             make_particle(10.0, 1.0, {51.0, 50.0}, {0.0, 1.0})});
+                             make_particle(10.0, 1.0, {51.0, 50.0}, {0.0, 1.0}),});
   auto const & ps = system.particles();
   ASSERT_EQ(ps.size(), 1U);
   EXPECT_DOUBLE_EQ(ps.at(0).vel.x, 1.0);
@@ -83,7 +83,7 @@ TEST(test_collisions, chain_of_merges) {
   auto const system = build({make_particle(5.0, 1.0, {50.0, 50.0}, {1.0, 0.0}),
                              make_particle(10.0, 1.5, {52.0, 50.0}, {0.0, 1.0}),
                              make_particle(3.0, 1.0, {54.0, 50.0}, {2.0, 2.0}),
-                             make_particle(7.0, 1.0, {80.0, 80.0})});
+                             make_particle(7.0, 1.0, {80.0, 80.0}),});
   auto const & ps = system.particles();
   ASSERT_EQ(ps.size(), 2U);
   EXPECT_DOUBLE_EQ(ps.at(0).mass, 18.0);
@@ -100,7 +100,7 @@ TEST(test_collisions, everything_collapses_to_one) {
                              make_particle(11.0, 5.0, {24.0, 20.0}, {1.0, 0.0}),
                              make_particle(12.0, 5.0, {28.0, 20.0}, {0.0, 1.0}),
                              make_particle(13.0, 5.0, {24.0, 24.0}, {-1.0, 0.0}),
-                             make_particle(14.0, 5.0, {20.0, 28.0}, {0.0, -1.0})});
+                             make_particle(14.0, 5.0, {20.0, 28.0}, {0.0, -1.0}),});
   auto const & ps = system.particles();
   ASSERT_EQ(ps.size(), 1U);
   EXPECT_DOUBLE_EQ(ps.at(0).mass, 60.0);
