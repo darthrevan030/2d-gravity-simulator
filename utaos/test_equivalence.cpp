@@ -3,6 +3,8 @@
 #include <cmath>
 #include <cstddef>
 #include <vector>
+#include <algorithm>
+#include <string>
 
 #include "particle_system.hpp"
 #include "reference_sim.hpp"
@@ -17,11 +19,12 @@ namespace {
     EXPECT_NEAR(actual, expected, tol);
   }
 
-  [[nodiscard]] std::vector<aos::particle> to_aos(std::vector<reference::body> const & bodies) {
+    [[nodiscard]] std::vector<aos::particle> to_aos(std::vector<reference::body> const & bodies) {
     std::vector<aos::particle> out;
     out.reserve(bodies.size());
     for (auto const & b : bodies) {
-      out.push_back(aos::particle{b.mass, b.radius, common::point{b.x, b.y}, common::vec2d{b.vx, b.vy}});
+      out.push_back(aos::particle{out.size(), b.mass, b.radius, common::point{b.x, b.y},
+                                  common::vec2d{b.vx, b.vy}});
     }
     return out;
   }

@@ -6,6 +6,7 @@
 #include "test_helpers.hpp"
 
 using test::make_particle;
+using test::with_id;
 
 namespace {
   // Collisions are resolved when the system is built, so the constructor is enough to test them.
@@ -49,7 +50,7 @@ TEST(test_collisions, equal_mass_and_radius_lower_index_absorbs) {
 
 TEST(test_collisions, merge_adds_velocities) {
   auto const system = build({make_particle(10.0, 1.0, {50.0, 50.0}, {1.0, 0.0}),
-                             make_particle(10.0, 1.0, {51.0, 50.0}, {0.0, 1.0})});
+                             make_particle(10.0, 1.0, {51.0, 50.0}, {0.0, 1.0}),});
   auto const & ps = system.particles();
   ASSERT_EQ(ps.size(), 1U);
   EXPECT_DOUBLE_EQ(ps.at(0).vel.x, 1.0);
@@ -83,7 +84,7 @@ TEST(test_collisions, chain_of_merges) {
   auto const system = build({make_particle(5.0, 1.0, {50.0, 50.0}, {1.0, 0.0}),
                              make_particle(10.0, 1.5, {52.0, 50.0}, {0.0, 1.0}),
                              make_particle(3.0, 1.0, {54.0, 50.0}, {2.0, 2.0}),
-                             make_particle(7.0, 1.0, {80.0, 80.0})});
+                             make_particle(7.0, 1.0, {80.0, 80.0}),});
   auto const & ps = system.particles();
   ASSERT_EQ(ps.size(), 2U);
   EXPECT_DOUBLE_EQ(ps.at(0).mass, 18.0);
@@ -100,7 +101,7 @@ TEST(test_collisions, everything_collapses_to_one) {
                              make_particle(11.0, 5.0, {24.0, 20.0}, {1.0, 0.0}),
                              make_particle(12.0, 5.0, {28.0, 20.0}, {0.0, 1.0}),
                              make_particle(13.0, 5.0, {24.0, 24.0}, {-1.0, 0.0}),
-                             make_particle(14.0, 5.0, {20.0, 28.0}, {0.0, -1.0})});
+                             make_particle(14.0, 5.0, {20.0, 28.0}, {0.0, -1.0}),});
   auto const & ps = system.particles();
   ASSERT_EQ(ps.size(), 1U);
   EXPECT_DOUBLE_EQ(ps.at(0).mass, 60.0);
@@ -124,5 +125,23 @@ TEST(test_collisions, particles_merge_after_moving_into_each_other) {
 TEST(test_collisions, empty_and_single_particle_have_no_collisions) {
   EXPECT_TRUE(build({}).particles().empty());
   EXPECT_EQ(build({make_particle(1.0, 1.0, {50.0, 50.0})}).particles().size(), 1U);
+}
+
+TEST(test_collisions, equal_mass_and_radius_smaller_id_absorbs) {
+  auto const system = build({with_id(make_particle(10.0, 1.0, {50.0, 50.0}), 7),
+                             with_id(make_particle(10.0, 1.0, {51.0, 50.0}), 3),});
+  auto const & ps = system.particles();
+  ASSERT_EQ(ps.size(), 1U);
+  EXPECT_EQ(ps.at(0).id, 3U);
+  EXPECT_DOUBLE_EQ(ps.at(0).pos.x, 51.0);
+}
+
+TEST(test_collisions, absorber_keeps_its_id) {
+  auto const system = build({with_id(make_particle(5.0, 2.0, {50.0, 50.0}), 0),
+                             with_id(make_particle(10.0, 1.0, {51.0, 50.0}), 1),});
+  auto const & ps = system.particles();
+  ASSERT_EQ(ps.size(), 1U);
+  EXPECT_EQ(ps.at(0).id, 1U);
+  EXPECT_DOUBLE_EQ(ps.at(0).mass, 15.0);
 }
 
