@@ -21,8 +21,8 @@ TEST(CollisionRules, NoCollisionDetection) {
 
 }
 TEST(CollisionRules, MergeParticles) {
-  common::particle_record  absorber{2.0, 1.0, {0.0, 0.0}, {1.0, 1.0}};
-  common::particle_record  const absorbed{3.0, 2.0, {1.0, 1.0}, {2.0, 2.0}};
+  common::particle_record  absorber{0,2.0, 1.0, {0.0, 0.0}, {1.0, 1.0}};
+  common::particle_record  const absorbed{1,3.0, 2.0, {1.0, 1.0}, {2.0, 2.0}};
 
   common::merge_particles( absorber, absorbed);
 
