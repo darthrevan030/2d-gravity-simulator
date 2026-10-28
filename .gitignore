@@ -5,3 +5,4 @@ perf/work.*/
 perf/
 !perf/results/**
 slurm-out/**
+*.zip
