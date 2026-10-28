@@ -15,7 +15,7 @@ TEST(test_particle_system, empty_system) {
 TEST(test_particle_system, keeps_separate_particles_in_order) {
   aos::particle_system const system{{make_particle(1.0, 1.0, {10.0, 10.0}),
                                       make_particle(2.0, 1.0, {50.0, 50.0}),
-                                      make_particle(3.0, 1.0, {90.0, 90.0})}};
+                                      make_particle(3.0, 1.0, {90.0, 90.0}),}};
   auto const & ps = system.particles();
   ASSERT_EQ(ps.size(), 3U);
   EXPECT_DOUBLE_EQ(ps.at(0).mass, 1.0);
