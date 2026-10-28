@@ -2,3 +2,6 @@ out/**
 output/**
 # perf job scratch dirs (made by scripts/run_build_perf.sh)
 perf/work.*/
+perf/
+!perf/results/**
+slurm-out/**
