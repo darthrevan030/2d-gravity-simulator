@@ -127,8 +127,8 @@ TEST(test_collisions, empty_and_single_particle_have_no_collisions) {
 }
 
 TEST(test_collisions, equal_mass_and_radius_smaller_id_absorbs) {
-  auto const system = build({make_particle(10.0, 1.0, {50.0, 50.0}, {}, 7),
-                             make_particle(10.0, 1.0, {51.0, 50.0}, {}, 3),});
+  auto const system = build({with_id(make_particle(10.0, 1.0, {50.0, 50.0}), 7),
+                             with_id(make_particle(10.0, 1.0, {51.0, 50.0}), 3),});
   auto const & ps = system.particles();
   ASSERT_EQ(ps.size(), 1U);
   EXPECT_EQ(ps.at(0).id, 3U);
@@ -136,8 +136,8 @@ TEST(test_collisions, equal_mass_and_radius_smaller_id_absorbs) {
 }
 
 TEST(test_collisions, absorber_keeps_its_id) {
-  auto const system = build({make_particle(5.0, 2.0, {50.0, 50.0}, {}, 0),
-                             make_particle(10.0, 1.0, {51.0, 50.0}, {}, 1),});
+  auto const system = build({with_id(make_particle(5.0, 2.0, {50.0, 50.0}), 0),
+                             with_id(make_particle(10.0, 1.0, {51.0, 50.0}), 1),});
   auto const & ps = system.particles();
   ASSERT_EQ(ps.size(), 1U);
   EXPECT_EQ(ps.at(0).id, 1U);
