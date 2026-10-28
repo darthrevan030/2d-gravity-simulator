@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "particle_system.hpp"
-#include "test_helpers.hpp"
+#include "test_helpers.cpp"
 
 using test::make_particle;
 
