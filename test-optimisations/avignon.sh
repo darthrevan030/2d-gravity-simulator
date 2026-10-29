@@ -3,18 +3,19 @@
 #SBATCH --exclusive
 #SBATCH --time=00:10:00
 # Measures time, energy and valgrind counts (instructions, cache misses, branch mispredictions) of
-# every optimisation stage and every commit on the avignon compute nodes.
+# the three tagged stages (baseline, optimisation-1, optimisation-2) on the avignon compute nodes,
+# and optionally of every commit.
 # Run on the frontend, without sbatch:
 #
-#   git fetch origin                        # needs origin/eda_optimization and the old commits
-#   test-optimisations/avignon.sh [--reps N] [--jobs K] [--no-stages] [--no-timeline] [--working-tree]
+#   git fetch --tags origin                 # needs the tags (and origin/eda_optimization for --timeline)
+#   test-optimisations/avignon.sh [--reps N] [--jobs K] [--no-stages] [--timeline] [--working-tree]
 #                                 [--no-valgrind] [--valgrind-only] [--vg-iterations N]
 #                                 [--vg-cache NAME:I1:D1:LL ...]
 #     --reps N        runs per executable and case (default 5; fewer if they don't fit in 10 minutes)
 #     --jobs K        jobs in the queue at the same time (default 1; each job has a whole node)
-#     --no-stages     skip the stage breakdown (make_stages.sh)
-#     --no-timeline   skip the per-commit history (timeline.py)
-#     --working-tree  also measure the uncommitted working tree in the history
+#     --no-stages     skip the tagged stages (make_stages.sh)
+#     --timeline      also measure the per-commit history (timeline.py, roughly 90 builds)
+#     --working-tree  also measure the uncommitted working tree in the history (implies --timeline)
 #     --no-valgrind   skip the valgrind jobs
 #     --valgrind-only only the valgrind jobs, no timing
 #     --vg-iterations iterations for the valgrind runs on the 1K input (default 20; valgrind is
@@ -25,7 +26,7 @@
 #                     Repeat it to compare sizes and associativities. Always also run: "host",
 #                     valgrind's model of the node's real caches.
 #
-# 1. On the frontend: builds every stage and every commit with $CXX (default g++-15), keeps one
+# 1. On the frontend: builds every tag (and every commit) with $CXX (default g++-15), keeps one
 #    copy of each distinct executable, and prepares a work folder for each run (compute
 #    nodes cannot create folders).
 # 2. Submits one job per executable and case (1K: 500 iterations, 10K: 100 iterations). Each job
@@ -131,7 +132,7 @@ command -v sbatch >/dev/null || { echo "ERROR: run this on the avignon frontend 
 REPS=5
 JOBS=1
 STAGES=1
-TIMELINE=1
+TIMELINE=0
 VALGRIND=1
 TIMING=1
 VG_ITERATIONS=20
@@ -142,8 +143,8 @@ while [ $# -gt 0 ]; do
     --reps) REPS="$2"; shift ;;
     --jobs) JOBS="$2"; shift ;;
     --no-stages) STAGES=0 ;;
-    --no-timeline) TIMELINE=0 ;;
-    --working-tree) TIMELINE_ARGS+=(--working-tree) ;;
+    --timeline) TIMELINE=1 ;;
+    --working-tree) TIMELINE=1; TIMELINE_ARGS+=(--working-tree) ;;
     --no-valgrind) VALGRIND=0 ;;
     --valgrind-only) TIMING=0 ;;
     --vg-iterations) VG_ITERATIONS="$2"; shift ;;
@@ -163,13 +164,18 @@ done
 
 export CXX="${CXX:-g++-15}"
 command -v "$CXX" >/dev/null || { echo "ERROR: compiler $CXX not found (set CXX)." >&2; exit 1; }
-for c in 03e761e 7fe1cfd 958d05d 57af213; do
-  git cat-file -e "$c^{commit}" 2>/dev/null || { echo "ERROR: commit $c missing; run git fetch origin." >&2; exit 1; }
-done
-if git rev-parse -q --verify origin/eda_optimization >/dev/null; then
-  TIMELINE_ARGS+=(--branch origin/eda_optimization)
-else
-  echo "warning: origin/eda_optimization not found; its commits are left out of the history" >&2
+if [ "$STAGES" -eq 1 ]; then
+  for t in baseline optimisation-1 optimisation-2; do
+    git rev-parse -q --verify "refs/tags/$t^{commit}" >/dev/null \
+      || { echo "ERROR: tag $t missing; run git fetch --tags origin." >&2; exit 1; }
+  done
+fi
+if [ "$TIMELINE" -eq 1 ]; then
+  if git rev-parse -q --verify origin/eda_optimization >/dev/null; then
+    TIMELINE_ARGS+=(--branch origin/eda_optimization)
+  else
+    echo "warning: origin/eda_optimization not found; its commits are left out of the history" >&2
+  fi
 fi
 
 BATCH="$(date +%Y%m%d-%H%M%S)"
@@ -183,7 +189,7 @@ echo "== batch $BATCH: $OUT"
 
 # 1. build
 if [ "$STAGES" -eq 1 ]; then
-  echo "== building the stages"
+  echo "== building the tagged stages"
   "$HERE/make_stages.sh" | tee "$OUT/build-stages.log"
   python3 "$HERE/avignon_helper.py" stages-manifest --bin-dir "$OUT/bin" --out "$OUT/stages-manifest.csv"
 fi

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Frontend-side helpers for avignon.sh (works on Python 3.6+).
 
-  stages-manifest --bin-dir DIR --out FILE   list the built stages' executables (one copy of each distinct executable in DIR)
+  stages-manifest --bin-dir DIR --out FILE   list the tagged stages' executables (one copy of each distinct executable in DIR)
   unique-binaries MANIFEST...                print each distinct executable once, as "<binary> <impl>"
   collect --batch DIR                        join the manifests with the timings from the jobs into
                                              DIR/results.csv (one row per stage/commit, impl and case)
@@ -15,8 +15,8 @@ import subprocess
 import sys
 from pathlib import Path
 
-from run_bench import STAGES
-from timeline import MANIFEST_FIELDS, stripped_copy
+from run_bench import IMPLS, STAGES, tag_commit
+from timeline import MANIFEST_FIELDS, describe, stripped_copy
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
@@ -41,10 +41,12 @@ def stages_manifest(opts):
     with opts.out.open("w", newline="") as fh:
         writer = csv.DictWriter(fh, fieldnames=MANIFEST_FIELDS)
         writer.writeheader()
-        for order, (stage, impls) in enumerate(STAGES.items(), start=1):
-            for impl in impls:
+        for order, stage in enumerate(STAGES, start=1):
+            date, author, subject = describe(stage + "^{commit}")
+            for impl in IMPLS:
                 exe = HERE / "stages" / stage / "out/build/default/{0}/Release/grav-{0}".format(impl)
-                row = {"kind": "stage", "label": stage, "order": order, "impl": impl,
+                row = {"kind": "stage", "label": stage, "order": order, "commit": tag_commit(stage),
+                       "date": date, "author": author, "subject": subject, "impl": impl,
                        "status": "no-build", "binary": ""}
                 if exe.is_file():
                     _, path = stripped_copy(exe, opts.bin_dir)
