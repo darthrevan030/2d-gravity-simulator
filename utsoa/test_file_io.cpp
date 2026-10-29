@@ -4,7 +4,6 @@
 
 #include <cstddef>  
 #include <sstream>  // std::istringstream / std::ostringstream: text in memory instead of real files
-#include <string>   
 #include <vector>   
 
 // ---- read_particles ----
