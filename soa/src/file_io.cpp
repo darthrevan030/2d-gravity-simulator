@@ -27,21 +27,26 @@ namespace soa{
         }
     } // namespace
 
+
+
     particle_system read_particles(std::istream & input, double width, double height) {
         particle_system system; // starts empty
-        std::size_t next_id = 0; // every well-formed line uses up an id, even if the particle is invalid
+        std::size_t next_id = 0; // id for the next line that is read
         std::string line;
         while (std::getline(input, line)) { // one line at a time until the end of the input
+            std::size_t const line_id = next_id; // line gets its id as it is read
+            ++next_id; // every line read uses an id even if it is thrown away below
             std::optional<particle_values> const values = parse_line(line);
-            if (not values) { continue; } // not six numbers: ignored completely, no id used
+            if (not values) { continue; } // malformed line: discarded, its id is just lost
             if (is_valid_particle(*values, width, height)) {
                 add_particle(system, *values);
-                system.id.back() = next_id; // keep this line's id (what the instructor's reference does)
+                system.id.back() = line_id; // keep this line's id (gaps where lines were thrown away)
             }
-            ++next_id; // valid or not, this line used up an id
         }
         return system;
     }
+
+
 
     void write_particles(std::ostream & output, particle_system const & system, simulation_settings const & settings) {
         std::println(output, "{:.3f} {:.3f} {:.3f} {}", settings.width, settings.height,

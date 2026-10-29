@@ -53,13 +53,13 @@ TEST(test_file_io, invalid_particles_are_discarded_but_use_up_their_id) {
     EXPECT_EQ(system.mass.back(), 2.0);
 }
 
-TEST(test_file_io, malformed_lines_do_not_use_up_an_id) {
+TEST(test_file_io, malformed_lines_also_up_an_id) {
     std::istringstream input{"1.0 1.0 10.0 10.0 0.0 0.0\n" // id 0
-                             "hello world\n"  // not a particle: no id
-                             "\n" // empty line: no id
-                             "2.0 1.0 30.0 30.0 0.0 0.0\n"}; // id 1
+                             "hello world\n"  // id 1: malformed, discarded
+                             "\n" // id 2: empty line, discarded
+                             "2.0 1.0 30.0 30.0 0.0 0.0\n"}; // id 3
     soa::particle_system const system = soa::read_particles(input, 100.0, 50.0);
-    std::vector<std::size_t> const expected_ids{0, 1};
+    std::vector<std::size_t> const expected_ids{0, 3}; // ids 1 and 2 were used by the discarded lines
     EXPECT_EQ(system.id, expected_ids);
 }
 
