@@ -1,0 +1,7 @@
+stages/
+timeline/
+tmp*/
+avignon-results/*/bin/
+avignon-results/*/work/
+avignon-results/*/slurm/
+__pycache__/
