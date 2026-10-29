@@ -41,3 +41,19 @@ TEST_F(ConfigWriterTest, WritesHeaderAndParticles) {
             "0: 125.720 2.540 10.500 12.250 43.225 75.325\n"
             "1: 200.300 15.000 50.000 60.000 5.000 10.000\n");
 }
+
+TEST_F(ConfigWriterTest, ReturnsFalseForUnwritablePath) {
+  std::filesystem::path const bad = std::filesystem::temp_directory_path() / "grav_no_such_dir" / "config.txt";
+  ASSERT_FALSE(std::filesystem::exists(bad.parent_path()));
+  std::vector<common::particle_record> const particles{
+      {0, 1.0, 1.0, common::point{10.0, 10.0}, common::vec2d{0.0, 0.0}}};
+
+  EXPECT_FALSE(common::write_config(bad, particles, common::enclosure{1000.0, 2000.0}, 0.25));
+  EXPECT_FALSE(std::filesystem::exists(bad));
+}
+
+TEST_F(ConfigWriterTest, WritesOnlyHeaderForNoParticles) {
+  EXPECT_TRUE(common::write_config(path_, {}, common::enclosure{1000.0, 2000.0}, 0.25));
+
+  EXPECT_EQ(read_all(), "1000.000 2000.000 0.250 0\n");
+}

@@ -15,7 +15,7 @@ Produces, for each metric (time, energy, power):
   scale_n_<metric>.png     lines: metric vs number of objects
   scale_iter_<metric>.png  lines: metric vs iterations
 One series per implementation and tag, so "baseline" vs "optimized" runs
-can be shown together. Error bars = relative std dev from perf stat.
+can be shown together. Error bars = standard error of the mean from perf stat.
 """
 
 import argparse
