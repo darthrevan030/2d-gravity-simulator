@@ -138,3 +138,37 @@ TEST(Parser, ExtraWhitespace){
 }
   
 
+TEST(Parser, RejectsOutOfRangeValues){
+  auto const particles = parse("1 2 50 50 3 4\n"
+                               "0 1 50 50 0 0\n"     // zero mass
+                               "-1 1 50 50 0 0\n"    // negative mass
+                               "1 0 50 50 0 0\n"     // zero radius
+                               "1 1 0.5 50 0 0\n"    // past the left wall
+                               "1 1 99.5 50 0 0\n"   // past the right wall
+                               "1 1 50 0.5 0 0\n"    // past the bottom wall
+                               "1 1 50 99.5 0 0\n"   // past the top wall
+                               "3 1 1 99 -1 2\n");   // touching the left and top walls is allowed
+
+  ASSERT_EQ(particles.size(), 2U);
+  EXPECT_DOUBLE_EQ(particles.at(0).id, 0);
+  EXPECT_DOUBLE_EQ(particles.at(1).id, 8);  // ids still count the rejected lines
+  EXPECT_DOUBLE_EQ(particles.at(1).mass, 3.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).radius, 1.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).pos.getx(), 1.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).pos.gety(), 99.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).vel.getx(), -1.0);
+  EXPECT_DOUBLE_EQ(particles.at(1).vel.gety(), 2.0);
+}
+
+// The stream refuses nan, inf and overflowing numbers, so these lines never reach the
+// isfinite check, but they must still be dropped.
+TEST(Parser, RejectsNonFiniteValues){
+  auto const particles = parse("nan 1 50 50 0 0\n"
+                               "1 inf 50 50 0 0\n"
+                               "1 1 50 50 1e999 0\n"
+                               "2 1 10 10 0 0\n");
+
+  ASSERT_EQ(particles.size(), 1U);
+  EXPECT_DOUBLE_EQ(particles.at(0).id, 3);
+  EXPECT_DOUBLE_EQ(particles.at(0).mass, 2.0);
+}

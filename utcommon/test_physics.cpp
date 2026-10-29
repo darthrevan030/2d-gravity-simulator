@@ -111,3 +111,63 @@ TEST(Physics, ReboundBottomLeftCorner) {
   EXPECT_DOUBLE_EQ(vel.gety(), 1.0);
 }
 
+TEST(Physics, ForceIsZeroForCoincidentParticles) {
+  common::point const p{5.0, 5.0};
+
+  common::vec2d const force = common::compute_force(p, 1.0, p, 1.0);
+
+  EXPECT_EQ(force.getx(), 0.0);  // guarded, not 0/0
+  EXPECT_EQ(force.gety(), 0.0);
+}
+
+TEST(Physics, ForceJustAboveEpsilonIsNotZeroed) {
+  common::point const p1{0.0, 0.0};
+  common::point const p2{1e-6, 0.0};  // above EPSILON (1e-9), so the guard must not apply
+
+  common::vec2d const force = common::compute_force(p1, 1.0, p2, 1.0);
+
+  double const expected_x = common::constants::G * 1e12;  // G * m1 * m2 / d^2
+  EXPECT_NEAR(force.getx(), expected_x, 1e-9 * expected_x);
+  EXPECT_DOUBLE_EQ(force.gety(), 0.0);
+}
+
+// Past a wall but already moving back into the box: clamp the position, keep the velocity.
+TEST(Physics, ReboundUpperWallMovingAway) {
+  common::point pos{50.0, 99.5};
+  common::vec2d vel{4.0, -5.0};
+
+  common::apply_rebound(pos, vel, 1.0, box);
+
+  EXPECT_DOUBLE_EQ(pos.gety(), 99.0);
+  EXPECT_DOUBLE_EQ(vel.gety(), -5.0);
+}
+
+TEST(Physics, ReboundRightWallMovingAway) {
+  common::point pos{99.5, 30.0};
+  common::vec2d vel{-3.0, 2.0};
+
+  common::apply_rebound(pos, vel, 1.0, box);
+
+  EXPECT_DOUBLE_EQ(pos.getx(), 99.0);
+  EXPECT_DOUBLE_EQ(vel.getx(), -3.0);
+}
+
+TEST(Physics, ReboundLowerWallMovingAway) {
+  common::point pos{30.0, 0.5};
+  common::vec2d vel{2.0, 3.0};
+
+  common::apply_rebound(pos, vel, 1.0, box);
+
+  EXPECT_DOUBLE_EQ(pos.gety(), 1.0);
+  EXPECT_DOUBLE_EQ(vel.gety(), 3.0);
+}
+
+TEST(Physics, ReboundLeftWallMovingAway) {
+  common::point pos{0.5, 30.0};
+  common::vec2d vel{2.0, 3.0};
+
+  common::apply_rebound(pos, vel, 1.0, box);
+
+  EXPECT_DOUBLE_EQ(pos.getx(), 1.0);
+  EXPECT_DOUBLE_EQ(vel.getx(), 2.0);
+}
