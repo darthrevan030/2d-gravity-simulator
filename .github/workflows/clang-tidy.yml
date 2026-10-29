@@ -20,5 +20,8 @@ jobs:
       - name: Configure
         run: cmake --preset clang-tidy
 
-      - name: Build with clang-tidy
+      - name: Build with clang-tidy (debug)
         run: cmake --build --preset clang-tidy-debug
+
+      - name: Build with clang-tidy (release)
+        run: cmake --build --preset clang-tidy-release
