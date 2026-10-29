@@ -9,11 +9,19 @@
 # each point and implementation is its own job, and a background loop on the frontend submits
 # them one at a time, then collects the results. Progress: slurm-out/perf-batch-<batch>.log
 #
-# Usage: scripts/run_perf.sh [--reps R] [--ref-only] [--tag LABEL] [--valgrind] [--after JOBID]
+# Usage: scripts/run_perf.sh [--reps R] [--ref-only] [--tag LABEL] [--after JOBID]
+#                            [--valgrind [--vg-iterations N] [--vg-cache NAME:I1:D1:LL ...]]
 #   --reps R     repetitions per point (default 5; fewer if they don't fit in the time limit)
 #   --ref-only   only the 1K/10K reference cases
 #   --tag L      label stored in every row
 #   --valgrind   run cachegrind and callgrind on the 1K input instead
+#   --vg-iterations N  iterations for the valgrind runs (default 20; valgrind is 50-100x slower,
+#                and its counts grow in proportion to the iterations)
+#   --vg-cache C an extra simulated cache for cachegrind, as NAME:I1:D1:LL with each cache
+#                size,associativity,line_size in bytes (sets = size / (assoc * line) must be a
+#                power of two), e.g. the cache lab's  --vg-cache lab:16384,2,32:16384,2,32:131072,2,32
+#                Repeat it to compare sizes and associativities. "host" (valgrind's model of the
+#                node's real caches) is always run.
 #   --after ID   start only once job ID has succeeded (used by run_build_perf.sh)
 #
 # Output: perf/results/perf_<batch>.csv (raw per-rep rows in perf/results/raw_<batch>/)
@@ -22,6 +30,14 @@
 #
 # time = duration_time, energy = RAPL power/energy-pkg/, power = energy / time (all from perf stat)
 # time_rsd_pct / energy_rsd_pct = standard error of the mean in % (what perf stat -r reports)
+#
+# Valgrind output (perf/results/, <job> = Slurm job id):
+#   valgrind_<job>.csv  impl,cache,I1,D1,LL,iterations,I_refs,D_refs,D1_misses,D1_miss_rate_pct,
+#                       LLd_misses,LL_miss_rate_pct,branches,mispredicts,mispred_rate_pct
+#   cachegrind-<cache>_<impl>_<job>.txt, callgrind_<impl>_<job>.txt: reports annotated line by line
+#   (cg_annotate --auto=yes). The build has -g (see build.sh: debug info only, same code).
+#   Cachegrind runs with --cache-sim=yes --branch-sim=yes: without --cache-sim=yes, valgrind 3.21+
+#   counts instructions only, with no cache misses.
 set -eu
 
 LIMIT_S=570  # stay under the 10 min job limit
@@ -92,23 +108,53 @@ collect() {
   echo "== $(($(wc -l <"$out") - 1)) points written to $out"
 }
 
-# --valgrind-job <root> <work>: cachegrind + callgrind on the 1K input, 20 iterations
+# cachegrind_row <log> <impl> <cache> <I1> <D1> <LL> <iterations>: one CSV row from the summary
+# at the end of a cachegrind log ("==123== D1  misses:   1,234  (1,000 rd + 234 wr)": first number)
+cachegrind_row() {
+  awk -v impl="$2" -v cache="$3" -v i1="$4" -v d1="$5" -v ll="$6" -v it="$7" '
+    /^==[0-9]+== / {
+      line = $0; sub(/^==[0-9]+== +/, "", line)
+      if (index(line, ":") == 0) next
+      key = substr(line, 1, index(line, ":") - 1); gsub(/ +/, " ", key)
+      val = substr(line, index(line, ":") + 1); sub(/^ +/, "", val); sub(/[ %(].*/, "", val); gsub(/,/, "", val)
+      v[key] = val
+    }
+    END {
+      if (i1 == "-") { i1 = ""; d1 = ""; ll = "" }
+      printf "%s,%s,\"%s\",\"%s\",\"%s\",%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", impl, cache, i1, d1, ll, it,
+        v["I refs"], v["D refs"], v["D1 misses"], v["D1 miss rate"], v["LLd misses"], v["LL miss rate"],
+        v["Branches"], v["Mispredicts"], v["Mispred rate"]
+    }' "$1"
+}
+
+# --valgrind-job <root> <work> <iterations>: cachegrind (once per cache in <work>/caches.txt) and
+# callgrind, on the 1K input
 valgrind_job() {
-  root="$1"; work="$2"
+  root="$1"; work="$2"; it="$3"
   command -v valgrind >/dev/null || { echo "ERROR: valgrind not available." >&2; exit 1; }
   trap 'rm -rf "$work" 2>/dev/null || true' EXIT
   head -n 1000 "$root/ftest/reference/1k/input.txt" >"$work/input/input.txt"
+  csv="$root/perf/results/valgrind_${SLURM_JOB_ID}.csv"
+  echo "impl,cache,I1,D1,LL,iterations,I_refs,D_refs,D1_misses,D1_miss_rate_pct,LLd_misses,LL_miss_rate_pct,branches,mispredicts,mispred_rate_pct" >"$csv"
   for impl in aos soa; do
     bin="$root/out/build/default/$impl/Release/grav-$impl"
-    for tool in cachegrind callgrind; do
-      if [ "$tool" = cachegrind ]; then annotate=cg_annotate; else annotate=callgrind_annotate; fi
-      out="$root/perf/results/${tool}_${impl}_${SLURM_JOB_ID}.out"
-      (cd "$work" && valgrind --tool="$tool" --"$tool"-out-file="$out" \
-         --log-file="${out%.out}.log" "$bin" 20 1000 1000 0.25 >/dev/null)
-      "$annotate" "$out" >"${out%.out}.txt" || true
-      echo "  $impl $tool -> $out"
-    done
+    while read -r name i1 d1 ll; do
+      base="$root/perf/results/cachegrind-${name}_${impl}_${SLURM_JOB_ID}"
+      if [ "$i1" = - ]; then sim=""; else sim="--I1=$i1 --D1=$d1 --LL=$ll"; fi
+      # shellcheck disable=SC2086  # sim is intentionally word-split
+      (cd "$work" && valgrind --tool=cachegrind --cache-sim=yes --branch-sim=yes $sim \
+         --cachegrind-out-file="$base.out" --log-file="$base.log" "$bin" "$it" 1000 1000 0.25 >/dev/null)
+      cg_annotate --auto=yes "$base.out" >"$base.txt" || true
+      cachegrind_row "$base.log" "$impl" "$name" "$i1" "$d1" "$ll" "$it" >>"$csv"
+      echo "  $impl cachegrind ($name) -> $base.txt"
+    done <"$work/caches.txt"
+    base="$root/perf/results/callgrind_${impl}_${SLURM_JOB_ID}"
+    (cd "$work" && valgrind --tool=callgrind --callgrind-out-file="$base.out" --log-file="$base.log" \
+       "$bin" "$it" 1000 1000 0.25 >/dev/null)
+    callgrind_annotate --auto=yes "$base.out" >"$base.txt" || true
+    echo "  $impl callgrind -> $base.txt"
   done
+  echo "  counts -> $csv"
 }
 
 case "${1:-}" in
@@ -127,6 +173,8 @@ cd "$ROOT"
 REPS=5
 REF_ONLY=0
 VALGRIND=0
+VG_ITERATIONS=20
+VG_CACHES="host - - -"
 TAG="run"
 AFTER=""
 while [ $# -gt 0 ]; do
@@ -134,6 +182,18 @@ while [ $# -gt 0 ]; do
     --reps) REPS="$2"; shift ;;
     --ref-only) REF_ONLY=1 ;;
     --valgrind) VALGRIND=1 ;;
+    --vg-iterations) VG_ITERATIONS="$2"; shift ;;
+    --vg-cache)
+      name="${2%%:*}"; rest="${2#*:}"
+      i1="${rest%%:*}"; rest="${rest#*:}"
+      d1="${rest%%:*}"; ll="${rest#*:}"
+      for c in "$i1" "$d1" "$ll"; do
+        echo "$c" | grep -Eq '^[0-9]+,[0-9]+,[0-9]+$' \
+          || { echo "bad --vg-cache $2: expected NAME:size,assoc,line:size,assoc,line:size,assoc,line" >&2; exit 2; }
+      done
+      VG_CACHES="$VG_CACHES
+$name $i1 $d1 $ll"
+      shift ;;
     --tag) TAG="$2"; shift ;;
     --after) AFTER="$2"; shift ;;
     *) echo "unknown option $1" >&2; exit 2 ;;
@@ -197,7 +257,9 @@ LOG="$ROOT/slurm-out/perf-batch-$BATCH.log"
 
 if [ "$VALGRIND" -eq 1 ]; then
   WORK="$(new_work)"
-  ( trap '' HUP; wait_build && submit_wait valgrind --valgrind-job "$ROOT" "$WORK" ) </dev/null >"$LOG" 2>&1 &
+  echo "$VG_CACHES" >"$WORK/caches.txt"
+  ( trap '' HUP; wait_build && submit_wait valgrind --valgrind-job "$ROOT" "$WORK" "$VG_ITERATIONS" ) \
+    </dev/null >"$LOG" 2>&1 &
   echo "valgrind run started in the background; progress: $LOG"
   exit 0
 fi
