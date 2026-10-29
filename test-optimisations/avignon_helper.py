@@ -25,7 +25,7 @@ RESULT_FIELDS = ["kind", "label", "order", "commit", "date", "author", "subject"
                  "reps", "time_s", "time_sem_pct", "energy_j", "energy_sem_pct", "power_w", "final_objects",
                  "binary_id", "same_binary_as"]
 VALGRIND_FIELDS = ["kind", "label", "order", "commit", "date", "author", "subject", "impl", "status",
-                   "iterations", "I_refs", "D_refs", "D1_misses", "D1_miss_rate_pct", "LLd_misses",
+                   "iterations", "cache", "I1", "D1", "LL", "I_refs", "D_refs", "D1_misses", "D1_miss_rate_pct", "LLd_misses",
                    "LL_miss_rate_pct", "branches", "mispredicts", "mispred_rate_pct", "binary_id",
                    "same_binary_as"]
 # cachegrind summary line -> column ("==123== D1  misses:   1,234  (1,000 rd + 234 wr)": first number)
@@ -90,26 +90,33 @@ def cachegrind_counts(log):
 
 def collect_valgrind(batch, manifest_rows):
     iterations = (batch / "vg-iterations.txt").read_text().strip()
+    # "<name> <I1> <D1> <LL>" per line, "-" = valgrind's model of the node's own caches
+    caches = [line.split() for line in (batch / "vg-caches.txt").read_text().splitlines() if line.strip()]
     first_label = {}
     with (batch / "valgrind.csv").open("w", newline="") as fh:
         writer = csv.DictWriter(fh, fieldnames=VALGRIND_FIELDS)
         writer.writeheader()
         for row in manifest_rows:
-            out = {k: row.get(k, "") for k in ("kind", "label", "order", "commit", "date", "author",
-                                                "subject", "impl")}
+            base = {k: row.get(k, "") for k in ("kind", "label", "order", "commit", "date", "author",
+                                                 "subject", "impl")}
             binary_id = Path(row["binary"]).name if row["binary"] else ""
             if not binary_id:
-                writer.writerow(dict(out, status="no-build"))
+                writer.writerow(dict(base, status="no-build"))
                 continue
             key = (row["kind"], binary_id)
-            out.update(binary_id=binary_id, iterations=iterations, same_binary_as=first_label.get(key, ""))
+            base.update(binary_id=binary_id, iterations=iterations, same_binary_as=first_label.get(key, ""))
             first_label.setdefault(key, row["label"])
             vg = batch / "valgrind" / binary_id
             status = (vg / "status").read_text().strip() if (vg / "status").exists() else "not-run"
-            out["status"] = status
-            if status == "ok" and (vg / "cachegrind.log").exists():
-                out.update(cachegrind_counts(vg / "cachegrind.log"))
-            writer.writerow(out)
+            for name, i1, d1, ll in caches:
+                out = dict(base, cache=name, I1=i1 if i1 != "-" else "", D1=d1 if d1 != "-" else "",
+                           LL=ll if ll != "-" else "")
+                log = vg / "cachegrind-{}.log".format(name)
+                if log.exists() and status in ("ok", "timeout (callgrind)"):
+                    out.update(cachegrind_counts(log), status="ok")
+                else:
+                    out["status"] = status
+                writer.writerow(out)
     print("valgrind: {}".format(batch / "valgrind.csv"))
 
 

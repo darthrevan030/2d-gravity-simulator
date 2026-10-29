@@ -73,7 +73,9 @@ def build(commit, tree):
     tree.mkdir(parents=True)
     archive = subprocess.run(["git", "-C", str(REPO), "archive", commit], stdout=subprocess.PIPE, check=True).stdout
     subprocess.run(["tar", "-x", "-C", str(tree)], input=archive, check=True)
-    configure = ["cmake", "--preset", "default"]
+    # -g only adds debug info (g++ generates the same code), so valgrind can annotate source lines;
+    # nothing in the project sets CMAKE_CXX_FLAGS, so this doesn't override any commit's own flags
+    configure = ["cmake", "--preset", "default", "-DCMAKE_CXX_FLAGS=-g"]
     if (DEPS / "gsl-src").is_dir():  # reuse the downloaded libraries instead of fetching them again
         configure += ["-DFETCHCONTENT_FULLY_DISCONNECTED=ON",
                       "-DFETCHCONTENT_SOURCE_DIR_GSL={}".format(DEPS / "gsl-src"),
@@ -124,13 +126,14 @@ def short_name(commit, subject):
 def build_only(opts):
     """Builds every commit and writes a manifest; the timing is done elsewhere (avignon.sh)."""
     opts.bin_dir.mkdir(parents=True, exist_ok=True)
-    tree = HERE / "timeline" / "build"
+    trees = opts.build_only.parent / "src"  # each commit's sources stay here for cg_annotate
     todo = todo_list(opts)
     with opts.build_only.open("w", newline="") as fh:
         writer = csv.DictWriter(fh, fieldnames=MANIFEST_FIELDS)
         writer.writeheader()
         for order, (commit, date, author, subject) in enumerate(todo, start=1):
             short = short_name(commit, subject)
+            tree = trees / short
             built = build(commit, tree)
             status = []
             for impl in IMPLS:
@@ -142,8 +145,8 @@ def build_only(opts):
                 writer.writerow(row)
                 status.append("{} {}".format(impl, row["status"]))
             fh.flush()
+            shutil.rmtree(str(tree / "out"), ignore_errors=True)  # keep the sources, drop the build
             print("[{}/{}] {} {}  ({})".format(order, len(todo), short, subject[:55], ", ".join(status)), flush=True)
-    shutil.rmtree(str(tree), ignore_errors=True)
 
 
 def measure(opts):
