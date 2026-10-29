@@ -3,6 +3,7 @@ target_sources(common PRIVATE
     src/progargs.cpp
     src/input_parser.cpp
     src/config_writer.cpp
+    src/collision_grid.cpp
     include/point.hpp
 )
 

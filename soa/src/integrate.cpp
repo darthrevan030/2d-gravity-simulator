@@ -40,28 +40,36 @@ namespace soa {
 
         // adds the gravity btwn partile i and every later particle j:
         // +F to particle i and -F to partile j (equal and opposite) so each pair is done once
+        // performance: i's sum is kept in locals (a reference into ax would make the compiler reload it
+        // every pair, since ax[j] is written in the same loop), and the later particles are walked with
+        // plain iterators, which g++ vectorizes (a zip | drop view it does not)
         void add_forces_with_later_particles(particle_system & system, gsl::index i){
             double const xi = gsl::at(system.x, i);     // particle i's values, read once
             double const yi = gsl::at(system.y, i);
             double const mi = gsl::at(system.mass, i);
-            double & fxi    = gsl::at(system.ax, i);    // particle i's running force sum (a reference)
-            double & fyi    = gsl::at(system.ay, i);
-            auto later = std::views::zip(system.x, system.y, system.mass, system.ax, system.ay) |
-                        std::views::drop(i + 1);       // only particles after i
-            for (auto && [xj, yj, mj, fxj, fyj] : later) {
-                double const dx         = xj - xi;                       // p_j - p_i
-                double const dy         = yj - yi;
+            double fxi      = 0.0;                      // particle i's force from the later particles
+            double fyi      = 0.0;
+            auto const first = static_cast<std::ptrdiff_t>(i + 1); // only particles after i
+            auto xj  = system.x.cbegin() + first;
+            auto yj  = system.y.cbegin() + first;
+            auto mj  = system.mass.cbegin() + first;
+            auto fxj = system.ax.begin() + first;
+            auto fyj = system.ay.begin() + first;
+            for (auto const x_end = system.x.cend(); xj != x_end; ++xj, ++yj, ++mj, ++fxj, ++fyj) {
+                double const dx         = *xj - xi;                      // p_j - p_i
+                double const dy         = *yj - yi;
                 double const dist_sq    = dx * dx + dy * dy;             // |p_j - p_i|^2
                 double const dist_cubed = dist_sq * std::sqrt(dist_sq);  // |p_j - p_i|^3, no pow()
-                double const g_masses   = gravitational_constant * mi * mj;
-                double const fx         = g_masses * dx / dist_cubed;    // G mi mj (p_j - p_i) / |p_j - p_i|^3
-                double const fy         = g_masses * dy / dist_cubed;
+                double const scale      = gravitational_constant * mi * *mj / dist_cubed; // one division per pair
+                double const fx         = scale * dx;                    // G mi mj (p_j - p_i) / |p_j - p_i|^3
+                double const fy         = scale * dy;
                 fxi += fx;  // i is pulled toward j
                 fyi += fy;
-                fxj -= fx;  // j is pulled toward i, same size, opposite direction
-                fyj -= fy;
+                *fxj -= fx;  // j is pulled toward i, same size, opposite direction
+                *fyj -= fy;
             }
-
+            gsl::at(system.ax, i) += fxi; // add to what the earlier particles already gave i
+            gsl::at(system.ay, i) += fyi;
         }
 
     } // namespace

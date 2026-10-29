@@ -17,7 +17,8 @@
         "CMAKE_CONFIGURATION_TYPES": "Release;Debug",
         "CMAKE_CXX_SCAN_FOR_MODULES": "OFF",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "YES",
-        "ENABLE_CLANG_TIDY": "OFF"
+        "ENABLE_CLANG_TIDY": "OFF",
+        "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG -fno-math-errno -fassociative-math -fno-signed-zeros -fno-trapping-math"
       }
     },
     {
