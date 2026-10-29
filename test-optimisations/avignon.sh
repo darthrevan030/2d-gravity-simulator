@@ -9,6 +9,7 @@
 #   git fetch origin                        # needs origin/eda_optimization and the old commits
 #   test-optimisations/avignon.sh [--reps N] [--jobs K] [--no-stages] [--no-timeline] [--working-tree]
 #                                 [--no-valgrind] [--valgrind-only] [--vg-iterations N]
+#                                 [--vg-cache NAME:I1:D1:LL ...]
 #     --reps N        runs per executable and case (default 5; fewer if they don't fit in 10 minutes)
 #     --jobs K        jobs in the queue at the same time (default 1; each job has a whole node)
 #     --no-stages     skip the stage breakdown (make_stages.sh)
@@ -18,6 +19,11 @@
 #     --valgrind-only only the valgrind jobs, no timing
 #     --vg-iterations iterations for the valgrind runs on the 1K input (default 20; valgrind is
 #                     50-100x slower, and the counts grow in proportion to the iterations)
+#     --vg-cache C    an extra simulated cache for cachegrind, as NAME:I1:D1:LL with each cache
+#                     size,associativity,line_size (bytes), e.g. the cache lab's
+#                     --vg-cache lab:16384,2,32:16384,2,32:131072,2,32
+#                     Repeat it to compare sizes and associativities. Always also run: "host",
+#                     valgrind's model of the node's real caches.
 #
 # 1. On the frontend: builds every stage and every commit with $CXX (default g++-15), keeps one
 #    copy of each distinct executable, and prepares a work folder for each run (compute
@@ -30,11 +36,13 @@
 #    kind,label,order,commit,date,author,subject,impl,case,status,reps,time_s,time_sem_pct,
 #    energy_j,energy_sem_pct,power_w,final_objects,binary_id,same_binary_as
 #    (time and energy are means over the runs; *_sem_pct is the standard error of the mean in %).
-#    Valgrind: one job per executable runs cachegrind (--cache-sim=yes --branch-sim=yes) and
-#    callgrind on the 1K input; the counts go to avignon-results/<batch>/valgrind.csv:
-#    ...,I_refs,D_refs,D1_misses,D1_miss_rate_pct,LLd_misses,LL_miss_rate_pct,branches,mispredicts,
-#    mispred_rate_pct, and the full reports to valgrind/<executable>/{cachegrind,callgrind}.txt
-#    (callgrind.txt lists the instructions spent in each function).
+#    Valgrind: one job per executable runs cachegrind (--cache-sim=yes --branch-sim=yes) once per
+#    cache configuration, then callgrind, on the 1K input. Builds have -g (debug info only, same
+#    code), so the reports are annotated line by line (--auto=yes), like in the cache lab.
+#    Counts: avignon-results/<batch>/valgrind.csv, one row per stage/commit, impl and cache:
+#    ...,cache,I1,D1,LL,I_refs,D_refs,D1_misses,D1_miss_rate_pct,LLd_misses,LL_miss_rate_pct,
+#    branches,mispredicts,mispred_rate_pct,...
+#    Reports: valgrind/<executable>/cachegrind-<cache>.txt and callgrind.txt.
 #
 # Steps 2 and 3 run in the background on the frontend and survive logging out.
 # Progress: tail -f test-optimisations/avignon-results/<batch>/progress.log
@@ -81,27 +89,35 @@ if [ "${1:-}" = "--job" ]; then
   exit 0
 fi
 
-# --vg-job <binary> <work dir> <output dir>: runs on a compute node
+# --vg-job <binary> <work dir> <output dir> <caches file>: runs on a compute node
+# caches file: one "<name> <I1> <D1> <LL>" per line ("-" = valgrind's model of this machine)
 if [ "${1:-}" = "--vg-job" ]; then
   [ -n "${SLURM_JOB_ID:-}" ] || { echo "ERROR: --vg-job is only for the Slurm job" >&2; exit 1; }
-  bin="$2"; work="$3"; vg="$4"
+  bin="$2"; work="$3"; vg="$4"; caches="$5"
   args="$(cat "$work/args")"
   if ! command -v valgrind >/dev/null; then echo no-valgrind >"$vg/status"; exit 0; fi
   start="$(date +%s)"
-  for tool in cachegrind callgrind; do
-    case "$tool" in
-      cachegrind) opts="--cache-sim=yes --branch-sim=yes"; annotate=cg_annotate ;;
-      callgrind)  opts=""; annotate=callgrind_annotate ;;
-    esac
+  # run <tool> <out name> <options...>: one valgrind run, then its annotated report
+  run_tool() {
+    tool="$1"; name="$2"; shift 2
     left=$((LIMIT_S - ($(date +%s) - start)))
     status=0
-    # shellcheck disable=SC2086  # opts and args are intentionally word-split
-    (cd "$work" && timeout -k 5 "$left" valgrind --tool="$tool" $opts --"$tool"-out-file="$vg/$tool.out" \
-        --log-file="$vg/$tool.log" "$bin" $args >/dev/null 2>&1) || status=$?
-    if [ "$status" -eq 124 ]; then echo "timeout ($tool)" >"$vg/status"; exit 0; fi
-    if [ "$status" -ne 0 ]; then echo "crash ($tool)" >"$vg/status"; exit 0; fi
-    "$annotate" "$vg/$tool.out" >"$vg/$tool.txt" 2>&1 || true
-  done
+    # shellcheck disable=SC2086  # args is intentionally word-split
+    (cd "$work" && timeout -k 5 "$left" valgrind --tool="$tool" "$@" --"$tool"-out-file="$vg/$name.out" \
+        --log-file="$vg/$name.log" "$bin" $args >/dev/null 2>&1) || status=$?
+    if [ "$status" -eq 124 ]; then echo "timeout ($name)" >"$vg/status"; exit 0; fi
+    if [ "$status" -ne 0 ]; then echo "crash ($name)" >"$vg/status"; exit 0; fi
+    if [ "$tool" = cachegrind ]; then annotate=cg_annotate; else annotate=callgrind_annotate; fi
+    "$annotate" --auto=yes "$vg/$name.out" >"$vg/$name.txt" 2>&1 || true
+  }
+  while read -r name i1 d1 ll; do
+    if [ "$i1" = - ]; then
+      run_tool cachegrind "cachegrind-$name" --cache-sim=yes --branch-sim=yes
+    else
+      run_tool cachegrind "cachegrind-$name" --cache-sim=yes --branch-sim=yes --I1="$i1" --D1="$d1" --LL="$ll"
+    fi
+  done <"$caches"
+  run_tool callgrind callgrind
   echo ok >"$vg/status"
   exit 0
 fi
@@ -119,6 +135,7 @@ TIMELINE=1
 VALGRIND=1
 TIMING=1
 VG_ITERATIONS=20
+VG_CACHES="host - - -"
 TIMELINE_ARGS=()
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -130,6 +147,15 @@ while [ $# -gt 0 ]; do
     --no-valgrind) VALGRIND=0 ;;
     --valgrind-only) TIMING=0 ;;
     --vg-iterations) VG_ITERATIONS="$2"; shift ;;
+    --vg-cache)
+      IFS=: read -r name i1 d1 ll <<<"$2"
+      for c in "$i1" "$d1" "$ll"; do
+        echo "$c" | grep -Eq '^[0-9]+,[0-9]+,[0-9]+$' \
+          || { echo "bad --vg-cache $2: expected NAME:size,assoc,line:size,assoc,line:size,assoc,line" >&2; exit 2; }
+      done
+      VG_CACHES="$VG_CACHES
+$name $i1 $d1 $ll"
+      shift ;;
     *) echo "unknown option $1" >&2; exit 2 ;;
   esac
   shift
@@ -151,6 +177,7 @@ OUT="$HERE/avignon-results/$BATCH"
 mkdir -p "$OUT/bin" "$OUT/raw" "$OUT/work" "$OUT/slurm" "$OUT/valgrind"
 [ "$TIMING" -eq 1 ] || [ "$VALGRIND" -eq 1 ] || { echo "nothing to do: --valgrind-only with --no-valgrind" >&2; exit 2; }
 echo "$VG_ITERATIONS" >"$OUT/vg-iterations.txt"
+echo "$VG_CACHES" >"$OUT/vg-caches.txt"
 echo "== batch $BATCH: $OUT"
 { hostname; "$CXX" --version | head -n 1; git rev-parse HEAD; } >"$OUT/build-info.txt"
 
@@ -216,7 +243,7 @@ run_all() {
     if [ "$kind" = perf ]; then
       id="$(submit --job "$bin" "$work" "$OUT/raw/$(basename "$work").csv" "$last" "$REPS")" || continue
     else
-      id="$(submit --vg-job "$bin" "$work" "$last")" || continue
+      id="$(submit --vg-job "$bin" "$work" "$last" "$OUT/vg-caches.txt")" || continue
     fi
     echo "$(date +%T) [$n/$total] job $id: $(basename "$work")"
   done <"$OUT/runs.txt"

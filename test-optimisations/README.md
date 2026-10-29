@@ -125,16 +125,36 @@ standard error) for every stage and commit. `--no-timeline` skips the history an
 builds, if time is short.
 
 Valgrind: one more job per distinct executable runs cachegrind (`--cache-sim=yes --branch-sim=yes`)
-and callgrind on the 1K input for 20 iterations (`--vg-iterations`). Valgrind is 50–100× slower,
-and its counts are exact and grow in proportion to the iterations, so a short run compares the
-stages fairly. Outputs:
+once per cache configuration, then callgrind, on the 1K input for 20 iterations (`--vg-iterations`).
+Valgrind is 50–100× slower, and its counts are exact and grow in proportion to the iterations, so a
+short run compares the stages fairly.
 
-- `avignon-results/<batch>/valgrind.csv`: one row per stage/commit and implementation, with
-  instructions (`I_refs`), data accesses (`D_refs`), L1 data misses and rate, last-level misses and
-  rate, branches, mispredictions and rate;
-- `avignon-results/<batch>/valgrind/<executable>/cachegrind.txt` and `callgrind.txt`: the full
-  reports (`callgrind.txt` lists the instructions spent in each function). `<executable>` is the
-  `binary_id` column of the CSVs.
+Cache configurations: `host` (valgrind's model of the node's real caches) is always run. Add
+simulated ones with `--vg-cache NAME:I1:D1:LL`, each cache given as `size,associativity,line_size`
+in bytes, as in the cache lab. Repeat the option to vary size and associativity:
 
-The release builds have symbols but no debug info, so callgrind gives per-function counts. For
-per-line detail, rebuild that stage with `-g` and run valgrind by hand.
+```sh
+test-optimisations/avignon.sh --valgrind-only \
+  --vg-cache lab:16384,2,32:16384,2,32:131072,2,32 \
+  --vg-cache d1-32k-8way:16384,2,32:32768,8,64:131072,2,32 \
+  --vg-cache d1-8k-direct:16384,2,32:8192,1,32:131072,2,32
+```
+
+Differences from the cache lab's script, and why:
+
+- **Release build, not Debug.** The graded build is `-O3`; a `-O0` profile describes code that
+  is never run and has many times more instructions. The builds add `-g` (debug info only: g++
+  generates the same code), so `cg_annotate --auto=yes` still annotates every source line.
+- **`--branch-sim=yes`** adds the branch columns (`Bc`, `Bcm`, `Bi`, `Bim`) to the reports.
+- **Without `--vg-cache`, misses are for the node's own caches,** not the lab's 16 KB 2-way
+  model, so they don't match the lab's numbers. Use `--vg-cache lab:…` for a like-for-like model.
+
+Outputs:
+
+- `avignon-results/<batch>/valgrind.csv`: one row per stage/commit, implementation and cache
+  configuration, with instructions (`I_refs`), data accesses (`D_refs`), L1 data misses and rate,
+  last-level misses and rate, branches, mispredictions and rate;
+- `avignon-results/<batch>/valgrind/<executable>/cachegrind-<cache>.txt` and `callgrind.txt`: the
+  annotated reports. `<executable>` is the `binary_id` column of the CSVs. The sources they
+  annotate are kept in `test-optimisations/stages/` and `avignon-results/<batch>/src/`, so don't
+  delete those before reading the reports.

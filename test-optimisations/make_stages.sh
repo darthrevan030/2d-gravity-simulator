@@ -85,7 +85,8 @@ for name in ${*:-$ALL}; do
   fetch=()
   [ -d "$DEPS/gsl-src" ] && fetch=(-DFETCHCONTENT_FULLY_DISCONNECTED=ON -DFETCHCONTENT_SOURCE_DIR_GSL="$DEPS/gsl-src"
                                    -DFETCHCONTENT_SOURCE_DIR_GOOGLETEST="$DEPS/googletest-src")
-  if (cd "$d" && cmake --preset default "${fetch[@]}" >"$d/configure.log" 2>&1 \
+  # -g only adds debug info (same code), so valgrind can annotate source lines
+  if (cd "$d" && cmake --preset default -DCMAKE_CXX_FLAGS=-g ${fetch[@]+"${fetch[@]}"} >"$d/configure.log" 2>&1 \
         && cmake --build --preset release --target grav-aos grav-soa >"$d/build.log" 2>&1); then
     warnings=$(grep -c "warning:" "$d/build.log" || true)
     echo "built $name (warnings: $warnings)"
