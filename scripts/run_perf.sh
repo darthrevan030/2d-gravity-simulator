@@ -55,6 +55,9 @@ point_job() {
         printf "  %-10s %-4s n=%-6d it=%-5d rep %d/%d %9.3f s %10.2f J %8.2f W\n",
                s, impl, n, it, r, reps, t, e, e / t > "/dev/stderr"
       }' "$work/perf.csv" >>"$raw"
+    # keep the last rep's configs next to the raw csv (the work dir is removed on exit)
+    cp "$work/init_config.txt" "${raw%.csv}_init_config.txt"
+    cp "$work/final_config.txt" "${raw%.csv}_final_config.txt"
     now="$(date +%s)"
     if [ "$r" -lt "$reps" ] && [ $((now + now - t0 - start)) -gt "$LIMIT_S" ]; then
       echo "  stopping after $r reps: the next one would not fit in the time limit" >&2
