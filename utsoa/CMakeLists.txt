@@ -11,7 +11,7 @@ set(CURRENT_DIR_SRC_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/test_collisions.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test_integrate.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test_file_io.cpp"
-
+  "${CMAKE_CURRENT_SOURCE_DIR}/test_equivalence.cpp"
 )
 
 add_unit_test_target(
@@ -20,5 +20,5 @@ add_unit_test_target(
   LIBRARY_FILTER soa
   COVERAGE_DIR coverage-soa
   LIBRARY_TO_LINK common
-  INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/soa/include"
+  INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/soa/include" "${CMAKE_SOURCE_DIR}/testutil"
 )
