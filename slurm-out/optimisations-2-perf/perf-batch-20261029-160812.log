@@ -1,0 +1,5 @@
+16:08:12 job 9750: aos reference n=1000 it=500
+16:08:32 job 9751: soa reference n=1000 it=500
+16:08:52 job 9752: aos reference n=10000 it=100
+16:10:32 job 9753: soa reference n=10000 it=100
+== 4 points written to /home/alumnos/a0616912/project-1/2d-gravity-simulator/perf/results/perf_20261029-160812.csv

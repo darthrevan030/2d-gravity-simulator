@@ -1,0 +1,27 @@
+==80410== Cachegrind, a high-precision tracing profiler
+==80410== Copyright (C) 2002-2024, and GNU GPL'd, by Nicholas Nethercote et al.
+==80410== Using Valgrind-3.26.0 and LibVEX; rerun with -h for copyright info
+==80410== Command: /home/alumnos/a0616912/baseline-perf-check/out/build/default/aos/Release/grav-aos 20 1000 1000 0.25
+==80410== Parent PID: 80408
+==80410== 
+--80410-- warning: L3 cache found, using its data for the LL simulation.
+==80410== 
+==80410== I refs:        775,764,392
+==80410== I1  misses:         28,429
+==80410== LLi misses:          2,779
+==80410== I1  miss rate:        0.00%
+==80410== LLi miss rate:        0.00%
+==80410== 
+==80410== D refs:        151,111,794  (126,879,360 rd   + 24,232,434 wr)
+==80410== D1  misses:     13,664,779  ( 13,655,116 rd   +      9,663 wr)
+==80410== LLd misses:         11,562  (      8,383 rd   +      3,179 wr)
+==80410== D1  miss rate:         9.0% (       10.8%     +        0.0%  )
+==80410== LLd miss rate:         0.0% (        0.0%     +        0.0%  )
+==80410== 
+==80410== LL refs:        13,693,208  ( 13,683,545 rd   +      9,663 wr)
+==80410== LL misses:          14,341  (     11,162 rd   +      3,179 wr)
+==80410== LL miss rate:          0.0% (        0.0%     +        0.0%  )
+==80410== 
+==80410== Branches:       69,102,168  ( 68,803,388 cond +    298,780 ind)
+==80410== Mispredicts:       306,243  (    213,751 cond +     92,492 ind)
+==80410== Mispred rate:          0.4% (        0.3%     +       31.0%   )

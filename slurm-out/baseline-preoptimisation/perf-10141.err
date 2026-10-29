@@ -1,0 +1,5 @@
+  reference  soa  n=1000   it=500   rep 1/5     2.101 s      18.22 J     8.67 W
+  reference  soa  n=1000   it=500   rep 2/5     2.536 s      19.03 J     7.50 W
+  reference  soa  n=1000   it=500   rep 3/5     2.103 s      18.20 J     8.65 W
+  reference  soa  n=1000   it=500   rep 4/5     2.636 s      19.14 J     7.26 W
+  reference  soa  n=1000   it=500   rep 5/5     2.235 s      18.37 J     8.22 W

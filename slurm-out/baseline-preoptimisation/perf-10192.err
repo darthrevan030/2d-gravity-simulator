@@ -1,0 +1,4 @@
+  scale_n    aos  n=8000   it=100   rep 1/5   188.918 s    1631.29 J     8.63 W
+  scale_n    aos  n=8000   it=100   rep 2/5   188.908 s    1631.85 J     8.64 W
+  scale_n    aos  n=8000   it=100   rep 3/5   189.076 s    1633.76 J     8.64 W
+  stopping after 3 reps: the next one would not fit in the time limit

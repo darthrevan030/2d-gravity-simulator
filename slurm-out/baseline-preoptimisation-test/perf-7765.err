@@ -1,0 +1,2 @@
+  reference  aos  n=10000  it=100   rep 1/5   363.425 s    3161.51 J     8.70 W
+  stopping after 1 reps: the next one would not fit in the time limit

@@ -1,0 +1,2 @@
+  reference  soa  n=10000  it=100   rep 1/5    33.870 s     307.45 J     9.08 W
+[2026-10-27T14:24:38.344] error: *** JOB 7766 ON avignon1 CANCELLED AT 2026-10-27T14:24:38 DUE to SIGNAL Terminated ***

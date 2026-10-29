@@ -1,0 +1,22 @@
+Cloning into 'gsl-src'...
+HEAD is now at 417ef68 Prevent external construction of checked iterators (#1263)
+Cloning into 'googletest-src'...
+HEAD is now at 063de7e Prepare for v1.18.0 (#5055)
+CMake Warning at cmake/TestUtils.cmake:145 (message):
+  gcovr not found.  Coverage targets for utcommon will not be available.
+Call Stack (most recent call first):
+  utcommon/CMakeLists.txt:17 (add_unit_test_target)
+
+
+CMake Warning at cmake/TestUtils.cmake:145 (message):
+  gcovr not found.  Coverage targets for utaos will not be available.
+Call Stack (most recent call first):
+  utaos/CMakeLists.txt:15 (add_unit_test_target)
+
+
+CMake Warning at cmake/TestUtils.cmake:145 (message):
+  gcovr not found.  Coverage targets for utsoa will not be available.
+Call Stack (most recent call first):
+  utsoa/CMakeLists.txt:17 (add_unit_test_target)
+
+

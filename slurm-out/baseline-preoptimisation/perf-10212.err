@@ -1,0 +1,2 @@
+  scale_n    aos  n=10000  it=100   rep 1/5   363.542 s    3172.61 J     8.73 W
+  stopping after 1 reps: the next one would not fit in the time limit

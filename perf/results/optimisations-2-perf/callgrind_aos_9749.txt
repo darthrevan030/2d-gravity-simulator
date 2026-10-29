@@ -1,0 +1,3763 @@
+--------------------------------------------------------------------------------
+Profile data file '/home/alumnos/a0616912/project-1/2d-gravity-simulator/perf/results/callgrind_aos_9749.out' (creator: callgrind-3.26.0)
+--------------------------------------------------------------------------------
+I1 cache: 
+D1 cache: 
+LL cache: 
+Timerange: Basic block 0 - 39831335
+Trigger: Program termination
+Profiled target:  /home/alumnos/a0616912/project-1/2d-gravity-simulator/out/build/default/aos/Release/grav-aos 20 1000 1000 0.25 (PID 75472, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       99
+Include dirs:     
+User annotated:   
+Auto-annotation:  on
+
+--------------------------------------------------------------------------------
+Ir                   
+--------------------------------------------------------------------------------
+359,093,772 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                    file:function
+--------------------------------------------------------------------------------
+153,860,196 (42.85%)  common/include/physics.hpp:aos::particle_system::compute_accelerations() const
+ 87,017,437 (24.23%)  aos/src/integrate.cpp:aos::particle_system::compute_accelerations() const [/home/alumnos/a0616912/project-1/2d-gravity-simulator/out/build/default/aos/Release/grav-aos]
+ 48,081,305 (13.39%)  common/include/vector.hpp:aos::particle_system::compute_accelerations() const
+ 19,350,634 ( 5.39%)  /usr/include/c++/15/bits/stl_vector.h:aos::particle_system::compute_accelerations() const
+  5,670,251 ( 1.58%)  ???:std::num_get<char, std::istreambuf_iterator<char, std::char_traits<char> > >::_M_extract_float(std::istreambuf_iterator<char, std::char_traits<char> >, std::istreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, std::_Ios_Iostate&, std::string&) const [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.35]
+  4,970,289 ( 1.38%)  ???:0x00000000001a1140 [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.35]
+  4,277,118 ( 1.19%)  common/src/collision_grid.cpp:common::collision_grid::later_neighbours(unsigned long, std::vector<unsigned long, std::allocator<unsigned long> >&) const [/home/alumnos/a0616912/project-1/2d-gravity-simulator/out/build/default/aos/Release/grav-aos]
+  3,657,348 ( 1.02%)  ./stdlib/./stdlib/strtod_l.c:____strtod_l_internal [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  1,976,847 ( 0.55%)  /usr/include/c++/15/bits/stl_vector.h:common::collision_grid::later_neighbours(unsigned long, std::vector<unsigned long, std::allocator<unsigned long> >&) const
+  1,729,893 ( 0.48%)  ./stdlib/./stdlib/strtod_l.c:str_to_mpn.isra.0 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  1,537,416 ( 0.43%)  /usr/include/c++/15/format:std::__format::__formatter_fp<char>::parse(std::basic_format_parse_context<char>&) [/home/alumnos/a0616912/project-1/2d-gravity-simulator/out/build/default/aos/Release/grav-aos]
+  1,238,289 ( 0.34%)  /usr/include/c++/15/format:std::vformat[abi:cxx11](std::basic_string_view<char, std::char_traits<char> >, std::basic_format_args<std::basic_format_context<std::__format::_Sink_iter<char>, char> >) [/home/alumnos/a0616912/project-1/2d-gravity-simulator/out/build/default/aos/Release/grav-aos]
+  1,205,762 ( 0.34%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  1,150,247 ( 0.32%)  ???:std::to_chars(char*, char*, double, std::chars_format, int) [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.35]
+  1,079,442 ( 0.30%)  /usr/include/c++/15/format:std::basic_format_context<std::__format::_Sink_iter<char>, char>::iterator std::__format::__formatter_fp<char>::format<double, std::__format::_Sink_iter<char> >(double, std::basic_format_context<std::__format::_Sink_iter<char>, char>&) const [/home/alumnos/a0616912/project-1/2d-gravity-simulator/out/build/default/aos/Release/grav-aos]
+  1,039,906 ( 0.29%)  /usr/include/c++/15/bits/ranges_algo.h:common::collision_grid::later_neighbours(unsigned long, std::vector<unsigned long, std::allocator<unsigned long> >&) const
+    998,663 ( 0.28%)  ./string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:__memset_avx2_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+    936,873 ( 0.26%)  /usr/include/c++/15/bits/stl_algobase.h:common::collision_grid::later_neighbours(unsigned long, std::vector<unsigned long, std::allocator<unsigned long> >&) const
+    729,212 ( 0.20%)  /usr/include/c++/15/span:common::collision_grid::later_neighbours(unsigned long, std::vector<unsigned long, std::allocator<unsigned long> >&) const
+    634,970 ( 0.18%)  ./string/../sysdeps/x86_64/multiarch/memchr-avx2.S:__memchr_avx2 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+    622,008 ( 0.17%)  /usr/include/c++/15/bits/unicode.h:std::__format::__formatter_fp<char>::parse(std::basic_format_parse_context<char>&)
+    609,663 ( 0.17%)  common/src/collision_grid.cpp:common::collision_grid::collision_grid(std::span<common::point const, 18446744073709551615ul>, double) [/home/alumnos/a0616912/project-1/2d-gravity-simulator/out/build/default/aos/Release/grav-aos]
+    604,449 ( 0.17%)  /usr/include/c++/15/format:decltype(auto) std::basic_format_arg<std::basic_format_context<std::__format::_Sink_iter<char>, char> >::_M_visit<std::__format::_Formatting_scanner<std::__format::_Sink_iter<char>, char>::_M_format_arg(unsigned long)::{lambda(auto:1&)#1}>(std::__format::_Formatting_scanner<std::__format::_Sink_iter<char>, char>::_M_format_arg(unsigned long)::{lambda(auto:1&)#1}&&, std::__format::_Arg_t) [/home/alumnos/a0616912/project-1/2d-gravity-simulator/out/build/default/aos/Release/grav-aos]
+    603,000 ( 0.17%)  ???:std::num_get<char, std::istreambuf_iterator<char, std::char_traits<char> > >::do_get(std::istreambuf_iterator<char, std::char_traits<char> >, std::istreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, std::_Ios_Iostate&, double&) const [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.35]
+    547,720 ( 0.15%)  /usr/include/c++/15/format:std::__format::_Sink<char>::_M_write(std::basic_string_view<char, std::char_traits<char> >) [/home/alumnos/a0616912/project-1/2d-gravity-simulator/out/build/default/aos/Release/grav-aos]
+    530,363 ( 0.15%)  ./elf/./elf/dl-lookup.c:do_lookup_x [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+    527,082 ( 0.15%)  aos/src/collisions.cpp:aos::particle_system::process_collisions() [/home/alumnos/a0616912/project-1/2d-gravity-simulator/out/build/default/aos/Release/grav-aos]
+    514,072 ( 0.14%)  ./elf/../sysdeps/generic/dl-new-hash.h:_dl_lookup_symbol_x
+    428,031 ( 0.12%)  ???:std::istream::sentry::sentry(std::istream&, bool) [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.35]
+    417,186 ( 0.12%)  /usr/include/c++/15/bits/stl_numeric.h:common::collision_grid::collision_grid(std::span<common::point const, 18446744073709551615ul>, double)
+    401,677 ( 0.11%)  ./stdlib/./stdlib/mul.c:__mpn_mul [/usr/lib/x86_64-linux-gnu/libc.so.6]
+    373,228 ( 0.10%)  common/include/physics.hpp:aos::particle_system::simulate(unsigned long, double, double, double)
+    372,384 ( 0.10%)  /usr/include/c++/15/bits/stl_vector.h:aos::particle_system::process_collisions()
+    351,601 ( 0.10%)  /usr/include/c++/15/bits/ranges_algo.h:common::collision_grid::collision_grid(std::span<common::point const, 18446744073709551615ul>, double)
+    328,608 ( 0.09%)  /usr/include/c++/15/bits/unicode.h:std::__unicode::_Utf_iterator<char, char32_t, char const*, char const*, std::__unicode::_Repl>::_M_read_utf8() [/home/alumnos/a0616912/project-1/2d-gravity-simulator/out/build/default/aos/Release/grav-aos]
+    312,000 ( 0.09%)  ???:std::istream& std::istream::_M_extract<double>(double&) [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.35]
+    301,154 ( 0.08%)  ./malloc/./malloc/malloc.c:free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+    272,975 ( 0.08%)  ./malloc/./malloc/malloc.c:malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+    268,608 ( 0.07%)  ./stdlib/../sysdeps/x86_64/lshift.S:__mpn_lshift [/usr/lib/x86_64-linux-gnu/libc.so.6]
+    260,288 ( 0.07%)  /usr/include/c++/15/bits/stl_algo.h:common::collision_grid::later_neighbours(unsigned long, std::vector<unsigned long, std::allocator<unsigned long> >&) const
+    260,160 ( 0.07%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_chk_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+    249,336 ( 0.07%)  ./stdlib/./stdlib/strtod_l.c:round_and_return [/usr/lib/x86_64-linux-gnu/libc.so.6]
+    245,344 ( 0.07%)  ???:std::string::push_back(char) [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.35]
+    228,600 ( 0.06%)  common/include/collision_rules.hpp:aos::particle_system::process_collisions()
+    216,000 ( 0.06%)  ???:void std::__convert_to_v<double>(char const*, double&, std::_Ios_Iostate&, __locale_struct* const&) [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.35]
+    211,248 ( 0.06%)  /usr/include/c++/15/charconv:std::__format::__formatter_fp<char>::parse(std::basic_format_parse_context<char>&)
+    209,264 ( 0.06%)  ???:0x0000000000153900 [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.35]
+    205,737 ( 0.06%)  ./stdlib/../sysdeps/x86_64/mul_1.S:__mpn_mul_1 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+    184,966 ( 0.05%)  ./elf/./elf/dl-lookup.c:_dl_lookup_symbol_x [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+    177,024 ( 0.05%)  aos/src/particle_system.cpp:aos::particle_system::simulate(unsigned long, double, double, double) [/home/alumnos/a0616912/project-1/2d-gravity-simulator/out/build/default/aos/Release/grav-aos]
+    176,040 ( 0.05%)  ???:0x000000000019d1b0 [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.35]
+    174,000 ( 0.05%)  ???:std::string::reserve(unsigned long) [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.35]
+    164,322 ( 0.05%)  /usr/include/c++/15/bits/string_view.tcc:std::vformat[abi:cxx11](std::basic_string_view<char, std::char_traits<char> >, std::basic_format_args<std::basic_format_context<std::__format::_Sink_iter<char>, char> >)
+    164,304 ( 0.05%)  /usr/include/c++/15/bits/basic_string.h:std::basic_format_context<std::__format::_Sink_iter<char>, char>::iterator std::__format::__formatter_fp<char>::format<double, std::__format::_Sink_iter<char> >(double, std::basic_format_context<std::__format::_Sink_iter<char>, char>&) const
+    151,685 ( 0.04%)  /usr/include/c++/15/bits/stl_algobase.h:aos::particle_system::process_collisions()
+    150,000 ( 0.04%)  ???:std::string::_Rep::_M_clone(std::allocator<char> const&, unsigned long) [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.35]
+    149,626 ( 0.04%)  ./elf/./elf/dl-reloc.c:_dl_relocate_object_no_relro [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+    147,008 ( 0.04%)  ???:operator new(unsigned long) [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.35]
+    144,942 ( 0.04%)  /usr/include/c++/15/bits/stl_vector.h:common::collision_grid::collision_grid(std::span<common::point const, 18446744073709551615ul>, double)
+    144,764 ( 0.04%)  /usr/include/c++/15/bits/char_traits.h:std::vformat[abi:cxx11](std::basic_string_view<char, std::char_traits<char> >, std::basic_format_args<std::basic_format_context<std::__format::_Sink_iter<char>, char> >)
+    144,000 ( 0.04%)  ???:std::string::_Rep::_S_create(unsigned long, unsigned long, std::allocator<char> const&) [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.35]
+    126,000 ( 0.04%)  ???:0x000000000014df80 [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.35]
+    124,568 ( 0.03%)  ./elf/../sysdeps/x86_64/dl-machine.h:_dl_relocate_object_no_relro
+    123,609 ( 0.03%)  /usr/include/c++/15/bits/charconv.h:std::basic_format_context<std::__format::_Sink_iter<char>, char>::iterator std::__format::__formatter_int<char>::format<unsigned long long, std::__format::_Sink_iter<char> >(unsigned long long, std::basic_format_context<std::__format::_Sink_iter<char>, char>&) const
+    121,315 ( 0.03%)  ./elf/./elf/dl-lookup.c:check_match [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+    121,250 ( 0.03%)  /usr/include/c++/15/bits/stl_iterator.h:aos::particle_system::process_collisions()
+    109,637 ( 0.03%)  ./elf/./elf/do-rel.h:_dl_relocate_object_no_relro
+    109,544 ( 0.03%)  /usr/include/c++/15/bits/stl_iterator.h:std::__format::_Sink<char>::_M_write(std::basic_string_view<char, std::char_traits<char> >)
+    105,678 ( 0.03%)  ???:std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long) [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.35]
+    103,691 ( 0.03%)  ???:std::basic_istream<char, std::char_traits<char> >& std::getline<char, std::char_traits<char>, std::allocator<char> >(std::basic_istream<char, std::char_traits<char> >&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, char) [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.35]
+    103,206 ( 0.03%)  /usr/include/c++/15/bits/ranges_algo.h:aos::particle_system::process_collisions()
+     99,314 ( 0.03%)  /usr/include/c++/15/bits/stl_iterator.h:common::collision_grid::later_neighbours(unsigned long, std::vector<unsigned long, std::allocator<unsigned long> >&) const
+     98,166 ( 0.03%)  common/include/vector.hpp:aos::particle_system::simulate(unsigned long, double, double, double)
+     96,048 ( 0.03%)  ./stdlib/../sysdeps/ieee754/dbl-64/mpn2dbl.c:__mpn_construct_double [/usr/lib/x86_64-linux-gnu/libc.so.6]
+     93,244 ( 0.03%)  ./string/../sysdeps/x86_64/multiarch/../multiarch/strcmp-sse2.S:strcmp [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+     88,065 ( 0.02%)  /usr/include/c++/15/format:std::basic_format_context<std::__format::_Sink_iter<char>, char>::iterator std::__format::__formatter_int<char>::_M_format_int<std::__format::_Sink_iter<char> >(std::basic_string_view<char, std::char_traits<char> >, unsigned long, std::basic_format_context<std::__format::_Sink_iter<char>, char>&) const [/home/alumnos/a0616912/project-1/2d-gravity-simulator/out/build/default/aos/Release/grav-aos]
+     86,592 ( 0.02%)  ???:0x00000000001539d0 [/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.35]
+     86,206 ( 0.02%)  /usr/include/c++/15/bits/basic_string.tcc:std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_mutate(unsigned long, unsigned long, char const*, unsigned long) [/home/alumnos/a0616912/project-1/2d-gravity-simulator/out/build/default/aos/Release/grav-aos]
+     85,094 ( 0.02%)  ./string/../sysdeps/x86_64/multiarch/strlen-avx2.S:__strlen_avx2 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/15/bits/unicode.h
+--------------------------------------------------------------------------------
+Ir               
+
+-- line 45 ----------------------------------------
+      .           {
+      .           _GLIBCXX_BEGIN_NAMESPACE_VERSION
+      .           namespace __unicode
+      .           {
+      .             // A Unicode code point that is not a high or low surrogate.
+      .             constexpr bool
+      .             __is_scalar_value(char32_t __c)
+      .             {
+ 23,472 ( 0.01%)      if (__c < 0xD800) [[likely]]
+      .                 return true;
+      .               return 0xDFFF < __c && __c <= 0x10FFFF;
+      .             }
+      .           
+      .             // A code point that can be encoded in a single code unit of type _CharT.
+      .             template<typename _CharT>
+      .               constexpr bool
+      .               __is_single_code_unit(char32_t __c)
+-- line 61 ----------------------------------------
+-- line 152 ----------------------------------------
+      .           
+      .                 [[nodiscard]]
+      .                 constexpr iter_difference_t<_Iter> 
+      .                 _M_units() const requires forward_iterator<_Iter>
+      .                 { return _M_to_increment; }
+      .           
+      .                 [[nodiscard]]
+      .                 constexpr value_type
+ 11,736 ( 0.00%)        operator*() const { return _M_buf[_M_buf_index]; }
+      .           
+      .                 constexpr _Utf_iterator&
+      .                 operator++()
+      .                 {
+140,832 ( 0.04%)  	if (_M_buf_index + 1 == _M_buf_last && _M_curr() != _M_last)
+      .           	  {
+      .           	    if constexpr (forward_iterator<_Iter>)
+      .           	      std::advance(_M_curr(), _M_to_increment);
+ 23,472 ( 0.01%)  	    if (_M_curr() == _M_last)
+      .           	      _M_buf_index = 0;
+      .           	    else
+      .           	      _M_read();
+      .           	  }
+      .           	else if (_M_buf_index + 1 < _M_buf_last)
+      .           	  ++_M_buf_index;
+      .           	return *this;
+      .                 }
+      .           
+      .                 constexpr _Utf_iterator
+      .                 operator++(int)
+      .                 {
+ 70,416 ( 0.02%)  	auto __tmp = *this;
+      .           	++*this;
+      .           	return __tmp;
+      .                 }
+      .           
+      .                 constexpr _Utf_iterator&
+      .                 operator--() requires bidirectional_iterator<_Iter>
+      .                 {
+      .           	if (!_M_buf_index && _M_curr() != _M_first())
+-- line 190 ----------------------------------------
+-- line 231 ----------------------------------------
+      .           		   && __lhs._M_buf_index == __lhs._M_buf_last;
+      .                 }
+      .           
+      .               private:
+      .                 constexpr void
+      .                 _M_read()
+      .                 {
+      .           	if constexpr (sizeof(_FromFmt) == sizeof(uint8_t))
+340,344 ( 0.09%)  	  _M_read_utf8();
+328,608 ( 0.09%)  => /usr/include/c++/15/bits/unicode.h:std::__unicode::_Utf_iterator<char, char32_t, char const*, char const*, std::__unicode::_Repl>::_M_read_utf8() (23,472x)
+      .           	else if constexpr (sizeof(_FromFmt) == sizeof(uint16_t))
+      .           	  _M_read_utf16();
+      .           	else
+      .           	  {
+      .           	    static_assert(sizeof(_FromFmt) == sizeof(uint32_t));
+      .           	    _M_read_utf32();
+      .           	  }
+ 11,736 ( 0.00%)        }
+      .           
+      .                 constexpr void
+      .                 _M_read_reverse(); // TODO
+      .           
+      .                 template<typename>
+      .           	struct _Guard
+      .           	{
+      .           	  _Guard(void*, _Iter&) { }
+      .           	};
+      .           
+      .                 template<typename _It> requires forward_iterator<_It>
+      .           	struct _Guard<_It>
+      .           	{
+ 23,472 ( 0.01%)  	  constexpr ~_Guard() { _M_this->_M_curr() = std::move(_M_orig); }
+      .           	  _Utf_iterator* _M_this;
+      .           	  _It _M_orig;
+      .           	};
+      .           
+      .                 constexpr void
+ 23,472 ( 0.01%)        _M_read_utf8()
+      .                 {
+ 23,472 ( 0.01%)  	_Guard<_Iter> __g{this, _M_curr()};
+      .           	char32_t __c{};
+      .           	const uint8_t __lo_bound = 0x80, __hi_bound = 0xBF;
+ 70,416 ( 0.02%)  	uint8_t __u = *_M_curr()++;
+ 23,472 ( 0.01%)  	uint8_t __to_incr = 1;
+      .           	auto __incr = [&, this] {
+      .           	  ++__to_incr;
+      .           	  return ++_M_curr();
+      .           	};
+      .           
+ 46,944 ( 0.01%)  	if (__u <= 0x7F) [[likely]]      // 0x00 to 0x7F
+      .           	  __c = __u;
+      .           	else if (__u < 0xC2) [[unlikely]]
+      .           	  __c = _S_error();
+      .           	else if (_M_curr() == _M_last) [[unlikely]]
+      .           	  __c = _S_error();
+      .           	else if (__u <= 0xDF) // 0xC2 to 0xDF
+      .           	  {
+      .           	    __c = __u & 0x1F;
+-- line 287 ----------------------------------------
+-- line 356 ----------------------------------------
+      .           		      }
+      .           		  }
+      .           	      }
+      .           	  }
+      .           	else [[unlikely]]
+      .           	  __c = _S_error();
+      .           
+      .           	_M_update(__c, __to_incr);
+ 23,472 ( 0.01%)        }
+      .           
+      .                 constexpr void
+      .                 _M_read_utf16()
+      .                 {
+      .           	_Guard<_Iter> __g{this, _M_curr()};
+      .           	char32_t __c{};
+      .           	uint16_t __u = *_M_curr()++;
+      .           	uint8_t __to_incr = 1;
+-- line 372 ----------------------------------------
+-- line 402 ----------------------------------------
+      .           	  __c = _S_error();
+      .           	_M_update(__c, 1);
+      .                 }
+      .           
+      .                 // Encode the code point __c as one or more code units in _M_buf.
+      .                 constexpr void
+      .                 _M_update(char32_t __c, uint8_t __to_incr)
+      .                 {
+ 23,472 ( 0.01%)  	_M_to_increment = __to_incr;
+ 46,944 ( 0.01%)  	_M_buf_index = 0;
+      .           	if constexpr (sizeof(_ToFmt) == sizeof(uint32_t))
+      .           	  {
+ 23,472 ( 0.01%)  	    _M_buf[0] = __c;
+      .           	    _M_buf_last = 1;
+      .           	  }
+      .           	else if constexpr (sizeof(_ToFmt) == sizeof(uint16_t))
+      .           	  {
+      .           	    if (__is_single_code_unit<_ToFmt>(__c))
+      .           	      {
+      .           		_M_buf[0] = __c;
+      .           		_M_buf[1] = 0;
+-- line 422 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/15/bits/charconv.h
+--------------------------------------------------------------------------------
+Ir              
+
+-- line 55 ----------------------------------------
+     .             template<typename _Tp>
+     .               _GLIBCXX14_CONSTEXPR unsigned
+     .               __to_chars_len(_Tp __value, int __base = 10) noexcept
+     .               {
+     .           #if __cpp_variable_templates
+     .                 static_assert(__integer_to_chars_is_unsigned<_Tp>, "implementation bug");
+     .           #endif
+     .           
+ 1,938 ( 0.00%)        unsigned __n = 1;
+     .                 const unsigned __b2 = __base  * __base;
+     .                 const unsigned __b3 = __b2 * __base;
+     .                 const unsigned long __b4 = __b3 * __base;
+     .                 for (;;)
+     .           	{
+ 5,848 ( 0.00%)  	  if (__value < (unsigned)__base) return __n;
+ 4,050 ( 0.00%)  	  if (__value < __b2) return __n + 1;
+ 7,056 ( 0.00%)  	  if (__value < __b3) return __n + 2;
+     .           	  if (__value < __b4) return __n + 3;
+ 3,876 ( 0.00%)  	  __value /= __b4;
+     .           	  __n += 4;
+     .           	}
+     .               }
+     .           
+     .             // Write an unsigned integer value to the range [first,first+len).
+     .             // The caller is required to provide a buffer of exactly the right size
+     .             // (which can be determined by the __to_chars_len function).
+     .             template<typename _Tp>
+     .               _GLIBCXX23_CONSTEXPR void
+     .               __to_chars_10_impl(char* __first, unsigned __len, _Tp __val) noexcept
+     .               {
+     .           #if __cpp_variable_templates
+     .                 static_assert(__integer_to_chars_is_unsigned<_Tp>, "implementation bug");
+     .           #endif
+     .           
+50,388 ( 0.01%)        constexpr char __digits[201] =
+     .           	"0001020304050607080910111213141516171819"
+     .           	"2021222324252627282930313233343536373839"
+     .           	"4041424344454647484950515253545556575859"
+     .           	"6061626364656667686970717273747576777879"
+     .           	"8081828384858687888990919293949596979899";
+ 5,292 ( 0.00%)        unsigned __pos = __len - 1;
+ 7,404 ( 0.00%)        while (__val >= 100)
+     .           	{
+17,640 ( 0.00%)  	  auto const __num = (__val % 100) * 2;
+ 1,764 ( 0.00%)  	  __val /= 100;
+ 5,292 ( 0.00%)  	  __first[__pos] = __digits[__num + 1];
+ 5,292 ( 0.00%)  	  __first[__pos - 1] = __digits[__num];
+ 1,764 ( 0.00%)  	  __pos -= 2;
+     .           	}
+ 3,528 ( 0.00%)        if (__val >= 10)
+     .           	{
+     .           	  auto const __num = __val * 2;
+   522 ( 0.00%)  	  __first[1] = __digits[__num + 1];
+   174 ( 0.00%)  	  __first[0] = __digits[__num];
+     .           	}
+     .                 else
+ 1,781 ( 0.00%)  	__first[0] = '0' + __val;
+     .               }
+     .           
+     .           } // namespace __detail
+     .           _GLIBCXX_END_NAMESPACE_VERSION
+     .           } // namespace std
+     .           #endif // C++11
+     .           #endif // _GLIBCXX_CHARCONV_H
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: aos/src/integrate.cpp
+--------------------------------------------------------------------------------
+Ir                  
+
+-- line 3 ----------------------------------------
+         .           
+         .           #include "particle_system.hpp"
+         .           #include "physics.hpp"
+         .           
+         .           namespace aos {
+         .           
+         .             // Sums the forces first and divides by the mass once per particle at the end, instead of two
+         .             // divisions per pair. Particle i's sum is kept in locals so it isn't reloaded every pair.
+       140 ( 0.00%)    std::vector<common::vec2d> particle_system::compute_accelerations() const {
+         .               std::vector<common::vec2d> acc(particles_.size(), common::vec2d{});
+    39,284 ( 0.01%)      for (std::size_t i = 0; i < particles_.size(); ++i) {
+         .                 particle const & pi = particles_.at(i);
+         .                 double fxi = 0.0;
+         .                 double fyi = 0.0;
+48,179,395 (13.42%)        for (std::size_t j = i + 1; j < particles_.size(); ++j) {
+         .                   particle const & pj = particles_.at(j);
+         .                   // force on i points towards j; j feels the opposite
+   117,612 ( 0.03%)          auto const force = common::compute_force(pi.pos, pi.mass, pj.pos, pj.mass);
+ 9,616,261 ( 2.68%)          fxi += force.x;
+         .                   fyi += force.y;
+28,848,783 ( 8.03%)          acc.at(j).x -= force.x;
+         .                   acc.at(j).y -= force.y;
+         .                 }
+    58,806 ( 0.02%)        acc.at(i).x += fxi;
+         .                 acc.at(i).y += fyi;
+         .               }
+    58,906 ( 0.02%)      for (std::size_t i = 0; i < particles_.size(); ++i) {  // a = F / m
+    98,110 ( 0.03%)        acc.at(i).x /= particles_.at(i).mass;
+         .                 acc.at(i).y /= particles_.at(i).mass;
+         .               }
+         .               return acc;
+       140 ( 0.00%)    }
+         .           
+         .           }  // namespace aos
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/15/bits/stl_iterator.h
+--------------------------------------------------------------------------------
+Ir               
+
+-- line 1051 ----------------------------------------
+      .                 __attribute__((__always_inline__))
+      .                 _GLIBCXX_CONSTEXPR
+      .                 __normal_iterator() _GLIBCXX_NOEXCEPT
+      .                 : _M_current() { }
+      .           
+      .                 __attribute__((__always_inline__))
+      .                 explicit _GLIBCXX_CONSTEXPR
+      .                 __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+ 84,424 ( 0.02%)        : _M_current(__i) { }
+      .           
+      .                 // Allow iterator to const_iterator conversion
+      .           #if __cplusplus >= 201103L
+      .           # ifdef __glibcxx_concepts
+      .                 template<typename _Iter> requires std::is_convertible_v<_Iter, _Iterator>
+      .           # else
+      .                 template<typename _Iter, typename = __convertible_from<_Iter>>
+      .           # endif
+-- line 1067 ----------------------------------------
+-- line 1095 ----------------------------------------
+      .                 operator->() const _GLIBCXX_NOEXCEPT
+      .                 { return _M_current; }
+      .           
+      .                 __attribute__((__always_inline__))
+      .                 _GLIBCXX14_CONSTEXPR
+      .                 __normal_iterator&
+      .                 operator++() _GLIBCXX_NOEXCEPT
+      .                 {
+ 80,039 ( 0.02%)  	++_M_current;
+      .           	return *this;
+      .                 }
+      .           
+      .                 __attribute__((__always_inline__))
+      .                 _GLIBCXX14_CONSTEXPR
+      .                 __normal_iterator
+      .                 operator++(int) _GLIBCXX_NOEXCEPT
+      .                 { return __normal_iterator(_M_current++); }
+      .           
+      .                 // Bidirectional iterator requirements
+      .           
+      .                 __attribute__((__always_inline__))
+      .                 _GLIBCXX14_CONSTEXPR
+      .                 __normal_iterator&
+  2,035 ( 0.00%)        operator--() _GLIBCXX_NOEXCEPT
+      .                 {
+  6,868 ( 0.00%)  	--_M_current;
+      .           	return *this;
+      .                 }
+      .           
+      .                 __attribute__((__always_inline__))
+      .                 _GLIBCXX14_CONSTEXPR
+      .                 __normal_iterator
+      .                 operator--(int) _GLIBCXX_NOEXCEPT
+      .                 { return __normal_iterator(_M_current--); }
+-- line 1128 ----------------------------------------
+-- line 1134 ----------------------------------------
+      .                 reference
+      .                 operator[](difference_type __n) const _GLIBCXX_NOEXCEPT
+      .                 { return _M_current[__n]; }
+      .           
+      .                 __attribute__((__always_inline__))
+      .                 _GLIBCXX14_CONSTEXPR
+      .                 __normal_iterator&
+      .                 operator+=(difference_type __n) _GLIBCXX_NOEXCEPT
+ 27,386 ( 0.01%)        { _M_current += __n; return *this; }
+      .           
+      .                 _GLIBCXX_NODISCARD __attribute__((__always_inline__))
+      .                 _GLIBCXX_CONSTEXPR
+      .                 __normal_iterator
+      .                 operator+(difference_type __n) const _GLIBCXX_NOEXCEPT
+ 24,600 ( 0.01%)        { return __normal_iterator(_M_current + __n); }
+      .           
+      .                 __attribute__((__always_inline__))
+      .                 _GLIBCXX14_CONSTEXPR
+      .                 __normal_iterator&
+      .                 operator-=(difference_type __n) _GLIBCXX_NOEXCEPT
+      .                 { _M_current -= __n; return *this; }
+      .           
+      .                 _GLIBCXX_NODISCARD __attribute__((__always_inline__))
+-- line 1156 ----------------------------------------
+-- line 1332 ----------------------------------------
+      .               { return __lhs.base() - __rhs.base(); }
+      .           
+      .             template<typename _Iterator, typename _Container>
+      .               _GLIBCXX_NODISCARD __attribute__((__always_inline__)) _GLIBCXX_CONSTEXPR
+      .               inline typename __normal_iterator<_Iterator, _Container>::difference_type
+      .               operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+      .           	      const __normal_iterator<_Iterator, _Container>& __rhs)
+      .               _GLIBCXX_NOEXCEPT
+131,379 ( 0.04%)      { return __lhs.base() - __rhs.base(); }
+      .           
+      .             template<typename _Iterator, typename _Container>
+      .               _GLIBCXX_NODISCARD __attribute__((__always_inline__)) _GLIBCXX_CONSTEXPR
+      .               inline __normal_iterator<_Iterator, _Container>
+      .               operator+(typename __normal_iterator<_Iterator, _Container>::difference_type
+      .           	      __n, const __normal_iterator<_Iterator, _Container>& __i)
+      .               _GLIBCXX_NOEXCEPT
+      .               { return __normal_iterator<_Iterator, _Container>(__i.base() + __n); }
+-- line 1348 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/15/bits/basic_string.h
+--------------------------------------------------------------------------------
+Ir              
+
+-- line 197 ----------------------------------------
+     .                 struct _Alloc_hider : allocator_type // TODO check __is_final
+     .                 {
+     .           #if __cplusplus < 201103L
+     .           	_Alloc_hider(pointer __dat, const _Alloc& __a = _Alloc())
+     .           	: allocator_type(__a), _M_p(__dat) { }
+     .           #else
+     .           	_GLIBCXX20_CONSTEXPR
+     .           	_Alloc_hider(pointer __dat, const _Alloc& __a)
+ 2,014 ( 0.00%)  	: allocator_type(__a), _M_p(__dat) { }
+     .           
+     .           	_GLIBCXX20_CONSTEXPR
+     .           	_Alloc_hider(pointer __dat, _Alloc&& __a = _Alloc())
+78,253 ( 0.02%)  	: allocator_type(std::move(__a)), _M_p(__dat) { }
+     .           #endif
+     .           
+     .           	pointer _M_p; // The actual data.
+     .                 };
+     .           
+     .                 _Alloc_hider	_M_dataplus;
+     .                 size_type		_M_string_length;
+     .           
+-- line 217 ----------------------------------------
+-- line 221 ----------------------------------------
+     .                 {
+     .           	_CharT           _M_local_buf[_S_local_capacity + 1];
+     .           	size_type        _M_allocated_capacity;
+     .                 };
+     .           
+     .                 _GLIBCXX20_CONSTEXPR
+     .                 void
+     .                 _M_data(pointer __p)
+ 6,877 ( 0.00%)        { _M_dataplus._M_p = __p; }
+     .           
+     .                 _GLIBCXX20_CONSTEXPR
+     .                 void
+     .                 _M_length(size_type __length)
+32,320 ( 0.01%)        { _M_string_length = __length; }
+     .           
+     .                 _GLIBCXX20_CONSTEXPR
+     .                 pointer
+     .                 _M_data() const
+35,349 ( 0.01%)        { return _M_dataplus._M_p; }
+     .           
+     .                 _GLIBCXX20_CONSTEXPR
+     .                 pointer
+     .                 _M_local_data()
+     .                 {
+     .           #if __cplusplus >= 201103L
+ 3,921 ( 0.00%)  	return std::pointer_traits<pointer>::pointer_to(*_M_local_buf);
+     .           #else
+     .           	return pointer(_M_local_buf);
+     .           #endif
+     .                 }
+     .           
+     .                 _GLIBCXX20_CONSTEXPR
+     .                 const_pointer
+     .                 _M_local_data() const
+     .                 {
+     .           #if __cplusplus >= 201103L
+ 3,920 ( 0.00%)  	return std::pointer_traits<const_pointer>::pointer_to(*_M_local_buf);
+     .           #else
+     .           	return const_pointer(_M_local_buf);
+     .           #endif
+     .                 }
+     .           
+     .                 _GLIBCXX20_CONSTEXPR
+     .                 void
+ 1,000 ( 0.00%)        _M_capacity(size_type __capacity)
+ 7,876 ( 0.00%)        { _M_allocated_capacity = __capacity; }
+     .           
+     .                 _GLIBCXX20_CONSTEXPR
+     .                 void
+     .                 _M_set_length(size_type __n)
+     .                 {
+     .           	_M_length(__n);
+     .           	traits_type::assign(_M_data()[__n], _CharT());
+     3 ( 0.00%)        }
+     .           
+     .                 _GLIBCXX20_CONSTEXPR
+     .                 bool
+     .                 _M_is_local() const
+     .                 {
+68,572 ( 0.02%)  	if (_M_data() == _M_local_data())
+     .           	  {
+     1 ( 0.00%)  	    if (_M_string_length > _S_local_capacity)
+     .           	      __builtin_unreachable();
+     .           	    return true;
+     .           	  }
+     .           	return false;
+     .                 }
+     .           
+     .                 // Create & Destroy
+     .                 _GLIBCXX20_CONSTEXPR
+-- line 290 ----------------------------------------
+-- line 297 ----------------------------------------
+     .                 {
+     .           	if (!_M_is_local())
+     .           	  _M_destroy(_M_allocated_capacity);
+     .                 }
+     .           
+     .                 _GLIBCXX20_CONSTEXPR
+     .                 void
+     .                 _M_destroy(size_type __size) throw()
+ 5,924 ( 0.00%)        { _Alloc_traits::deallocate(_M_get_allocator(), _M_data(), __size + 1); }
+     .           
+     .           #if __cplusplus < 201103L || defined _GLIBCXX_DEFINING_STRING_INSTANTIATIONS
+     .                 // _M_construct_aux is used to implement the 21.3.1 para 15 which
+     .                 // requires special behaviour if _InIterator is an integral type
+     .                 template<typename _InIterator>
+     .                   void
+     .                   _M_construct_aux(_InIterator __beg, _InIterator __end,
+     .           			 std::__false_type)
+-- line 313 ----------------------------------------
+-- line 414 ----------------------------------------
+     .           				   __s, __pos, this->size());
+     .           	return __pos;
+     .                 }
+     .           
+     .                 _GLIBCXX20_CONSTEXPR
+     .                 void
+     .                 _M_check_length(size_type __n1, size_type __n2, const char* __s) const
+     .                 {
+ 7,828 ( 0.00%)  	if (this->max_size() - (this->size() - __n1) < __n2)
+     .           	  __throw_length_error(__N(__s));
+     .                 }
+     .           
+     .           
+     .                 // NB: _M_limit doesn't check for a bad __pos value.
+     .                 _GLIBCXX20_CONSTEXPR
+     .                 size_type
+     .                 _M_limit(size_type __pos, size_type __off) const _GLIBCXX_NOEXCEPT
+     .                 {
+     .           	const bool __testoff =  __off < this->size() - __pos;
+     2 ( 0.00%)  	return __testoff ? __off : this->size() - __pos;
+     .                 }
+     .           
+     .                 // True if _Rep and source do not overlap.
+     .                 bool
+     .                 _M_disjunct(const _CharT* __s) const _GLIBCXX_NOEXCEPT
+     .                 {
+     .           	return (less<const _CharT*>()(__s, _M_data())
+     .           		|| less<const _CharT*>()(_M_data() + this->size(), __s));
+-- line 441 ----------------------------------------
+-- line 442 ----------------------------------------
+     .                 }
+     .           
+     .                 // When __n = 1 way faster than the general multichar
+     .                 // traits_type::copy/move/assign.
+     .                 _GLIBCXX20_CONSTEXPR
+     .                 static void
+     .                 _S_copy(_CharT* __d, const _CharT* __s, size_type __n)
+     .                 {
+ 3,932 ( 0.00%)  	if (__n == 1)
+     .           	  traits_type::assign(*__d, *__s);
+     .           	else
+     .           	  traits_type::copy(__d, __s, __n);
+     .                 }
+     .           
+     .                 _GLIBCXX20_CONSTEXPR
+     .                 static void
+     .                 _S_move(_CharT* __d, const _CharT* __s, size_type __n)
+-- line 458 ----------------------------------------
+-- line 681 ----------------------------------------
+     .                  *  has no special meaning.
+     .                  */
+     .                 _GLIBCXX20_CONSTEXPR
+     .                 basic_string(const _CharT* __s, size_type __n,
+     .           		   const _Alloc& __a = _Alloc())
+     .                 : _M_dataplus(_M_local_data(), __a)
+     .                 {
+     .           	// NB: Not required, but considered best practice.
+ 7,004 ( 0.00%)  	if (__s == 0 && __n > 0)
+     .           	  std::__throw_logic_error(__N("basic_string: "
+     .           				       "construction from null is not valid"));
+     .           	_M_construct(__s, __s + __n, std::forward_iterator_tag());
+     .                 }
+     .           
+     .                 /**
+     .                  *  @brief  Construct string as copy of a C string.
+     .                  *  @param  __s  Source C string.
+-- line 697 ----------------------------------------
+-- line 702 ----------------------------------------
+     .                 // 3076. basic_string CTAD ambiguity
+     .                 template<typename = _RequireAllocator<_Alloc>>
+     .           #endif
+     .                 _GLIBCXX20_CONSTEXPR
+     .                 basic_string(const _CharT* __s, const _Alloc& __a = _Alloc())
+     .                 : _M_dataplus(_M_local_data(), __a)
+     .                 {
+     .           	// NB: Not required, but considered best practice.
+    10 ( 0.00%)  	if (__s == 0)
+     .           	  std::__throw_logic_error(__N("basic_string: "
+     .           				       "construction from null is not valid"));
+     .           	const _CharT* __end = __s + traits_type::length(__s);
+     .           	_M_construct(__s, __end, forward_iterator_tag());
+     .                 }
+     .           
+     .                 /**
+     .                  *  @brief  Construct string as multiple characters.
+-- line 718 ----------------------------------------
+-- line 740 ----------------------------------------
+     .                  */
+     .                 _GLIBCXX20_CONSTEXPR
+     .                 basic_string(basic_string&& __str) noexcept
+     .                 : _M_dataplus(_M_local_data(), std::move(__str._M_get_allocator()))
+     .                 {
+     .           	if (__str._M_is_local())
+     .           	  {
+     .           	    _M_init_local_buf();
+     1 ( 0.00%)  	    traits_type::copy(_M_local_buf, __str._M_local_buf,
+     .           			      __str.length() + 1);
+     .           	  }
+     .           	else
+     .           	  {
+     .           	    _M_data(__str._M_data());
+     .           	    _M_capacity(__str._M_allocated_capacity);
+     .           	  }
+     .           
+-- line 756 ----------------------------------------
+-- line 958 ----------------------------------------
+     .           	// Replace allocator if POCMA is true.
+     .           	std::__alloc_on_move(_M_get_allocator(), __str._M_get_allocator());
+     .           
+     .           	if (__str._M_is_local())
+     .           	  {
+     .           	    // We've always got room for a short string, just copy it
+     .           	    // (unless this is a self-move, because that would violate the
+     .           	    // char_traits::copy precondition that the ranges don't overlap).
+     3 ( 0.00%)  	    if (__builtin_expect(std::__addressof(__str) != this, true))
+     .           	      {
+     2 ( 0.00%)  		if (__str.size())
+     .           		  this->_S_copy(_M_data(), __str._M_data(), __str.size());
+     .           		_M_set_length(__str.size());
+     .           	      }
+     .           	  }
+     .           	else if (_Alloc_traits::_S_propagate_on_move_assign() || __equal_allocs)
+     .           	  {
+     .           	    // Just move the allocated pointer, our allocator can free it.
+     .           	    pointer __data = nullptr;
+-- line 976 ----------------------------------------
+-- line 1155 ----------------------------------------
+     .           #endif
+     .           
+     .               public:
+     .                 // Capacity:
+     .                 ///  Returns the number of characters in the string, not including any
+     .                 ///  null-termination.
+     .                 _GLIBCXX_NODISCARD _GLIBCXX20_CONSTEXPR
+     .                 size_type
+     3 ( 0.00%)        size() const _GLIBCXX_NOEXCEPT
+     .                 {
+ 8,841 ( 0.00%)  	size_type __sz = _M_string_length;
+     .           	if (__sz > max_size ())
+     .           	  __builtin_unreachable ();
+     .           	return __sz;
+     .                 }
+     .           
+     .                 ///  Returns the number of characters in the string, not including any
+     .                 ///  null-termination.
+     .                 _GLIBCXX_NODISCARD _GLIBCXX20_CONSTEXPR
+-- line 1173 ----------------------------------------
+-- line 1271 ----------------------------------------
+     .                 /**
+     .                  *  Returns the total number of characters that the %string can hold
+     .                  *  before needing to allocate more memory.
+     .                  */
+     .                 _GLIBCXX_NODISCARD _GLIBCXX20_CONSTEXPR
+     .                 size_type
+     .                 capacity() const _GLIBCXX_NOEXCEPT
+     .                 {
+ 5,872 ( 0.00%)  	size_t __sz = _M_is_local() ? size_type(_S_local_capacity)
+     .           				     : _M_allocated_capacity;
+     .           	if (__sz < _S_local_capacity || __sz > max_size ())
+     .           	  __builtin_unreachable ();
+     .           	return __sz;
+     .                 }
+     .           
+     .                 /**
+     .                  *  @brief  Attempt to preallocate enough memory for specified number of
+-- line 1287 ----------------------------------------
+-- line 4362 ----------------------------------------
+     .              */
+     .             template<typename _CharT, typename _Traits, typename _Alloc>
+     .               inline basic_ostream<_CharT, _Traits>&
+     .               operator<<(basic_ostream<_CharT, _Traits>& __os,
+     .           	       const basic_string<_CharT, _Traits, _Alloc>& __str)
+     .               {
+     .                 // _GLIBCXX_RESOLVE_LIB_DEFECTS
+     .                 // 586. string inserter not a formatted function
+ 7,828 ( 0.00%)        return __ostream_insert(__os, __str.data(), __str.size());
+338,809 ( 0.09%)  => ???:0x0000000004003840 (1,957x)
+     .               }
+     .           
+     .             /**
+     .              *  @brief  Read a line from stream into a string.
+     .              *  @param __is  Input stream.
+     .              *  @param __str  Buffer to store into.
+     .              *  @param __delim  Character marking end of line.
+     .              *  @return  Reference to the input stream.
+-- line 4378 ----------------------------------------
+-- line 4399 ----------------------------------------
+     .              *  is reached.  Any previous contents of @a __str are erased.  If
+     .              *  end of line is encountered, it is extracted but not stored into
+     .              *  @a __str.
+     .              */
+     .             template<typename _CharT, typename _Traits, typename _Alloc>
+     .               inline basic_istream<_CharT, _Traits>&
+     .               getline(basic_istream<_CharT, _Traits>& __is,
+     .           	    basic_string<_CharT, _Traits, _Alloc>& __str)
+ 5,005 ( 0.00%)      { return std::getline(__is, __str, __is.widen('\n')); }
+247,982 ( 0.07%)  => ???:0x00000000040039e0 (1,001x)
+     .           
+     .           #if __cplusplus >= 201103L
+     .             /// Read a line from an rvalue stream into a string.
+     .             template<typename _CharT, typename _Traits, typename _Alloc>
+     .               inline basic_istream<_CharT, _Traits>&
+     .               getline(basic_istream<_CharT, _Traits>&& __is,
+     .           	    basic_string<_CharT, _Traits, _Alloc>& __str, _CharT __delim)
+     .               { return std::getline(__is, __str, __delim); }
+-- line 4415 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: common/src/collision_grid.cpp
+--------------------------------------------------------------------------------
+Ir                 
+
+-- line 12 ----------------------------------------
+        .           namespace common {
+        .           
+        .             namespace {
+        .               // At most about this many cells per particle, so building and clearing the grid stays cheap
+        .               // when the particles are spread out.
+        .               constexpr double max_cells_per_particle = 4.0;
+        .             }  // namespace
+        .           
+      357 ( 0.00%)    collision_grid::collision_grid(std::span<point const> centres, double max_radius) {
+       42 ( 0.00%)      if (centres.empty()) { return; }
+        .               auto const [left, right] = std::ranges::minmax(centres, {}, &point::x);
+        .               auto const [bottom, top] = std::ranges::minmax(centres, {}, &point::y);
+    5,194 ( 0.00%)      min_x_ = left.x;
+    5,144 ( 0.00%)      min_y_ = bottom.y;
+      136 ( 0.00%)      double const width = right.x - left.x;
+      128 ( 0.00%)      double const height = top.y - bottom.y;
+        .               double const cells_per_axis =
+      126 ( 0.00%)          std::max(1.0, std::sqrt(max_cells_per_particle * static_cast<double>(centres.size())));
+      126 ( 0.00%)      cell_ = std::max({2.0 * max_radius, std::max(width, height) / cells_per_axis,
+        .                                 std::numeric_limits<double>::min()});
+      147 ( 0.00%)      cols_ = static_cast<std::size_t>(width / cell_) + 1;
+      168 ( 0.00%)      rows_ = static_cast<std::size_t>(height / cell_) + 1;
+        .           
+        .               // counting sort of the particles by cell; stable, so indices stay ascending inside a cell
+        .               cell_of_.resize(centres.size());
+        .               std::ranges::transform(centres, cell_of_.begin(), [this](point const & p) { return cell_index(p); });
+       21 ( 0.00%)      start_.assign(cols_ * rows_ + 1, 0);
+  123,696 ( 0.03%)      for (std::size_t const cell : cell_of_) { ++start_.at(cell + 1); }
+        .               std::partial_sum(start_.begin(), start_.end(), start_.begin());
+        .               std::vector<std::size_t> next(start_.begin(), std::prev(start_.end()));
+        .               members_.resize(centres.size());
+   61,890 ( 0.02%)      for (std::size_t k = 0; k < cell_of_.size(); ++k) {
+   20,616 ( 0.01%)        std::size_t & slot = next.at(cell_of_.at(k));
+   41,232 ( 0.01%)        members_.at(slot) = k;
+   41,232 ( 0.01%)        ++slot;
+        .               }
+      147 ( 0.00%)    }
+        .           
+  268,008 ( 0.07%)    void collision_grid::later_neighbours(std::size_t i, std::vector<std::size_t> & out) const {
+        .               out.clear();
+  103,080 ( 0.03%)      std::size_t const row = cell_of_.at(i) / cols_;
+        .               std::size_t const col = cell_of_.at(i) % cols_;
+  838,216 ( 0.23%)      for (std::size_t r = (row == 0) ? 0 : row - 1; r <= std::min(row + 1, rows_ - 1); ++r) {
+1,564,917 ( 0.44%)        for (std::size_t c = (col == 0) ? 0 : col - 1; c <= std::min(col + 1, cols_ - 1); ++c) {
+  546,909 ( 0.15%)          std::size_t const cell = r * cols_ + c;
+  729,212 ( 0.20%)          auto const in_cell = std::span{members_}.subspan(start_.at(cell), start_.at(cell + 1) - start_.at(cell));
+        .                   std::ranges::copy_if(in_cell, std::back_inserter(out), [i](std::size_t j) { return j > i; });
+        .                 }
+        .               }
+        .               std::ranges::sort(out);
+  226,776 ( 0.06%)    }
+        .           
+        .             std::size_t collision_grid::cell_index(point const & p) const {
+  123,696 ( 0.03%)      std::size_t const col = std::min(static_cast<std::size_t>((p.x - min_x_) / cell_), cols_ - 1);
+  123,717 ( 0.03%)      std::size_t const row = std::min(static_cast<std::size_t>((p.y - min_y_) / cell_), rows_ - 1);
+   61,848 ( 0.02%)      return row * cols_ + col;
+        .             }
+        .           
+        .           }  // namespace common
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/15/bits/stl_numeric.h
+--------------------------------------------------------------------------------
+Ir               
+
+-- line 259 ----------------------------------------
+      .                 typedef typename iterator_traits<_InputIterator>::value_type _ValueType;
+      .           
+      .                 // concept requirements
+      .                 __glibcxx_function_requires(_InputIteratorConcept<_InputIterator>)
+      .                 __glibcxx_function_requires(_OutputIteratorConcept<_OutputIterator,
+      .           				                         _ValueType>)
+      .                 __glibcxx_requires_valid_range(__first, __last);
+      .           
+     42 ( 0.00%)        if (__first == __last)
+      .           	return __result;
+     42 ( 0.00%)        _ValueType __value = *__first;
+      .                 *__result = __value;
+250,278 ( 0.07%)        while (++__first != __last)
+      .           	{
+ 83,412 ( 0.02%)  	  __value = _GLIBCXX_MOVE_IF_20(__value) + *__first;
+ 83,412 ( 0.02%)  	  *++__result = __value;
+      .           	}
+      .                 return ++__result;
+      .               }
+      .           
+      .             /**
+      .              *  @brief  Return list of partial sums
+      .              *
+      .              *  Accumulates the values in the range [first,last) using @p __binary_op.
+-- line 282 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/15/bits/char_traits.h
+--------------------------------------------------------------------------------
+Ir               
+
+-- line 344 ----------------------------------------
+      .                 static _GLIBCXX17_CONSTEXPR void
+      .                 assign(char_type& __c1, const char_type& __c2) _GLIBCXX_NOEXCEPT
+      .                 {
+      .           #if __cpp_constexpr_dynamic_alloc
+      .           	if (std::__is_constant_evaluated())
+      .           	  std::construct_at(__builtin_addressof(__c1), __c2);
+      .           	else
+      .           #endif
+ 30,362 ( 0.01%)  	__c1 = __c2;
+      .                 }
+      .           
+      .                 static _GLIBCXX_CONSTEXPR bool
+      .                 eq(const char_type& __c1, const char_type& __c2) _GLIBCXX_NOEXCEPT
+      .                 { return __c1 == __c2; }
+      .           
+      .                 static _GLIBCXX_CONSTEXPR bool
+      .                 lt(const char_type& __c1, const char_type& __c2) _GLIBCXX_NOEXCEPT
+-- line 360 ----------------------------------------
+-- line 385 ----------------------------------------
+      .           
+      .                 static _GLIBCXX17_CONSTEXPR size_t
+      .                 length(const char_type* __s)
+      .                 {
+      .           #if __cplusplus >= 201703L
+      .           	if (std::__is_constant_evaluated())
+      .           	  return __gnu_cxx::char_traits<char_type>::length(__s);
+      .           #endif
+     15 ( 0.00%)  	return __builtin_strlen(__s);
+     96 ( 0.00%)  => ???:0x0000000004003670 (5x)
+      .                 }
+      .           
+      .                 static _GLIBCXX17_CONSTEXPR const char_type*
+      .                 find(const char_type* __s, size_t __n, const char_type& __a)
+      .                 {
+      .           	if (__n == 0)
+      .           	  return 0;
+      .           #if __cplusplus >= 201703L
+      .           	if (std::__is_constant_evaluated())
+      .           	  return __gnu_cxx::char_traits<char_type>::find(__s, __n, __a);
+      .           #endif
+138,893 ( 0.04%)  	return static_cast<const char_type*>(__builtin_memchr(__s, __a, __n));
+657,300 ( 0.18%)  => ???:0x0000000004003820 (31,300x)
+      .                 }
+      .           
+      .                 static _GLIBCXX20_CONSTEXPR char_type*
+      .                 move(char_type* __s1, const char_type* __s2, size_t __n)
+      .                 {
+      .           	if (__n == 0)
+      .           	  return __s1;
+      .           #if __cplusplus >= 202002L
+-- line 413 ----------------------------------------
+-- line 415 ----------------------------------------
+      .           	  return __gnu_cxx::char_traits<char_type>::move(__s1, __s2, __n);
+      .           #endif
+      .           	return static_cast<char_type*>(__builtin_memmove(__s1, __s2, __n));
+      .                 }
+      .           
+      .                 static _GLIBCXX20_CONSTEXPR char_type*
+      .                 copy(char_type* __s1, const char_type* __s2, size_t __n)
+      .                 {
+     12 ( 0.00%)  	if (__n == 0)
+      .           	  return __s1;
+      .           #if __cplusplus >= 202002L
+      .           	if (std::__is_constant_evaluated())
+      .           	  return __gnu_cxx::char_traits<char_type>::copy(__s1, __s2, __n);
+      .           #endif
+ 95,034 ( 0.03%)  	return static_cast<char_type*>(__builtin_memcpy(__s1, __s2, __n));
+ 27,444 ( 0.01%)  => ???:0x0000000004003780 (1,959x)
+      .                 }
+      .           
+      .                 static _GLIBCXX20_CONSTEXPR char_type*
+      .                 assign(char_type* __s, size_t __n, char_type __a)
+      .                 {
+      .           	if (__n == 0)
+      .           	  return __s;
+      .           #if __cplusplus >= 202002L
+-- line 437 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/15/bits/string_view.tcc
+--------------------------------------------------------------------------------
+Ir              
+
+-- line 78 ----------------------------------------
+     .               }
+     .           
+     .             template<typename _CharT, typename _Traits>
+     .               constexpr typename basic_string_view<_CharT, _Traits>::size_type
+     .               basic_string_view<_CharT, _Traits>::
+     .               find(_CharT __c, size_type __pos) const noexcept
+     .               {
+     .                 size_type __ret = npos;
+44,993 ( 0.01%)        if (__pos < this->_M_len)
+     .           	{
+     .           	  const size_type __n = this->_M_len - __pos;
+     .           	  const _CharT* __p = traits_type::find(this->_M_str + __pos, __n, __c);
+54,772 ( 0.02%)  	  if (__p)
+64,557 ( 0.02%)  	    __ret = __p - this->_M_str;
+     .           	}
+     .                 return __ret;
+     .               }
+     .           
+     .             template<typename _CharT, typename _Traits>
+     .               constexpr typename basic_string_view<_CharT, _Traits>::size_type
+     .               basic_string_view<_CharT, _Traits>::
+     .               rfind(const _CharT* __str, size_type __pos, size_type __n) const noexcept
+-- line 99 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/15/span
+--------------------------------------------------------------------------------
+Ir               
+
+-- line 99 ----------------------------------------
+      .           
+      .               template<>
+      .                 class __extent_storage<dynamic_extent>
+      .                 {
+      .                 public:
+      .           	[[__gnu__::__always_inline__]]
+      .           	constexpr
+      .           	__extent_storage(size_t __extent) noexcept
+     21 ( 0.00%)  	: _M_extent_value(__extent)
+      .           	{ }
+      .           
+      .           	[[__gnu__::__always_inline__]]
+      .           	constexpr size_t
+      .           	_M_extent() const noexcept
+      .           	{ return this->_M_extent_value; }
+      .           
+      .                 private:
+-- line 115 ----------------------------------------
+-- line 325 ----------------------------------------
+      .                 [[nodiscard]]
+      .                 constexpr iterator
+      .                 begin() const noexcept
+      .                 { return iterator(this->_M_ptr); }
+      .           
+      .                 [[nodiscard]]
+      .                 constexpr iterator
+      .                 end() const noexcept
+182,389 ( 0.05%)        { return iterator(this->_M_ptr + this->size()); }
+      .           
+      .                 [[nodiscard]]
+      .                 constexpr reverse_iterator
+      .                 rbegin() const noexcept
+      .                 { return reverse_iterator(this->end()); }
+      .           
+      .                 [[nodiscard]]
+      .                 constexpr reverse_iterator
+-- line 341 ----------------------------------------
+-- line 443 ----------------------------------------
+      .           	}
+      .           
+      .                 [[nodiscard]]
+      .                 constexpr span<element_type, dynamic_extent>
+      .                 subspan(size_type __offset, size_type __count = dynamic_extent) const
+      .                 noexcept
+      .                 {
+      .           	__glibcxx_assert(__offset <= size());
+364,606 ( 0.10%)  	if (__count == dynamic_extent)
+ 54,772 ( 0.02%)  	  __count = this->size() - __offset;
+      .           	else
+      .           	  {
+      .           	    __glibcxx_assert(__count <= size());
+      .           	    __glibcxx_assert(__offset + __count <= size());
+      .           	  }
+182,303 ( 0.05%)  	return span<element_type>(this->data() + __offset, __count);
+      .                 }
+      .           
+      .               private:
+      .                 template<typename, size_t> friend class span;
+      .           
+      .                 // Tag type for pointer that has known extent.
+      .                 using _SizedPtr = __detail::__span_ptr<_Type>;
+      .           
+-- line 466 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: aos/src/particle_system.cpp
+--------------------------------------------------------------------------------
+Ir               
+
+      .           #include "particle_system.hpp"
+      .           
+      .           #include "physics.hpp"
+      .           
+      .           #include <utility>
+      .           
+      .           namespace aos {
+      .           
+      5 ( 0.00%)  particle_system::particle_system(
+      .               std::vector<particle> particles)
+      .               : particles_(std::move(particles))
+      .           {
+      1 ( 0.00%)      process_collisions();
+711,820 ( 0.20%)  => /home/alumnos/a0616912/project-1/2d-gravity-simulator/aos/src/collisions.cpp:aos::particle_system::process_collisions() (1x)
+      4 ( 0.00%)  }
+      .           
+      .           const std::vector<particle>&
+      .           particle_system::particles() const noexcept
+      4 ( 0.00%)  {
+      .               return particles_;
+      2 ( 0.00%)  }
+      .           
+      .           void particle_system::simulate(
+      .               std::size_t iterations,
+      .               double dt,
+      .               double width,
+      .               double height)
+      9 ( 0.00%)  {
+    128 ( 0.00%)      for (std::size_t step = 0; step < iterations; ++step)
+      .               {
+    120 ( 0.00%)          auto accelerations = compute_accelerations();
+308,366,603 (85.87%)  => /home/alumnos/a0616912/project-1/2d-gravity-simulator/aos/src/integrate.cpp:aos::particle_system::compute_accelerations() const (20x)
+      .           
+ 58,926 ( 0.02%)          for (std::size_t i = 0; i < particles_.size(); ++i)
+      .                   {
+      .                       common::update_kinematics(
+      .                           particles_.at(i).pos,
+      .                           particles_.at(i).vel,
+      .                           accelerations.at(i),
+      .                           dt);
+      .           
+117,732 ( 0.03%)              common::apply_rebound(
+      .                           particles_.at(i).pos,
+      .                           particles_.at(i).vel,
+      .                           particles_.at(i).radius,
+      .                           common::enclosure{width, height});
+      .                   }
+      .           
+    100 ( 0.00%)          process_collisions();
+13,863,262 ( 3.86%)  => /home/alumnos/a0616912/project-1/2d-gravity-simulator/aos/src/collisions.cpp:aos::particle_system::process_collisions() (20x)
+      .               }
+      9 ( 0.00%)  }
+      .           
+      .           }
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/15/charconv
+--------------------------------------------------------------------------------
+Ir              
+
+-- line 212 ----------------------------------------
+     .               __to_chars_10(char* __first, char* __last, _Tp __val) noexcept
+     .               {
+     .                 static_assert(__integer_to_chars_is_unsigned<_Tp>, "implementation bug");
+     .           
+     .                 to_chars_result __res;
+     .           
+     .                 const unsigned __len = __to_chars_len(__val, 10);
+     .           
+ 5,848 ( 0.00%)        if (__builtin_expect(size_t(__last - __first) < __len, 0))
+     .           	{
+     .           	  __res.ptr = __last;
+     .           	  __res.ec = errc::value_too_large;
+     .           	  return __res;
+     .           	}
+     .           
+     .                 __detail::__to_chars_10_impl(__first, __len, __val);
+ 5,865 ( 0.00%)        __res.ptr = __first + __len;
+     .                 __res.ec = {};
+ 1,955 ( 0.00%)        return __res;
+     .               }
+     .           
+     .             template<typename _Tp>
+     .               constexpr to_chars_result
+     .               __to_chars_8(char* __first, char* __last, _Tp __val) noexcept
+     .               {
+     .                 static_assert(__integer_to_chars_is_unsigned<_Tp>, "implementation bug");
+     .           
+-- line 238 ----------------------------------------
+-- line 326 ----------------------------------------
+     .                 __glibcxx_assert(2 <= __base && __base <= 36);
+     .           
+     .                 using _Up = __detail::__unsigned_least_t<_Tp>;
+     .                 _Up __unsigned_val = __value;
+     .           
+     .                 if (__first >= __last) [[__unlikely__]]
+     .           	return { __last, errc::value_too_large };
+     .           
+ 3,914 ( 0.00%)        if (__value == 0)
+     .           	{
+     2 ( 0.00%)  	  *__first = '0';
+ 1,961 ( 0.00%)  	  return { __first + 1, errc{} };
+     .           	}
+     .                 else if _GLIBCXX17_CONSTEXPR (std::is_signed<_Tp>::value)
+     .           	if (__value < 0)
+     .           	  {
+     .           	    *__first++ = '-';
+     .           	    __unsigned_val = _Up(~__value) + _Up(1);
+     .           	  }
+     .           
+-- line 345 ----------------------------------------
+-- line 448 ----------------------------------------
+     .             // return its corresponding base-10 value, otherwise return a value >= 127.
+     .             // If _DecOnly is false: if the character is an alphanumeric digit, then
+     .             // return its corresponding base-36 value, otherwise return a value >= 127.
+     .             template<bool _DecOnly = false>
+     .               _GLIBCXX20_CONSTEXPR unsigned char
+     .               __from_chars_alnum_to_val(unsigned char __c)
+     .               {
+     .                 if _GLIBCXX17_CONSTEXPR (_DecOnly)
+46,944 ( 0.01%)  	return static_cast<unsigned char>(__c - '0');
+     .                 else
+     .           	return __from_chars_alnum_to_val_table<_DecOnly>::value.__data[__c];
+     .               }
+     .           
+     .             /// std::from_chars implementation for integers in a power-of-two base.
+     .             /// If _DecOnly is true, then we may assume __base is at most 8.
+     .             template<bool _DecOnly, typename _Tp>
+     .               _GLIBCXX23_CONSTEXPR bool
+-- line 464 ----------------------------------------
+-- line 520 ----------------------------------------
+     .             template<bool _DecOnly, typename _Tp>
+     .               constexpr bool
+     .               __from_chars_alnum(const char*& __first, const char* __last, _Tp& __val,
+     .           		       int __base)
+     .               {
+     .                 // __glibcxx_assert(_DecOnly ? __base <= 10 : __base <= 36);
+     .           
+     .                 const int __bits_per_digit = __bit_width(unsigned(__base & 0x3f));
+23,472 ( 0.01%)        int __unused_bits_lower_bound = __gnu_cxx::__int_traits<_Tp>::__digits;
+35,208 ( 0.01%)        for (; __first != __last; ++__first)
+     .           	{
+     .           	  const unsigned char __c = __from_chars_alnum_to_val<_DecOnly>(*__first);
+46,944 ( 0.01%)  	  if (__c >= __base)
+     .           	    return true;
+     .           
+     .           	  __unused_bits_lower_bound -= __bits_per_digit;
+23,472 ( 0.01%)  	  if (__unused_bits_lower_bound >= 0) [[__likely__]]
+     .           	    // We're definitely not going to overflow.
+35,208 ( 0.01%)  	    __val = __val * __base + __c;
+     .           	  else if (!__raise_and_add(__val, __base, __c)) [[__unlikely__]]
+     .           	    {
+     .           	      while (++__first != __last
+     .           		     && __from_chars_alnum_to_val<_DecOnly>(*__first) < __base)
+     .           		;
+     .           	      return false;
+     .           	    }
+     .           	}
+-- line 546 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/15/format
+--------------------------------------------------------------------------------
+Ir               
+
+-- line 287 ----------------------------------------
+      .                 constexpr explicit
+      .                 basic_format_parse_context(basic_string_view<_CharT> __fmt) noexcept
+      .                 : _M_begin(__fmt.begin()), _M_end(__fmt.end())
+      .                 { }
+      .           
+      .                 basic_format_parse_context(const basic_format_parse_context&) = delete;
+      .                 void operator=(const basic_format_parse_context&) = delete;
+      .           
+ 80,201 ( 0.02%)        constexpr const_iterator begin() const noexcept { return _M_begin; }
+ 56,729 ( 0.02%)        constexpr const_iterator end() const noexcept { return _M_end; }
+      .           
+      .                 constexpr void
+      .                 advance_to(const_iterator __it) noexcept
+ 72,379 ( 0.02%)        { _M_begin = __it; }
+      .           
+      .                 constexpr size_t
+      .                 next_arg_id()
+      .                 {
+ 27,386 ( 0.01%)  	if (_M_indexing == _Manual)
+      .           	  __format::__conflicting_indexing_in_format_string();
+ 13,693 ( 0.00%)  	_M_indexing = _Auto;
+      .           
+      .           	// _GLIBCXX_RESOLVE_LIB_DEFECTS
+      .           	// 3825. Missing compile-time argument id check in next_arg_id
+      .           	if (std::is_constant_evaluated())
+      .           	  if (_M_next_arg_id == _M_num_args)
+      .           	    __format::__invalid_arg_id_in_format_string();
+ 41,079 ( 0.01%)  	return _M_next_arg_id++;
+      .                 }
+      .           
+      .                 constexpr void
+      .                 check_arg_id(size_t __id)
+      .                 {
+      .           	if (_M_indexing == _Auto)
+      .           	  __format::__conflicting_indexing_in_format_string();
+      .           	_M_indexing = _Manual;
+-- line 322 ----------------------------------------
+-- line 401 ----------------------------------------
+      .           
+      .                 friend __format::_Scanner<_CharT>;
+      .           #endif
+      .           
+      .                 // This constructor should only be used by the implementation.
+      .                 constexpr explicit
+      .                 basic_format_parse_context(basic_string_view<_CharT> __fmt,
+      .           				 size_t __num_args) noexcept
+  7,828 ( 0.00%)        : _M_begin(__fmt.begin()), _M_end(__fmt.end()), _M_num_args(__num_args)
+      .                 { }
+      .           
+      .               private:
+      .                 iterator _M_begin;
+      .                 iterator _M_end;
+      .                 enum _Indexing { _Unknown, _Manual, _Auto };
+      .                 _Indexing _M_indexing = _Unknown;
+      .                 size_t _M_next_arg_id = 0;
+-- line 417 ----------------------------------------
+-- line 432 ----------------------------------------
+      .               __parse_integer(const _CharT* __first, const _CharT* __last)
+      .               {
+      .                 if (__first == __last)
+      .           	__builtin_unreachable();
+      .           
+      .                 if constexpr (is_same_v<_CharT, char>)
+      .           	{
+      .           	  const auto __start = __first;
+ 11,736 ( 0.00%)  	  unsigned short __val = 0;
+      .           	  // N.B. std::from_chars is not constexpr in C++20.
+      .           	  if (__detail::__from_chars_alnum<true>(__first, __last, __val, 10)
+ 23,472 ( 0.01%)  		&& __first != __start) [[likely]]
+      .           	    return {__val, __first};
+      .           	}
+      .                 else
+      .           	{
+      .           	  constexpr int __n = 32;
+      .           	  char __buf[__n]{};
+      .           	  for (int __i = 0; __i < __n && (__first + __i) != __last; ++__i)
+      .           	    __buf[__i] = __first[__i];
+-- line 451 ----------------------------------------
+-- line 538 ----------------------------------------
+      .                 unsigned short _M_prec;
+      .                 char32_t _M_fill = ' ';
+      .           
+      .                 using iterator = typename basic_string_view<_CharT>::iterator;
+      .           
+      .                 static constexpr _Align
+      .                 _S_align(_CharT __c) noexcept
+      .                 {
+152,568 ( 0.04%)  	switch (__c)
+      .           	{
+      .           	  case '<': return _Align_left;
+      .           	  case '>': return _Align_right;
+      .           	  case '^': return _Align_centre;
+      .           	  default: return _Align_default;
+      .           	}
+      .                 }
+      .           
+-- line 554 ----------------------------------------
+-- line 557 ----------------------------------------
+      .                 _M_parse_fill_and_align(iterator __first, iterator __last) noexcept
+      .                 { return _M_parse_fill_and_align(__first, __last, "{"); }
+      .           
+      .                 // pre: __first != __last
+      .                 constexpr iterator
+      .                 _M_parse_fill_and_align(iterator __first, iterator __last, string_view __not_fill) noexcept
+      .                 {
+      .           	for (char __c : __not_fill)
+ 23,472 ( 0.01%)  	  if (*__first == static_cast<_CharT>(__c))
+      .           	    return __first;
+      .           
+      .           	using namespace __unicode;
+      .           	if constexpr (__literal_encoding_is_unicode<_CharT>())
+      .           	  {
+      .           	    // Accept any UCS scalar value as fill character.
+      .           	    _Utf32_view<ranges::subrange<iterator>> __uv({__first, __last});
+      .           	    if (!__uv.empty())
+      .           	    {
+      .           	      auto __beg = __uv.begin();
+      .           	      char32_t __c = *__beg++;
+      .           	      if (__is_scalar_value(__c))
+ 23,472 ( 0.01%)  		if (auto __next = __beg.base(); __next != __last)
+ 11,736 ( 0.00%)  		  if (_Align __align = _S_align(*__next))
+      .           		    {
+      .           		      _M_fill = __c;
+      .           		      _M_align = __align;
+      .           		      return ++__next;
+      .           		    }
+      .           	     }
+      .           	  }
+      .           	else if (__last - __first >= 2)
+-- line 587 ----------------------------------------
+-- line 597 ----------------------------------------
+      .           	    _M_fill = ' ';
+      .           	    _M_align = __align;
+      .           	    return __first + 1;
+      .           	  }
+      .           	return __first;
+      .                 }
+      .           
+      .                 static constexpr _Sign
+ 11,736 ( 0.00%)        _S_sign(_CharT __c) noexcept
+      .                 {
+      .           	switch (__c)
+      .           	{
+      .           	  case '+': return _Sign_plus;
+      .           	  case '-': return _Sign_minus;
+      .           	  case ' ': return _Sign_space;
+      .           	  default:  return _Sign_default;
+      .           	}
+-- line 613 ----------------------------------------
+-- line 636 ----------------------------------------
+      .           	  }
+      .           	return __first;
+      .                 }
+      .           
+      .                 // pre: __first != __last
+      .                 constexpr iterator
+      .                 _M_parse_zero_fill(iterator __first, iterator /* __last */) noexcept
+      .                 {
+ 23,472 ( 0.01%)  	if (*__first == '0')
+      .           	  {
+      .           	    _M_zero_fill = true;
+      .           	    ++__first;
+      .           	  }
+      .           	return __first;
+      .                 }
+      .           
+      .                 // pre: __first != __last
+      .                 static constexpr iterator
+      .                 _S_parse_width_or_precision(iterator __first, iterator __last,
+      .           				  unsigned short& __val, bool& __arg_id,
+      .           				  basic_format_parse_context<_CharT>& __pc)
+      .                 {
+ 58,680 ( 0.02%)  	if (__format::__is_digit(*__first))
+      .           	  {
+      .           	    auto [__v, __ptr] = __format::__parse_integer(__first, __last);
+      .           	    if (!__ptr)
+      .           	      __throw_format_error("format error: invalid width or precision "
+      .           				   "in format-spec");
+      .           	    __first = __ptr;
+      .           	    __val = __v;
+      .           	  }
+-- line 666 ----------------------------------------
+-- line 708 ----------------------------------------
+      .                 // pre: __first != __last
+      .                 constexpr iterator
+      .                 _M_parse_precision(iterator __first, iterator __last,
+      .           			 basic_format_parse_context<_CharT>& __pc)
+      .                 {
+      .           	if (__first[0] != '.')
+      .           	  return __first;
+      .           
+ 23,472 ( 0.01%)  	iterator __next = ++__first;
+      .           	bool __arg_id = false;
+ 23,472 ( 0.01%)  	if (__next != __last)
+      .           	  __next = _S_parse_width_or_precision(__first, __last, _M_prec,
+      .           					       __arg_id, __pc);
+      .           	if (__next == __first)
+      .           	  __throw_format_error("format error: missing precision after '.' in "
+      .           			       "format string");
+ 23,472 ( 0.01%)  	_M_prec_kind = __arg_id ? _WP_from_arg : _WP_value;
+      .           	return __next;
+      .                 }
+      .           
+      .                 // pre: __first != __last
+      .                 constexpr iterator
+      .                 _M_parse_locale(iterator __first, iterator /* __last */) noexcept
+      .                 {
+ 23,472 ( 0.01%)  	if (*__first == 'L')
+      .           	  {
+      .           	    _M_localized = true;
+      .           	    ++__first;
+      .           	  }
+      .           	return __first;
+      .                 }
+      .           
+      .                 template<typename _Context>
+      .           	size_t
+      .           	_M_get_width(_Context& __ctx) const
+      .           	{
+      .           	  size_t __width = 0;
+ 54,772 ( 0.02%)  	  if (_M_width_kind == _WP_value)
+      .           	    __width = _M_width;
+ 27,386 ( 0.01%)  	  else if (_M_width_kind == _WP_from_arg)
+      .           	    __width = __format::__int_from_arg(__ctx.arg(_M_width));
+      .           	  return __width;
+      .           	}
+      .           
+      .                 template<typename _Context>
+      .           	size_t
+      .           	_M_get_precision(_Context& __ctx) const
+      .           	{
+      .           	  size_t __prec = -1;
+ 23,472 ( 0.01%)  	  if (_M_prec_kind == _WP_value)
+ 35,208 ( 0.01%)  	    __prec = _M_prec;
+      .           	  else if (_M_prec_kind == _WP_from_arg)
+      .           	    __prec = __format::__int_from_arg(__ctx.arg(_M_prec));
+      .           	  return __prec;
+      .           	}
+      .               };
+      .           
+      .             template<typename _Int>
+      .               inline char*
+      .               __put_sign(_Int __i, _Sign __sign, char* __dest) noexcept
+      .               {
+      .                 if (__i < 0)
+      .           	*__dest = '-';
+  3,914 ( 0.00%)        else if (__sign == _Sign_plus)
+      .           	*__dest = '+';
+  3,914 ( 0.00%)        else if (__sign == _Sign_space)
+      .           	*__dest = ' ';
+      .                 else
+      .           	++__dest;
+      .                 return __dest;
+      .               }
+      .           
+      .             // Write STR to OUT (and do so efficiently if OUT is a _Sink_iter).
+      .             template<typename _Out, typename _CharT>
+      .               requires output_iterator<_Out, const _CharT&>
+      .               inline _Out
+      .               __write(_Out __out, basic_string_view<_CharT> __str)
+      .               {
+      .                 if constexpr (is_same_v<_Out, _Sink_iter<_CharT>>)
+      .           	{
+ 43,036 ( 0.01%)  	  if (__str.size())
+      .           	    __out = __str;
+      .           	}
+      .                 else
+      .           	for (_CharT __c : __str)
+      .           	  *__out++ = __c;
+      .                 return __out;
+      .               }
+      .           
+-- line 796 ----------------------------------------
+-- line 1187 ----------------------------------------
+      .                 *__out = _Escapes<_CharT>::_S_term(__term);
+      .                 return ++__out;
+      .               }
+      .           
+      .             // A lightweight optional<locale>.
+      .             struct _Optional_locale
+      .             {
+      .               [[__gnu__::__always_inline__]]
+  3,914 ( 0.00%)      _Optional_locale() : _M_dummy(), _M_hasval(false) { }
+      .           
+      .               _Optional_locale(const locale& __loc) noexcept
+      .               : _M_loc(__loc), _M_hasval(true)
+      .               { }
+      .           
+      .               _Optional_locale(const _Optional_locale& __l) noexcept
+      .               : _M_dummy(), _M_hasval(__l._M_hasval)
+      .               {
+-- line 1203 ----------------------------------------
+-- line 1221 ----------------------------------------
+      .                 else if (__l._M_hasval)
+      .           	{
+      .           	  std::construct_at(&_M_loc, __l._M_loc);
+      .           	  _M_hasval = true;
+      .           	}
+      .                 return *this;
+      .               }
+      .           
+  5,871 ( 0.00%)      ~_Optional_locale() { if (_M_hasval) _M_loc.~locale(); }
+      .           
+      .               _Optional_locale&
+      .               operator=(locale&& __loc) noexcept
+      .               {
+      .                 if (_M_hasval)
+      .           	_M_loc = std::move(__loc);
+      .                 else
+      .           	{
+-- line 1237 ----------------------------------------
+-- line 1436 ----------------------------------------
+      .               {
+      .                 // If no presentation type is specified, meaning of "none" depends
+      .                 // whether we are formatting an integer or a char or a bool.
+      .                 static constexpr _Pres_type _AsInteger = _Pres_d;
+      .                 static constexpr _Pres_type _AsBool = _Pres_s;
+      .                 static constexpr _Pres_type _AsChar = _Pres_c;
+      .           
+      .                 constexpr typename basic_format_parse_context<_CharT>::iterator
+ 19,570 ( 0.01%)        _M_do_parse(basic_format_parse_context<_CharT>& __pc, _Pres_type __type)
+      .                 {
+  1,957 ( 0.00%)  	_Spec<_CharT> __spec{};
+  3,914 ( 0.00%)  	__spec._M_type = __type;
+      .           
+      .           	const auto __last = __pc.end();
+      .           	auto __first = __pc.begin();
+      .           
+      .           	auto __finalize = [this, &__spec] {
+ 19,570 ( 0.01%)  	  _M_spec = __spec;
+      .           	};
+      .           
+      .           	auto __finished = [&] {
+  9,785 ( 0.00%)  	  if (__first == __last || *__first == '}')
+      .           	    {
+      .           	      __finalize();
+      .           	      return true;
+      .           	    }
+      .           	  return false;
+      .           	};
+      .           
+      .           	if (__finished())
+-- line 1465 ----------------------------------------
+-- line 1541 ----------------------------------------
+      .           #endif
+      .           	    break;
+      .           	  }
+      .           
+      .           	if (__finished())
+      .           	  return __first;
+      .           
+      .           	__format::__failed_to_parse_format_spec();
+ 19,570 ( 0.01%)        }
+      .           
+      .                 template<typename _Tp>
+      .           	constexpr typename basic_format_parse_context<_CharT>::iterator
+      .           	_M_parse(basic_format_parse_context<_CharT>& __pc)
+      .           	{
+      .           	  if constexpr (is_same_v<_Tp, bool>)
+      .           	    {
+      .           	      auto __end = _M_do_parse(__pc, _AsBool);
+-- line 1557 ----------------------------------------
+-- line 1569 ----------------------------------------
+      .           		if (_M_spec._M_sign || _M_spec._M_alt || _M_spec._M_zero_fill
+      .           		      /* XXX should be invalid? || _M_spec._M_localized */)
+      .           		  __throw_format_error("format error: format-spec contains "
+      .           				       "invalid formatting options for "
+      .           				       "'charT'");
+      .           	      return __end;
+      .           	    }
+      .           	  else
+  7,828 ( 0.00%)  	    return _M_do_parse(__pc, _AsInteger);
+ 80,237 ( 0.02%)  => /usr/include/c++/15/format:std::__format::__formatter_int<char>::_M_do_parse(std::basic_format_parse_context<char>&, std::__format::_Pres_type) (1,957x)
+      .           	}
+      .           
+      .                 template<typename _Int, typename _Out>
+      .           	typename basic_format_context<_Out, _CharT>::iterator
+ 15,656 ( 0.00%)  	format(_Int __i, basic_format_context<_Out, _CharT>& __fc) const
+      .           	{
+  9,785 ( 0.00%)  	  if (_M_spec._M_type == _Pres_c)
+      .           	    return _M_format_character(_S_to_character(__i), __fc);
+      .           
+      .           	  char __buf[sizeof(_Int) * __CHAR_BIT__ + 3];
+      .           	  to_chars_result __res{};
+      .           
+      .           	  string_view __base_prefix;
+      .           	  make_unsigned_t<_Int> __u;
+      .           	  if (__i < 0)
+      .           	    __u = -static_cast<make_unsigned_t<_Int>>(__i);
+      .           	  else
+      .           	    __u = __i;
+      .           
+  1,957 ( 0.00%)  	  char* __start = __buf + 3;
+      .           	  char* const __end = __buf + sizeof(__buf);
+      .           	  char* const __start_digits = __start;
+      .           
+ 13,699 ( 0.00%)  	  switch (_M_spec._M_type)
+      .           	  {
+      .           	    case _Pres_b:
+      .           	    case _Pres_B:
+      .           	      __base_prefix = _M_spec._M_type == _Pres_b ? "0b" : "0B";
+      .           	      __res = to_chars(__start, __end, __u, 2);
+      .           	      break;
+      .           #if 0
+      .           	    case _Pres_c:
+-- line 1609 ----------------------------------------
+-- line 1637 ----------------------------------------
+      .           	  }
+      .           
+      .           	  if (_M_spec._M_alt && __base_prefix.size())
+      .           	    {
+      .           	      __start -= __base_prefix.size();
+      .           	      __builtin_memcpy(__start, __base_prefix.data(),
+      .           			       __base_prefix.size());
+      .           	    }
+  3,914 ( 0.00%)  	  __start = __format::__put_sign(__i, _M_spec._M_sign, __start - 1);
+      .           
+  9,785 ( 0.00%)  	  return _M_format_int(string_view(__start, __res.ptr - __start),
+185,877 ( 0.05%)  => /usr/include/c++/15/format:std::basic_format_context<std::__format::_Sink_iter<char>, char>::iterator std::__format::__formatter_int<char>::_M_format_int<std::__format::_Sink_iter<char> >(std::basic_string_view<char, std::char_traits<char> >, unsigned long, std::basic_format_context<std::__format::_Sink_iter<char>, char>&) const (1,957x)
+  1,957 ( 0.00%)  			       __start_digits - __start, __fc);
+ 13,699 ( 0.00%)  	}
+      .           
+      .                 template<typename _Out>
+      .           	typename basic_format_context<_Out, _CharT>::iterator
+      .           	format(bool __i, basic_format_context<_Out, _CharT>& __fc) const
+      .           	{
+      .           	  if (_M_spec._M_type == _Pres_c)
+      .           	    return _M_format_character(static_cast<unsigned char>(__i), __fc);
+      .           	  if (_M_spec._M_type != _Pres_s)
+-- line 1657 ----------------------------------------
+-- line 1744 ----------------------------------------
+      .           	  else if (__i <= make_unsigned_t<_CharT>(_Traits::__max))
+      .           	    return static_cast<_CharT>(__i);
+      .           	  __throw_format_error("format error: integer not representable as "
+      .           			       "character");
+      .           	}
+      .           
+      .                 template<typename _Out>
+      .           	typename basic_format_context<_Out, _CharT>::iterator
+ 31,312 ( 0.01%)  	_M_format_int(string_view __narrow_str, size_t __prefix_len,
+      .           		      basic_format_context<_Out, _CharT>& __fc) const
+      .           	{
+      .           	  size_t __width = _M_spec._M_get_width(__fc);
+      .           
+      .           	  basic_string_view<_CharT> __str;
+      .           	  if constexpr (is_same_v<char, _CharT>)
+  3,914 ( 0.00%)  	    __str = __narrow_str;
+      .           #ifdef _GLIBCXX_USE_WCHAR_T
+      .           	  else
+      .           	    {
+      .           	      size_t __n = __narrow_str.size();
+      .           	      auto __p = (_CharT*)__builtin_alloca(__n * sizeof(_CharT));
+      .           	      std::__to_wstring_numeric(__narrow_str.data(), __n, __p);
+      .           	      __str = {__p, __n};
+      .           	    }
+      .           #endif
+      .           
+  3,914 ( 0.00%)  	  if (_M_spec._M_localized)
+      .           	    {
+      .           	      const auto& __l = __fc.locale();
+      .           	      if (__l.name() != "C")
+      .           		{
+      .           		  auto& __np = use_facet<numpunct<_CharT>>(__l);
+      .           		  string __grp = __np.grouping();
+      .           		  if (!__grp.empty())
+      .           		    {
+-- line 1778 ----------------------------------------
+-- line 1815 ----------------------------------------
+      .           		      __str.remove_prefix(__prefix_len);
+      .           		    }
+      .           		}
+      .           	      else
+      .           		__fill_char = _CharT(' ');
+      .           	    }
+      .           	  return __format::__write_padded(std::move(__out), __str,
+      .           					  __align, __nfill, __fill_char);
+ 21,527 ( 0.01%)  	}
+      .           
+      .           #if defined __SIZEOF_INT128__ && defined __STRICT_ANSI__
+      .                 template<typename _Tp>
+      .           	using make_unsigned_t
+      .           	  = typename __conditional_t<(sizeof(_Tp) <= sizeof(long long)),
+      .           				     std::make_unsigned<_Tp>,
+      .           				     type_identity<unsigned __int128>>::type;
+      .           
+-- line 1831 ----------------------------------------
+-- line 1931 ----------------------------------------
+      .               concept __formattable_float
+      .                 = is_same_v<remove_cv_t<_Tp>, _Tp> && requires (_Tp __t, char* __p)
+      .                 { __format::to_chars(__p, __p, __t, chars_format::scientific, 6); };
+      .           
+      .             template<__char _CharT>
+      .               struct __formatter_fp
+      .               {
+      .                 constexpr typename basic_format_parse_context<_CharT>::iterator
+129,096 ( 0.04%)        parse(basic_format_parse_context<_CharT>& __pc)
+      .                 {
+ 82,152 ( 0.02%)  	_Spec<_CharT> __spec{};
+      .           	const auto __last = __pc.end();
+      .           	auto __first = __pc.begin();
+      .           
+      .           	auto __finalize = [this, &__spec] {
+316,872 ( 0.09%)  	  _M_spec = __spec;
+      .           	};
+      .           
+      .           	auto __finished = [&] {
+211,248 ( 0.06%)  	  if (__first == __last || *__first == '}')
+      .           	    {
+      .           	      __finalize();
+      .           	      return true;
+      .           	    }
+      .           	  return false;
+      .           	};
+      .           
+      .           	if (__finished())
+-- line 1958 ----------------------------------------
+-- line 1969 ----------------------------------------
+      .           	__first = __spec._M_parse_alternate_form(__first, __last);
+      .           	if (__finished())
+      .           	  return __first;
+      .           
+      .           	__first = __spec._M_parse_zero_fill(__first, __last);
+      .           	if (__finished())
+      .           	  return __first;
+      .           
+ 23,472 ( 0.01%)  	if (__first[0] != '.')
+      .           	  {
+      .           	    __first = __spec._M_parse_width(__first, __last, __pc);
+      .           	    if (__finished())
+      .           	      return __first;
+      .           	  }
+      .           
+      .           	__first = __spec._M_parse_precision(__first, __last, __pc);
+      .           	if (__finished())
+      .           	  return __first;
+      .           
+      .           	__first = __spec._M_parse_locale(__first, __last);
+      .           	if (__finished())
+      .           	  return __first;
+      .           
+105,624 ( 0.03%)  	switch (*__first)
+      .           	{
+      .           	  case 'a':
+      .           	    __spec._M_type = _Pres_a;
+      .           	    ++__first;
+      .           	    break;
+      .           	  case 'A':
+      .           	    __spec._M_type = _Pres_A;
+      .           	    ++__first;
+-- line 2000 ----------------------------------------
+-- line 2003 ----------------------------------------
+      .           	    __spec._M_type = _Pres_e;
+      .           	    ++__first;
+      .           	    break;
+      .           	  case 'E':
+      .           	    __spec._M_type = _Pres_E;
+      .           	    ++__first;
+      .           	    break;
+      .           	  case 'f':
+ 11,736 ( 0.00%)  	    __spec._M_type = _Pres_f;
+ 11,736 ( 0.00%)  	    ++__first;
+ 11,736 ( 0.00%)  	    break;
+      .           	  case 'F':
+      .           	    __spec._M_type = _Pres_F;
+      .           	    ++__first;
+      .           	    break;
+      .           	  case 'g':
+      .           	    __spec._M_type = _Pres_g;
+      .           	    ++__first;
+      .           	    break;
+      .           	  case 'G':
+      .           	    __spec._M_type = _Pres_G;
+      .           	    ++__first;
+      .           	    break;
+      .           	  }
+      .           
+      .           	if (__finished())
+ 11,736 ( 0.00%)  	  return __first;
+      .           
+      .           	__format::__failed_to_parse_format_spec();
+129,096 ( 0.04%)        }
+      .           
+      .                 template<typename _Fp, typename _Out>
+      .           	typename basic_format_context<_Out, _CharT>::iterator
+129,096 ( 0.04%)  	format(_Fp __v, basic_format_context<_Out, _CharT>& __fc) const
+      .           	{
+      .           	  std::string __dynbuf;
+      .           	  char __buf[128];
+      .           	  to_chars_result __res{};
+      .           
+      .           	  size_t __prec = 6;
+ 11,736 ( 0.00%)  	  bool __use_prec = _M_spec._M_prec_kind != _WP_none;
+ 35,208 ( 0.01%)  	  if (__use_prec)
+      .           	    __prec = _M_spec._M_get_precision(__fc);
+      .           
+      .           	  char* __start = __buf + 1; // reserve space for sign
+ 23,472 ( 0.01%)  	  char* __end = __buf + sizeof(__buf);
+      .           
+      .           	  chars_format __fmt{};
+ 11,736 ( 0.00%)  	  bool __upper = false;
+ 11,736 ( 0.00%)  	  bool __trailing_zeros = false;
+ 11,736 ( 0.00%)  	  char __expc = 'e';
+      .           
+ 82,152 ( 0.02%)  	  switch (_M_spec._M_type)
+      .           	  {
+      .           	    case _Pres_A:
+      .           	      __upper = true;
+      .           	      __expc = 'P';
+      .           	      [[fallthrough]];
+      .           	    case _Pres_a:
+      .           	      if (_M_spec._M_type != _Pres_A)
+      .           		__expc = 'p';
+-- line 2063 ----------------------------------------
+-- line 2071 ----------------------------------------
+      .           	      __use_prec = true;
+      .           	      __fmt = chars_format::scientific;
+      .           	      break;
+      .           	    case _Pres_F:
+      .           	      __upper = true;
+      .           	      [[fallthrough]];
+      .           	    case _Pres_f:
+      .           	      __use_prec = true;
+ 11,736 ( 0.00%)  	      __fmt = chars_format::fixed;
+ 11,736 ( 0.00%)  	      break;
+      .           	    case _Pres_G:
+      .           	      __upper = true;
+      .           	      __expc = 'E';
+      .           	      [[fallthrough]];
+      .           	    case _Pres_g:
+      .           	      __trailing_zeros = true;
+      .           	      __use_prec = true;
+      .           	      __fmt = chars_format::general;
+-- line 2088 ----------------------------------------
+-- line 2093 ----------------------------------------
+      .           	      break;
+      .           	    default:
+      .           	      __builtin_unreachable();
+      .           	  }
+      .           
+      .           	  // Write value into buffer using std::to_chars.
+      .           	  auto __to_chars = [&](char* __b, char* __e) {
+      .           	    if (__use_prec)
+105,624 ( 0.03%)  	      return __format::to_chars(__b, __e, __v, __fmt, __prec);
+6,320,048 ( 1.76%)  => ???:0x00000000040036f0 (11,736x)
+      .           	    else if (__fmt != chars_format{})
+      .           	      return __format::to_chars(__b, __e, __v, __fmt);
+      .           	    else
+      .           	      return __format::to_chars(__b, __e, __v);
+      .           	  };
+      .           
+      .           	  // First try using stack buffer.
+      .           	  __res = __to_chars(__start, __end);
+      .           
+ 23,472 ( 0.01%)  	  if (__builtin_expect(__res.ec == errc::value_too_large, 0))
+      .           	    {
+      .           	      // If the buffer is too small it's probably because of a large
+      .           	      // precision, or a very large value in fixed format.
+      .           	      size_t __guess = 8 + __prec;
+      .           	      if (__fmt == chars_format::fixed) // +ddd.prec
+      .           		{
+      .           		  if constexpr (is_same_v<_Fp, float> || is_same_v<_Fp, double>
+      .           				  || is_same_v<_Fp, long double>)
+-- line 2119 ----------------------------------------
+-- line 2153 ----------------------------------------
+      .           						  __overwrite);
+      .           		  __start = __dynbuf.data() + 1; // reserve space for sign
+      .           		  __end = __dynbuf.data() + __dynbuf.size();
+      .           		}
+      .           	      while (__builtin_expect(__res.ec == errc::value_too_large, 0));
+      .           	  }
+      .           
+      .           	  // Use uppercase for 'A', 'E', and 'G' formats.
+ 23,472 ( 0.01%)  	  if (__upper)
+      .           	    {
+      .           	      for (char* __p = __start; __p != __res.ptr; ++__p)
+      .           		*__p = std::toupper(*__p);
+      .           	    }
+      .           
+      .           	  bool __have_sign = true;
+      .           	  // Add sign for non-negative values.
+ 35,208 ( 0.01%)  	  if (!__builtin_signbit(__v))
+      .           	    {
+ 70,146 ( 0.02%)  	      if (_M_spec._M_sign == _Sign_plus)
+      .           		*--__start = '+';
+ 23,364 ( 0.01%)  	      else if (_M_spec._M_sign == _Sign_space)
+    108 ( 0.00%)  		*--__start = ' ';
+      .           	      else
+      .           		__have_sign = false;
+      .           	    }
+      .           
+ 23,472 ( 0.01%)  	  string_view __narrow_str(__start, __res.ptr - __start);
+      .           
+      .           	  // Use alternate form. Ensure decimal point is always present,
+      .           	  // and add trailing zeros (up to precision) for g and G forms.
+ 23,472 ( 0.01%)  	  if (_M_spec._M_alt && __builtin_isfinite(__v))
+      .           	    {
+      .           	      string_view __s = __narrow_str;
+      .           	      size_t __sigfigs; // Number of significant figures.
+      .           	      size_t __z = 0;   // Number of trailing zeros to add.
+      .           	      size_t __p;       // Position of the exponent character (if any).
+      .           	      size_t __d = __s.find('.'); // Position of decimal point.
+      .           	      if (__d != __s.npos) // Found decimal point.
+      .           		{
+-- line 2191 ----------------------------------------
+-- line 2259 ----------------------------------------
+      .           		      __narrow_str = __dynbuf;
+      .           		    }
+      .           		}
+      .           	    }
+      .           
+      .           	  basic_string<_CharT> __wstr;
+      .           	  basic_string_view<_CharT> __str;
+      .           	  if constexpr (is_same_v<_CharT, char>)
+ 11,736 ( 0.00%)  	    __str = __narrow_str;
+      .           #ifdef _GLIBCXX_USE_WCHAR_T
+      .           	  else
+      .           	    {
+      .           	      __wstr = std::__to_wstring_numeric(__narrow_str);
+      .           	      __str = __wstr;
+      .           	    }
+      .           #endif
+      .           
+ 23,472 ( 0.01%)  	  if (_M_spec._M_localized && __builtin_isfinite(__v))
+      .           	    {
+      .           	      auto __s = _M_localize(__str, __expc, __fc.locale());
+      .           	      if (!__s.empty())
+      .           		__str = __wstr = std::move(__s);
+      .           	    }
+      .           
+      .           	  size_t __width = _M_spec._M_get_width(__fc);
+      .           
+-- line 2284 ----------------------------------------
+-- line 2303 ----------------------------------------
+      .           		      __str.remove_prefix(1);
+      .           		    }
+      .           		}
+      .           	      else
+      .           		__fill_char = _CharT(' ');
+      .           	    }
+      .           	  return __format::__write_padded(std::move(__out), __str,
+      .           					  __align, __nfill, __fill_char);
+140,832 ( 0.04%)  	}
+      .           
+      .                 // Locale-specific format.
+      .                 basic_string<_CharT>
+      .                 _M_localize(basic_string_view<_CharT> __str, char __expc,
+      .           		  const locale& __loc) const
+      .                 {
+      .           	basic_string<_CharT> __lstr;
+      .           
+-- line 2319 ----------------------------------------
+-- line 2682 ----------------------------------------
+      .                 parse(basic_format_parse_context<_CharT>& __pc)
+      .                 {
+      .           	return _M_f.template _M_parse<_Tp>(__pc);
+      .                 }
+      .           
+      .                 template<typename _Out>
+      .           	typename basic_format_context<_Out, _CharT>::iterator
+      .           	format(_Tp __u, basic_format_context<_Out, _CharT>& __fc) const
+  7,828 ( 0.00%)  	{ return _M_f.format(__u, __fc); }
+411,225 ( 0.11%)  => /usr/include/c++/15/format:std::basic_format_context<std::__format::_Sink_iter<char>, char>::iterator std::__format::__formatter_int<char>::format<unsigned long long, std::__format::_Sink_iter<char> >(unsigned long long, std::basic_format_context<std::__format::_Sink_iter<char>, char>&) const (1,957x)
+      .           
+      .               private:
+      .                 __format::__formatter_int<_CharT> _M_f;
+      .               };
+      .           
+      .           #if defined __glibcxx_to_chars
+      .             /// Format a floating-point value.
+      .             template<__format::__formattable_float _Tp, __format::__char _CharT>
+      .               struct formatter<_Tp, _CharT>
+      .               {
+      .                 formatter() = default;
+      .           
+      .                 [[__gnu__::__always_inline__]]
+      .                 constexpr typename basic_format_parse_context<_CharT>::iterator
+      .                 parse(basic_format_parse_context<_CharT>& __pc)
+ 35,208 ( 0.01%)        { return _M_f.parse(__pc); }
+2,722,752 ( 0.76%)  => /usr/include/c++/15/format:std::__format::__formatter_fp<char>::parse(std::basic_format_parse_context<char>&) (11,736x)
+      .           
+      .                 template<typename _Out>
+      .           	typename basic_format_context<_Out, _CharT>::iterator
+      .           	format(_Tp __u, basic_format_context<_Out, _CharT>& __fc) const
+ 46,944 ( 0.01%)  	{ return _M_f.format(__u, __fc); }
+8,127,114 ( 2.26%)  => /usr/include/c++/15/format:std::basic_format_context<std::__format::_Sink_iter<char>, char>::iterator std::__format::__formatter_fp<char>::format<double, std::__format::_Sink_iter<char> >(double, std::basic_format_context<std::__format::_Sink_iter<char>, char>&) const (11,736x)
+      .           
+      .               private:
+      .                 __format::__formatter_fp<_CharT> _M_f;
+      .               };
+      .           
+      .           #if __LDBL_MANT_DIG__ == __DBL_MANT_DIG__
+      .             // Reuse __formatter_fp<C>::format<double, Out> for long double.
+      .             template<__format::__char _CharT>
+-- line 2719 ----------------------------------------
+-- line 3084 ----------------------------------------
+      .           	_M_sink->_M_write(__c);
+      .           	return *this;
+      .                 }
+      .           
+      .                 [[__gnu__::__always_inline__]]
+      .                 constexpr _Sink_iter&
+      .                 operator=(basic_string_view<_CharT> __s)
+      .                 {
+131,059 ( 0.04%)  	_M_sink->_M_write(__s);
+539,848 ( 0.15%)  => /usr/include/c++/15/format:std::__format::_Sink<char>::_M_write(std::basic_string_view<char, std::char_traits<char> >) (11,736x)
+      .           	return *this;
+      .                 }
+      .           
+      .                 [[__gnu__::__always_inline__]]
+      .                 constexpr _Sink_iter&
+      .                 operator*() { return *this; }
+      .           
+      .                 [[__gnu__::__always_inline__]]
+-- line 3100 ----------------------------------------
+-- line 3127 ----------------------------------------
+      .                 // TODO: remove the precondition? could make overflow handle it.
+      .                 virtual void _M_overflow() = 0;
+      .           
+      .               protected:
+      .                 // Precondition: __span.size() != 0
+      .                 [[__gnu__::__always_inline__]]
+      .                 explicit constexpr
+      .                 _Sink(span<_CharT> __span) noexcept
+  9,785 ( 0.00%)        : _M_span(__span), _M_next(__span.begin())
+      .                 { }
+      .           
+      .                 // The portion of the span that has been written to.
+      .                 [[__gnu__::__always_inline__]]
+      .                 span<_CharT>
+      .                 _M_used() const noexcept
+      .                 { return _M_span.first(_M_next - _M_span.begin()); }
+      .           
+-- line 3143 ----------------------------------------
+-- line 3166 ----------------------------------------
+      .                 _M_write(_CharT __c)
+      .                 {
+      .           	*_M_next++ = __c;
+      .           	if (_M_next - _M_span.begin() == std::ssize(_M_span)) [[unlikely]]
+      .           	  _M_overflow();
+      .                 }
+      .           
+      .                 constexpr void
+246,474 ( 0.07%)        _M_write(basic_string_view<_CharT> __s)
+      .                 {
+      .           	span __to = _M_unused();
+ 82,158 ( 0.02%)  	while (__to.size() <= __s.size())
+      .           	  {
+      .           	    __s.copy(__to.data(), __to.size());
+      .           	    _M_next += __to.size();
+      .           	    __s.remove_prefix(__to.size());
+      .           	    _M_overflow();
+      .           	    __to = _M_unused();
+      .           	  }
+ 54,772 ( 0.02%)  	if (__s.size())
+      .           	  {
+      .           	    __s.copy(__to.data(), __s.size());
+      .           	    _M_next += __s.size();
+      .           	  }
+164,316 ( 0.05%)        }
+      .           
+      .                 // A successful _Reservation can be used to directly write
+      .                 // up to N characters to the sink to avoid unwanted buffering.
+      .                 struct _Reservation
+      .                 {
+      .           	// True if the reservation was successful, false otherwise.
+      .           	explicit operator bool() const noexcept { return _M_sink; }
+      .           	// A pointer to write directly to the sink.
+-- line 3198 ----------------------------------------
+-- line 3360 ----------------------------------------
+      .                 }
+      .           
+      .               public:
+      .                 // TODO: for SSO string, use SSO buffer as initial span, then switch
+      .                 // to _M_buf if it overflows? Or even do that for all unused capacity?
+      .           
+      .                 [[__gnu__::__always_inline__]]
+      .                 _Seq_sink() noexcept(is_nothrow_default_constructible_v<_Seq>)
+ 11,742 ( 0.00%)        { }
+      .           
+      .                 _Seq_sink(_Seq&& __s) noexcept(is_nothrow_move_constructible_v<_Seq>)
+      .                 : _M_seq(std::move(__s))
+      .                 { }
+      .           
+      .                 using _Sink<_CharT>::out;
+      .           
+      .                 _Seq
+      .                 get() &&
+      .                 {
+  5,871 ( 0.00%)  	if (this->_M_used().size() != 0)
+      .           	  _Seq_sink::_M_overflow();
+      .           	return std::move(_M_seq);
+      .                 }
+      .           
+      .                 // A writable span that views everything written to the sink.
+      .                 // Will be either a view over _M_seq or the used part of _M_buf.
+      .                 span<_CharT>
+      .                 view()
+-- line 3387 ----------------------------------------
+-- line 3997 ----------------------------------------
+      .           	__format::__visit_format_arg(_Visitor&&, basic_format_arg<_Ctx>);
+      .           
+      .                 template<typename _Ch, typename _Tp>
+      .           	friend consteval __format::_Arg_t
+      .           	__format::__to_arg_t_enum() noexcept;
+      .           
+      .                 template<typename _Visitor>
+      .           	decltype(auto)
+150,623 ( 0.04%)  	_M_visit(_Visitor&& __vis, __format::_Arg_t __type)
+      .           	{
+      .           	  using namespace __format;
+ 68,465 ( 0.02%)  	  switch (__type)
+      .           	  {
+      .           	    case _Arg_none:
+      .           	      return std::forward<_Visitor>(__vis)(_M_val._M_none);
+      .           	    case _Arg_bool:
+      .           	      return std::forward<_Visitor>(__vis)(_M_val._M_bool);
+      .           	    case _Arg_c:
+      .           	      return std::forward<_Visitor>(__vis)(_M_val._M_c);
+      .           	    case _Arg_i:
+-- line 4016 ----------------------------------------
+-- line 4058 ----------------------------------------
+      .           	    case _Arg_f128:
+      .           	      return std::forward<_Visitor>(__vis)(_M_val._M_f128);
+      .           #endif
+      .           
+      .           	    default:
+      .           	      // _Arg_f16 etc.
+      .           	      __builtin_unreachable();
+      .           	  }
+136,930 ( 0.04%)  	}
+      .           
+      .                 template<typename _Visitor>
+      .           	decltype(auto)
+      .           	_M_visit_user(_Visitor&& __vis, __format::_Arg_t __type)
+      .           	{
+      .           	  return _M_visit([&__vis]<typename _Tp>(_Tp& __val) -> decltype(auto)
+      .           	    {
+      .           	      constexpr bool __user_facing = __is_one_of<_Tp,
+-- line 4074 ----------------------------------------
+-- line 4098 ----------------------------------------
+      .           
+      .           /// @cond undocumented
+      .           namespace __format
+      .           {
+      .             template<typename _Visitor, typename _Ctx>
+      .               inline decltype(auto)
+      .               __visit_format_arg(_Visitor&& __vis, basic_format_arg<_Ctx> __arg)
+      .               {
+ 82,158 ( 0.02%)        return __arg._M_visit(std::forward<_Visitor>(__vis), __arg._M_type);
+11,945,777 ( 3.33%)  => /usr/include/c++/15/format:decltype(auto) std::basic_format_arg<std::basic_format_context<std::__format::_Sink_iter<char>, char> >::_M_visit<std::__format::_Formatting_scanner<std::__format::_Sink_iter<char>, char>::_M_format_arg(unsigned long)::{lambda(auto:1&)#1}>(std::__format::_Formatting_scanner<std::__format::_Sink_iter<char>, char>::_M_format_arg(unsigned long)::{lambda(auto:1&)#1}&&, std::__format::_Arg_t) (13,693x)
+      .               }
+      .           
+      .             struct _WidthPrecVisitor
+      .             {
+      .               template<typename _Tp>
+      .                 size_t
+      .                 operator()(_Tp& __arg) const
+      .                 {
+-- line 4114 ----------------------------------------
+-- line 4185 ----------------------------------------
+      .           
+      .                 size_t
+      .                 _M_size() const noexcept
+      .                 { return _M_packed_size ? _M_packed_size : _M_unpacked_size; }
+      .           
+      .                 typename __format::_Arg_t
+      .                 _M_type(size_t __i) const noexcept
+      .                 {
+ 54,772 ( 0.02%)  	uint64_t __t = _M_unpacked_size >> (__i * _S_packed_type_bits);
+ 41,079 ( 0.01%)  	return static_cast<__format::_Arg_t>(__t & _S_packed_type_mask);
+      .                 }
+      .           
+      .                 template<typename _Ctx, typename... _Args>
+      .           	friend auto
+      .           	make_format_args(_Args&...) noexcept;
+      .           
+      .                 // An array of _Arg_t enums corresponding to _Args...
+      .                 template<typename... _Args>
+-- line 4202 ----------------------------------------
+-- line 4208 ----------------------------------------
+      .                 template<typename... _Args>
+      .           	basic_format_args(const _Store<_Args...>& __store) noexcept;
+      .           
+      .                 [[nodiscard,__gnu__::__always_inline__]]
+      .                 basic_format_arg<_Context>
+      .                 get(size_t __i) const noexcept
+      .                 {
+      .           	basic_format_arg<_Context> __arg;
+ 68,465 ( 0.02%)  	if (__i < _M_packed_size)
+      .           	  {
+      .           	    __arg._M_type = _M_type(__i);
+ 54,772 ( 0.02%)  	    __arg._M_val = _M_values[__i];
+      .           	  }
+      .           	else if (_M_packed_size == 0 && __i < _M_unpacked_size)
+      .           	  __arg = _M_args[__i];
+      .           	return __arg;
+      .                 }
+      .               };
+      .           
+      .             // _GLIBCXX_RESOLVE_LIB_DEFECTS
+-- line 4227 ----------------------------------------
+-- line 4282 ----------------------------------------
+      .           	  else
+      .           	    return __arg;
+      .           	}
+      .           
+      .                 template<typename... _Tp>
+      .           	requires (sizeof...(_Tp) == sizeof...(_Args))
+      .           	[[__gnu__::__always_inline__]]
+      .           	_Arg_store(_Tp&... __a) noexcept
+ 13,695 ( 0.00%)  	: _M_args{_S_make_elt(__a)...}
+      .           	{ }
+      .               };
+      .           
+      .             template<typename _Context>
+      .               class __format::_Arg_store<_Context>
+      .               { };
+      .           
+      .             template<typename _Context>
+      .               template<typename... _Args>
+      .                 inline
+  1,957 ( 0.00%)        basic_format_args<_Context>::
+      .                 basic_format_args(const _Store<_Args...>& __store) noexcept
+      .                 {
+      .           	if constexpr (sizeof...(_Args) == 0)
+      .           	  {
+      .           	    _M_packed_size = 0;
+      .           	    _M_unpacked_size = 0;
+      .           	    _M_args = nullptr;
+      .           	  }
+-- line 4309 ----------------------------------------
+-- line 4310 ----------------------------------------
+      .           	else if constexpr (sizeof...(_Args) <= _S_max_packed_args)
+      .           	  {
+      .           	    // The number of packed arguments:
+      .           	    _M_packed_size = sizeof...(_Args);
+      .           	    // The packed type enums:
+      .           	    _M_unpacked_size
+      .           	      = __format::__pack_arg_types<_S_packed_type_bits>(_S_types_to_pack<_Args...>());
+      .           	    // The _Arg_value objects.
+      2 ( 0.00%)  	    _M_values = __store._M_args;
+      .           	  }
+      .           	else
+      .           	  {
+      .           	    // No packed arguments:
+      .           	    _M_packed_size = 0;
+      .           	    // The number of unpacked arguments:
+      .           	    _M_unpacked_size = sizeof...(_Args);
+      .           	    // The basic_format_arg objects:
+-- line 4326 ----------------------------------------
+-- line 4382 ----------------------------------------
+      .                 static_assert( output_iterator<_Out, const _CharT&> );
+      .           
+      .                 basic_format_args<basic_format_context> _M_args;
+      .                 _Out _M_out;
+      .                 __format::_Optional_locale _M_loc;
+      .           
+      .                 basic_format_context(basic_format_args<basic_format_context> __args,
+      .           			   _Out __out)
+  5,871 ( 0.00%)        : _M_args(__args), _M_out(std::move(__out))
+      .                 { }
+      .           
+      .                 basic_format_context(basic_format_args<basic_format_context> __args,
+      .           			   _Out __out, const std::locale& __loc)
+      .                 : _M_args(__args), _M_out(std::move(__out)), _M_loc(__loc)
+      .                 { }
+      .           
+      .                 // _GLIBCXX_RESOLVE_LIB_DEFECTS
+-- line 4398 ----------------------------------------
+-- line 4421 ----------------------------------------
+      .                 basic_format_arg<basic_format_context>
+      .                 arg(size_t __id) const noexcept
+      .                 { return _M_args.get(__id); }
+      .           
+      .                 [[nodiscard]]
+      .                 std::locale locale() { return _M_loc.value(); }
+      .           
+      .                 [[nodiscard]]
+ 50,858 ( 0.01%)        iterator out() { return std::move(_M_out); }
+      .           
+ 39,122 ( 0.01%)        void advance_to(iterator __it) { _M_out = std::move(__it); }
+      .               };
+      .           
+      .           
+      .           /// @cond undocumented
+      .           namespace __format
+      .           {
+      .             // Abstract base class defining an interface for scanning format strings.
+      .             // Scan the characters in a format string, dividing it up into strings of
+-- line 4439 ----------------------------------------
+-- line 4442 ----------------------------------------
+      .             // or write formatted output.
+      .             template<typename _CharT>
+      .               struct _Scanner
+      .               {
+      .                 using iterator = typename basic_format_parse_context<_CharT>::iterator;
+      .           
+      .                 struct _Parse_context : basic_format_parse_context<_CharT>
+      .                 {
+  7,828 ( 0.00%)  	using basic_format_parse_context<_CharT>::basic_format_parse_context;
+      .           	const _Arg_t* _M_types = nullptr;
+      .                 } _M_pc;
+      .           
+      .                 constexpr explicit
+      .                 _Scanner(basic_string_view<_CharT> __str, size_t __nargs = (size_t)-1)
+      .                 : _M_pc(__str, __nargs)
+      .                 { }
+      .           
+-- line 4458 ----------------------------------------
+-- line 4459 ----------------------------------------
+      .                 constexpr iterator begin() const noexcept { return _M_pc.begin(); }
+      .                 constexpr iterator end() const noexcept { return _M_pc.end(); }
+      .           
+      .                 constexpr void
+      .                 _M_scan()
+      .                 {
+      .           	basic_string_view<_CharT> __fmt = _M_fmt_str();
+      .           
+  3,914 ( 0.00%)  	if (__fmt.size() == 2 && __fmt[0] == '{' && __fmt[1] == '}')
+      .           	  {
+      .           	    _M_pc.advance_to(begin() + 1);
+      .           	    _M_format_arg(_M_pc.next_arg_id());
+      .           	    return;
+      .           	  }
+      .           
+      .           	size_t __lbr = __fmt.find('{');
+      .           	size_t __rbr = __fmt.find('}');
+      .           
+      .           	while (__fmt.size())
+      .           	  {
+ 41,079 ( 0.01%)  	    auto __cmp = __lbr <=> __rbr;
+      .           	    if (__cmp == 0)
+      .           	      {
+      .           		_M_on_chars(end());
+      .           		_M_pc.advance_to(end());
+      .           		return;
+      .           	      }
+      .           	    else if (__cmp < 0)
+      .           	      {
+ 13,693 ( 0.00%)  		if (__lbr + 1 == __fmt.size()
+ 68,465 ( 0.02%)  		      || (__rbr == __fmt.npos && __fmt[__lbr + 1] != '{'))
+      .           		  __format::__unmatched_left_brace_in_format_string();
+ 27,386 ( 0.01%)  		const bool __is_escape = __fmt[__lbr + 1] == '{';
+ 54,772 ( 0.02%)  		iterator __last = begin() + __lbr + int(__is_escape);
+      .           		_M_on_chars(__last);
+ 13,693 ( 0.00%)  		_M_pc.advance_to(__last + 1);
+      .           		__fmt = _M_fmt_str();
+ 23,472 ( 0.01%)  		if (__is_escape)
+      .           		  {
+      .           		    if (__rbr != __fmt.npos)
+      .           		      __rbr -= __lbr + 2;
+      .           		    __lbr = __fmt.find('{');
+      .           		  }
+      .           		else
+      .           		  {
+      .           		    _M_on_replacement_field();
+-- line 4504 ----------------------------------------
+-- line 4528 ----------------------------------------
+      .           
+      .                 constexpr virtual void _M_on_chars(iterator) { }
+      .           
+      .                 constexpr void _M_on_replacement_field()
+      .                 {
+      .           	auto __next = begin();
+      .           
+      .           	size_t __id;
+ 41,079 ( 0.01%)  	if (*__next == '}')
+      .           	  __id = _M_pc.next_arg_id();
+ 23,472 ( 0.01%)  	else if (*__next == ':')
+      .           	  {
+      .           	    __id = _M_pc.next_arg_id();
+ 23,472 ( 0.01%)  	    _M_pc.advance_to(++__next);
+      .           	  }
+      .           	else
+      .           	  {
+      .           	    auto [__i, __ptr] = __format::__parse_arg_id(begin(), end());
+      .           	    if (!__ptr || !(*__ptr == '}' || *__ptr == ':'))
+      .           	      __format::__invalid_arg_id_in_format_string();
+      .           	    _M_pc.check_arg_id(__id = __i);
+      .           	    if (*__ptr == ':')
+      .           	      {
+      .           		_M_pc.advance_to(++__ptr);
+      .           	      }
+      .           	    else
+      .           	      _M_pc.advance_to(__ptr);
+      .           	  }
+      .           	_M_format_arg(__id);
+ 54,772 ( 0.02%)  	if (begin() == end() || *begin() != '}')
+      .           	  __format::__unmatched_left_brace_in_format_string();
+ 13,693 ( 0.00%)  	_M_pc.advance_to(begin() + 1); // Move past '}'
+      .                 }
+      .           
+      .                 constexpr virtual void _M_format_arg(size_t __id) = 0;
+      .               };
+      .           
+      .             // Process a format string and format the arguments in the context.
+      .             template<typename _Out, typename _CharT>
+      .               class _Formatting_scanner : public _Scanner<_CharT>
+      .               {
+      .               public:
+      .                 _Formatting_scanner(basic_format_context<_Out, _CharT>& __fc,
+      .           			  basic_string_view<_CharT> __str)
+  3,914 ( 0.00%)        : _Scanner<_CharT>(__str), _M_fc(__fc)
+      .                 { }
+      .           
+      .               private:
+      .                 basic_format_context<_Out, _CharT>& _M_fc;
+      .           
+      .                 using iterator = typename _Scanner<_CharT>::iterator;
+      .           
+      .                 constexpr void
+      .                 _M_on_chars(iterator __last) override
+      .                 {
+      .           	basic_string_view<_CharT> __str(this->begin(), __last);
+ 13,693 ( 0.00%)  	_M_fc.advance_to(__format::__write(_M_fc.out(), __str));
+      .                 }
+      .           
+      .                 constexpr void
+      .                 _M_format_arg(size_t __id) override
+      .                 {
+      .           	using _Context = basic_format_context<_Out, _CharT>;
+      .           	using handle = typename basic_format_arg<_Context>::handle;
+      .           
+ 72,379 ( 0.02%)  	__format::__visit_format_arg([this](auto& __arg) {
+      .           	  using _Type = remove_reference_t<decltype(__arg)>;
+      .           	  using _Formatter = typename _Context::template formatter_type<_Type>;
+      .           	  if constexpr (is_same_v<_Type, monostate>)
+      .           	    __format::__invalid_arg_id_in_format_string();
+      .           	  else if constexpr (is_same_v<_Type, handle>)
+      .           	    __arg.format(this->_M_pc, this->_M_fc);
+      .           	  else if constexpr (is_default_constructible_v<_Formatter>)
+      .           	    {
+ 27,386 ( 0.01%)  	      _Formatter __f;
+ 41,079 ( 0.01%)  	      this->_M_pc.advance_to(__f.parse(this->_M_pc));
+ 27,386 ( 0.01%)  	      this->_M_fc.advance_to(__f.format(__arg, this->_M_fc));
+      .           	    }
+      .           	  else
+      .           	    static_assert(__format::__formattable_with<_Type, _Context>);
+ 13,693 ( 0.00%)  	}, _M_fc.arg(__id));
+      .                 }
+      .               };
+      .           
+      .             template<typename _CharT, typename _Tp>
+      .               consteval _Arg_t
+      .               __to_arg_t_enum() noexcept
+      .               {
+      .                 using _Context = __format::__format_context<_CharT>;
+-- line 4616 ----------------------------------------
+-- line 4678 ----------------------------------------
+      .               __do_vformat_to(_Out __out, basic_string_view<_CharT> __fmt,
+      .           		    const basic_format_args<_Context>& __args,
+      .           		    const locale* __loc)
+      .               {
+      .                 _Iter_sink<_CharT, _Out> __sink(std::move(__out));
+      .                 _Sink_iter<_CharT> __sink_out;
+      .           
+      .                 if constexpr (is_same_v<_Out, _Sink_iter<_CharT>>)
+  3,914 ( 0.00%)  	__sink_out = __out; // Already a sink iterator, safe to use post-move.
+      .                 else
+      .           	__sink_out = __sink.out();
+      .           
+      .                 if constexpr (is_same_v<_CharT, char>)
+      .           	// Fast path for "{}" format strings and simple format arg types.
+  3,914 ( 0.00%)  	if (__fmt.size() == 2 && __fmt[0] == '{' && __fmt[1] == '}')
+      .           	  {
+      .           	    bool __done = false;
+      .           	    __format::__visit_format_arg([&](auto& __arg) {
+      .           	      using _Tp = remove_cvref_t<decltype(__arg)>;
+      .           	      if constexpr (is_same_v<_Tp, bool>)
+      .           		{
+      .           		  size_t __len = 4 + !__arg;
+      .           		  const char* __chars[] = { "false", "true" };
+-- line 4700 ----------------------------------------
+-- line 4844 ----------------------------------------
+      .               {
+      .                 return __format::__do_vformat_to(std::move(__out), __fmt, __args, &__loc);
+      .               }
+      .           #endif
+      .           
+      .             [[nodiscard]]
+      .             inline string
+      .             vformat(string_view __fmt, format_args __args)
+ 25,441 ( 0.01%)    {
+      .               __format::_Str_sink<char> __buf;
+      .               std::vformat_to(__buf.out(), __fmt, __args);
+      .               return std::move(__buf).get();
+ 23,484 ( 0.01%)    }
+      .           
+      .           #ifdef _GLIBCXX_USE_WCHAR_T
+      .             [[nodiscard]]
+      .             inline wstring
+      .             vformat(wstring_view __fmt, wformat_args __args)
+      .             {
+      .               __format::_Str_sink<wchar_t> __buf;
+      .               std::vformat_to(__buf.out(), __fmt, __args);
+-- line 4864 ----------------------------------------
+-- line 4885 ----------------------------------------
+      .               return std::move(__buf).get();
+      .             }
+      .           #endif
+      .           
+      .             template<typename... _Args>
+      .               [[nodiscard]]
+      .               inline string
+      .               format(format_string<_Args...> __fmt, _Args&&... __args)
+ 11,744 ( 0.00%)      { return std::vformat(__fmt.get(), std::make_format_args(__args...)); }
+15,167,792 ( 4.22%)  => /usr/include/c++/15/format:std::vformat[abi:cxx11](std::basic_string_view<char, std::char_traits<char> >, std::basic_format_args<std::basic_format_context<std::__format::_Sink_iter<char>, char> >) (1,957x)
+      .           
+      .           #ifdef _GLIBCXX_USE_WCHAR_T
+      .             template<typename... _Args>
+      .               [[nodiscard]]
+      .               inline wstring
+      .               format(wformat_string<_Args...> __fmt, _Args&&... __args)
+      .               { return std::vformat(__fmt.get(), std::make_wformat_args(__args...)); }
+      .           #endif
+-- line 4901 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: common/include/physics.hpp
+--------------------------------------------------------------------------------
+Ir                  
+
+-- line 7 ----------------------------------------
+         .           #include "constants.hpp"
+         .           #include "enclosure.hpp"
+         .           #include <cmath>
+         .           namespace common {
+         .           
+         .           
+         .           [[nodiscard]] inline vec2d compute_force(point const & p1, double m1, point const & p2, double m2) {
+         .             vec2d const difvec=p2-p1;
+48,081,305 (13.39%)    double const dist_sq = difvec.getx()*difvec.getx() + difvec.gety()*difvec.gety();
+28,848,783 ( 8.03%)    if (dist_sq<common::constants::EPSILON*common::constants::EPSILON){
+         .               return vec2d{0,0};}
+         .           
+28,848,783 ( 8.03%)    double const vec3norm=dist_sq*(std::sqrt(dist_sq));
+         .           
+48,081,325 (13.39%)    double const scalar1=common::constants::G*(1/vec3norm)*m1*m2;
+         .           
+         .             return difvec*scalar1;
+         .           }
+         .           inline void update_kinematics(point & pos, vec2d & vel, vec2d const & accel, double dt) {
+    78,488 ( 0.02%)    vel.setx(vel.getx()+accel.getx()*dt);
+         .             vel.sety(vel.gety()+accel.gety()*dt);
+    98,110 ( 0.03%)    pos.setx(pos.getx()+vel.getx()*dt);
+         .             pos.sety(pos.gety()+vel.gety()*dt);
+         .           
+         .           }
+         .           
+         .           /**
+         .            * @brief Applies wall collision rebounds (left, right, bottom, top boundaries).
+         .            * @details Checks <= / >= boundary limits, clamps position inside [r, limit - r],
+         .            *          and reverses velocity direction if moving toward the wall.
+         .            */
+         .           inline void apply_rebound(point & pos, vec2d & vel, double radius, enclosure box) {
+         .           
+        40 ( 0.00%)    if ((pos.getx()-radius)<=0.0){
+         .               pos.setx(0.0+radius);
+         .               if (vel.getx()<0.0){
+         .           
+         .                 vel.setx(-1*vel.getx());}
+         .           
+         .           }
+    58,866 ( 0.02%)  if ((pos.getx()+radius)>=box.width){
+        44 ( 0.00%)      pos.setx(box.width-radius);
+        66 ( 0.00%)      if (vel.getx()>0.0){
+         .               
+        22 ( 0.00%)        vel.setx(-1*vel.getx());
+         .           
+         .           }}
+    78,488 ( 0.02%)  if ((pos.gety()+radius)>=box.height){
+        68 ( 0.00%)      pos.sety(box.height-radius);
+        68 ( 0.00%)      if (vel.gety()>0){
+         .           
+        68 ( 0.00%)      vel.sety(-1*vel.gety());
+         .               }
+         .           }
+    58,900 ( 0.02%)  if ((pos.gety()-radius)<=0.0){
+         .               pos.sety(0.0+radius);
+         .               if (vel.gety()<0){
+         .           
+         .               vel.sety(-1*vel.gety());
+         .               }
+         .           }}
+         .           
+         .           }
+-- line 69 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/15/bits/stl_algobase.h
+--------------------------------------------------------------------------------
+Ir               
+
+-- line 231 ----------------------------------------
+      .             template<typename _Tp>
+      .               _GLIBCXX_NODISCARD _GLIBCXX14_CONSTEXPR
+      .               inline const _Tp&
+      .               min(const _Tp& __a, const _Tp& __b)
+      .               {
+      .                 // concept requirements
+      .                 __glibcxx_function_requires(_LessThanComparableConcept<_Tp>)
+      .                 //return __b < __a ? __b : __a;
+976,645 ( 0.27%)        if (__b < __a)
+      .           	return __b;
+      .                 return __a;
+      .               }
+      .           
+      .             /**
+      .              *  @brief This does what you think it does.
+      .              *  @ingroup sorting_algorithms
+      .              *  @param  __a  A thing of arbitrary type.
+-- line 247 ----------------------------------------
+-- line 255 ----------------------------------------
+      .             template<typename _Tp>
+      .               _GLIBCXX_NODISCARD _GLIBCXX14_CONSTEXPR
+      .               inline const _Tp&
+      .               max(const _Tp& __a, const _Tp& __b)
+      .               {
+      .                 // concept requirements
+      .                 __glibcxx_function_requires(_LessThanComparableConcept<_Tp>)
+      .                 //return  __a < __b ? __b : __a;
+    548 ( 0.00%)        if (__a < __b)
+      .           	return __b;
+      .                 return __a;
+      .               }
+      .           
+      .             /**
+      .              *  @brief This does what you think it does.
+      .              *  @ingroup sorting_algorithms
+      .              *  @param  __a  A thing of arbitrary type.
+-- line 271 ----------------------------------------
+-- line 396 ----------------------------------------
+      .           #pragma GCC diagnostic ignored "-Wc++17-extensions"
+      .             template<bool _IsMove, typename _OutIter, typename _InIter>
+      .               __attribute__((__always_inline__)) _GLIBCXX20_CONSTEXPR
+      .               inline void
+      .               __assign_one(_OutIter& __out, _InIter& __in)
+      .               {
+      .           #if __cplusplus >= 201103L
+      .                 if constexpr (_IsMove)
+  2,632 ( 0.00%)  	*__out = std::move(*__in);
+      .                 else
+      .           #endif
+      .           	*__out = *__in;
+  2,632 ( 0.00%)      }
+      .           
+      .             template<bool _IsMove, typename _InIter, typename _Sent, typename _OutIter>
+      .               _GLIBCXX20_CONSTEXPR
+      .               inline _OutIter
+      .               __copy_move_a2(_InIter __first, _Sent __last, _OutIter __result)
+      .               {
+      .                 typedef __decltype(*__first) _InRef;
+      .                 typedef __decltype(*__result) _OutRef;
+-- line 416 ----------------------------------------
+-- line 694 ----------------------------------------
+      .           #ifdef __cpp_lib_is_constant_evaluated
+      .                 else if (std::is_constant_evaluated())
+      .                  { } /* Skip the optimizations and use the loop at the end. */
+      .           #endif
+      .                 else if _GLIBCXX_CONSTEXPR (__memcpyable<_BI2, _BI1>::__value)
+      .           	{
+      .           	  ptrdiff_t __n = std::distance(__first, __last);
+      .           	  std::advance(__result, -__n);
+  7,478 ( 0.00%)  	  if (__builtin_expect(__n > 1, true))
+      .           	    {
+  2,214 ( 0.00%)  	      __builtin_memmove(_GLIBCXX_TO_ADDR(__result),
+ 14,457 ( 0.00%)  => ???:0x0000000004003960 (1,107x)
+      .           				_GLIBCXX_TO_ADDR(__first),
+      .           				__n * sizeof(*__first));
+      .           	    }
+  2,632 ( 0.00%)  	  else if (__n == 1)
+      .           	    std::__assign_one<_IsMove>(__result, __first);
+      .           	  return __result;
+      .           	}
+      .           #if __cpp_lib_concepts
+      .                 else if constexpr (__memcpyable_iterators<_BI2, _BI1>)
+      .           	{
+      .           	  if (auto __n = __last - __first; __n > 1) [[likely]]
+      .           	    {
+-- line 716 ----------------------------------------
+-- line 917 ----------------------------------------
+      .           
+      .                 // When the condition is true, we use a copy of __value,
+      .                 // otherwise we just use another reference.
+      .                 typedef typename __gnu_cxx::__conditional_type<__load_outside_loop,
+      .           						     const _Tp,
+      .           						     const _Tp&>::__type _Up;
+      .                 _Up __val(__value);
+      .                 for (; __first != __last; ++__first)
+    462 ( 0.00%)  	*__first = __val;
+330,402 ( 0.09%)  => ???:0x00000000040036c0 (42x)
+      .               }
+      .           #pragma GCC diagnostic pop
+      .           
+      .             // Specialization: for char types we can use memset.
+      .             template<typename _Up, typename _Tp>
+      .               _GLIBCXX20_CONSTEXPR
+      .               inline typename
+      .               __gnu_cxx::__enable_if<__is_byte<_Up>::__value
+-- line 933 ----------------------------------------
+-- line 1135 ----------------------------------------
+      .               _GLIBCXX20_CONSTEXPR
+      .               inline _OutputIterator
+      .               __fill_n_a(_OutputIterator __first, _Size __n, const _Tp& __value,
+      .           	       std::random_access_iterator_tag)
+      .               {
+      .           #if __cplusplus >= 201103L
+      .                 static_assert(is_integral<_Size>{}, "fill_n must pass integral size");
+      .           #endif
+    294 ( 0.00%)        if (__n <= 0)
+      .           	return __first;
+      .           
+      .                 __glibcxx_requires_can_increment(__first, __n);
+      .           
+     42 ( 0.00%)        std::__fill_a(__first, __first + __n, __value);
+      .                 return __first + __n;
+      .               }
+      .           
+      .             /**
+      .              *  @brief Fills the range [first,first+n) with copies of value.
+      .              *  @ingroup mutating_algorithms
+      .              *  @param  __first  An output iterator.
+      .              *  @param  __n      The count of copies to perform.
+-- line 1156 ----------------------------------------
+-- line 1547 ----------------------------------------
+      .           
+      .             /// This is a helper function for the sort routines and for random.tcc.
+      .             //  Precondition: __n > 0.
+      .             template<typename _Tp>
+      .               inline _GLIBCXX_CONSTEXPR _Tp
+      .               __lg(_Tp __n)
+      .               {
+      .           #if __cplusplus >= 201402L
+ 24,600 ( 0.01%)        return std::__bit_width(make_unsigned_t<_Tp>(__n)) - 1;
+      .           #else
+      .           #pragma GCC diagnostic push
+      .           #pragma GCC diagnostic ignored "-Wlong-long"
+      .                 // Use +__n so it promotes to at least int.
+      .                 return (sizeof(+__n) * __CHAR_BIT__ - 1)
+      .           	       - (sizeof(+__n) == sizeof(long long)
+      .           		    ? __builtin_clzll(+__n)
+      .           		    : (sizeof(+__n) == sizeof(long)
+-- line 1563 ----------------------------------------
+-- line 2087 ----------------------------------------
+      .           
+      .             // Implementation of std::find_if, also used in std::remove_if and others.
+      .             template<typename _Iterator, typename _Predicate>
+      .               _GLIBCXX20_CONSTEXPR
+      .               inline _Iterator
+      .               __find_if(_Iterator __first, _Iterator __last, _Predicate __pred)
+      .               {
+      .           #pragma GCC unroll 4
+ 15,790 ( 0.00%)        while (__first != __last && !__pred(__first))
+      .           	++__first;
+      .                 return __first;
+      .               }
+      .           
+      .             template<typename _InputIterator, typename _Predicate>
+      .               _GLIBCXX20_CONSTEXPR
+      .               typename iterator_traits<_InputIterator>::difference_type
+      .               __count_if(_InputIterator __first, _InputIterator __last, _Predicate __pred)
+-- line 2103 ----------------------------------------
+-- line 2111 ----------------------------------------
+      .           
+      .             template<typename _ForwardIterator, typename _Predicate>
+      .               _GLIBCXX20_CONSTEXPR
+      .               _ForwardIterator
+      .               __remove_if(_ForwardIterator __first, _ForwardIterator __last,
+      .           		_Predicate __pred)
+      .               {
+      .                 __first = std::__find_if(__first, __last, __pred);
+     34 ( 0.00%)        if (__first == __last)
+      .           	return __first;
+      .                 _ForwardIterator __result = __first;
+      .                 ++__first;
+ 31,399 ( 0.01%)        for (; __first != __last; ++__first)
+ 20,926 ( 0.01%)  	if (!__pred(__first))
+      .           	  {
+ 83,536 ( 0.02%)  	    *__result = _GLIBCXX_MOVE(*__first);
+      .           	    ++__result;
+      .           	  }
+      .                 return __result;
+      .               }
+      .           
+      .             template<typename _ForwardIterator1, typename _ForwardIterator2,
+      .           	   typename _BinaryPredicate>
+      .               _GLIBCXX20_CONSTEXPR
+-- line 2134 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/15/bits/ranges_algo.h
+--------------------------------------------------------------------------------
+Ir               
+
+-- line 622 ----------------------------------------
+      .               template<input_iterator _Iter, sentinel_for<_Iter> _Sent,
+      .           	     weakly_incrementable _Out, typename _Proj = identity,
+      .           	     indirect_unary_predicate<projected<_Iter, _Proj>> _Pred>
+      .                 requires indirectly_copyable<_Iter, _Out>
+      .                 constexpr copy_if_result<_Iter, _Out>
+      .                 operator()(_Iter __first, _Sent __last, _Out __result,
+      .           		 _Pred __pred, _Proj __proj = {}) const
+      .                 {
+907,162 ( 0.25%)  	for (; __first != __last; ++__first)
+132,744 ( 0.04%)  	  if (std::__invoke(__pred, std::__invoke(__proj, *__first)))
+      .           	    {
+      .           	      *__result = *__first;
+      .           	      ++__result;
+      .           	    }
+      .           	return {std::move(__first), std::move(__result)};
+      .                 }
+      .           
+      .               template<input_range _Range, weakly_incrementable _Out,
+-- line 639 ----------------------------------------
+-- line 721 ----------------------------------------
+      .           	     copy_constructible _Fp, typename _Proj = identity>
+      .                 requires indirectly_writable<_Out,
+      .           				   indirect_result_t<_Fp&,
+      .           				     projected<_Iter, _Proj>>>
+      .                 constexpr unary_transform_result<_Iter, _Out>
+      .                 operator()(_Iter __first1, _Sent __last1, _Out __result,
+      .           		 _Fp __op, _Proj __proj = {}) const
+      .                 {
+144,417 ( 0.04%)  	for (; __first1 != __last1; ++__first1, (void)++__result)
+      .           	  *__result = std::__invoke(__op, std::__invoke(__proj, *__first1));
+      .           	return {std::move(__first1), std::move(__result)};
+      .                 }
+      .           
+      .               template<input_range _Range, weakly_incrementable _Out,
+      .           	     copy_constructible _Fp, typename _Proj = identity>
+      .                 requires indirectly_writable<_Out,
+      .           				   indirect_result_t<_Fp&,
+-- line 737 ----------------------------------------
+-- line 2953 ----------------------------------------
+      .                 requires indirectly_copyable_storable<iterator_t<_Range>,
+      .           					    range_value_t<_Range>*>
+      .                 constexpr range_value_t<_Range>
+      .                 operator()(_Range&& __r, _Comp __comp = {}, _Proj __proj = {}) const
+      .                 {
+      .           	auto __first = ranges::begin(__r);
+      .           	auto __last = ranges::end(__r);
+      .           	__glibcxx_assert(__first != __last);
+     21 ( 0.00%)  	auto __result = *__first;
+ 41,295 ( 0.01%)  	while (++__first != __last)
+      .           	  {
+      .           	    auto&& __tmp = *__first;
+      .           	    if (std::__invoke(__comp,
+      .           			      std::__invoke(__proj, __result),
+      .           			      std::__invoke(__proj, __tmp)))
+      .           	      __result = std::forward<decltype(__tmp)>(__tmp);
+      .           	  }
+      .           	return __result;
+-- line 2970 ----------------------------------------
+-- line 3057 ----------------------------------------
+      .                 requires indirectly_copyable_storable<iterator_t<_Range>, range_value_t<_Range>*>
+      .                 constexpr minmax_result<range_value_t<_Range>>
+      .                 operator()(_Range&& __r, _Comp __comp = {}, _Proj __proj = {}) const
+      .                 {
+      .           	auto __first = ranges::begin(__r);
+      .           	auto __last = ranges::end(__r);
+      .           	__glibcxx_assert(__first != __last);
+      .           	auto __comp_proj = __detail::__make_comp_proj(__comp, __proj);
+    105 ( 0.00%)  	minmax_result<range_value_t<_Range>> __result = {*__first, __result.min};
+     42 ( 0.00%)  	if (++__first == __last)
+      .           	  return __result;
+      .           	else
+      .           	  {
+      .           	    // At this point __result.min == __result.max, so a single
+      .           	    // comparison with the next element suffices.
+      .           	    auto&& __val = *__first;
+     84 ( 0.00%)  	    if (__comp_proj(__val, __result.min))
+    105 ( 0.00%)  	      __result.min = std::forward<decltype(__val)>(__val);
+      .           	    else
+     84 ( 0.00%)  	      __result.max = std::forward<decltype(__val)>(__val);
+      .           	  }
+ 82,478 ( 0.02%)  	while (++__first != __last)
+      .           	  {
+      .           	    // Now process two elements at a time so that we perform at most
+      .           	    // 1 + 3*(N-2)/2 comparisons in total (each of the (N-2)/2
+      .           	    // iterations of this loop performs three comparisons).
+ 20,586 ( 0.01%)  	    range_value_t<_Range> __val1 = *__first;
+ 41,172 ( 0.01%)  	    if (++__first == __last)
+      .           	      {
+      .           		// N is odd; in this final iteration, we perform at most two
+      .           		// comparisons, for a total of 1 + 3*(N-3)/2 + 2 comparisons,
+      .           		// which is not more than 3*N/2, as required.
+     48 ( 0.00%)  		if (__comp_proj(__val1, __result.min))
+      .           		  __result.min = std::move(__val1);
+    144 ( 0.00%)  		else if (!__comp_proj(__val1, __result.max))
+      .           		  __result.max = std::move(__val1);
+      .           		break;
+      .           	      }
+      .           	    auto&& __val2 = *__first;
+ 41,124 ( 0.01%)  	    if (!__comp_proj(__val2, __val1))
+      .           	      {
+ 20,574 ( 0.01%)  		if (__comp_proj(__val1, __result.min))
+    206 ( 0.00%)  		  __result.min = std::move(__val1);
+ 20,574 ( 0.01%)  		if (!__comp_proj(__val2, __result.max))
+    318 ( 0.00%)  		  __result.max = std::forward<decltype(__val2)>(__val2);
+      .           	      }
+      .           	    else
+      .           	      {
+ 20,550 ( 0.01%)  		if (__comp_proj(__val2, __result.min))
+    190 ( 0.00%)  		  __result.min = std::forward<decltype(__val2)>(__val2);
+ 20,690 ( 0.01%)  		if (!__comp_proj(__val1, __result.max))
+      .           		  __result.max = std::move(__val1);
+      .           	      }
+      .           	  }
+      .           	return __result;
+      .                 }
+      .           
+      .               template<copyable _Tp, typename _Proj = identity,
+      .           	     indirect_strict_weak_order<projected<const _Tp*, _Proj>>
+-- line 3115 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/15/bits/stl_algo.h
+--------------------------------------------------------------------------------
+Ir              
+
+-- line 1750 ----------------------------------------
+     .               void
+     .               __unguarded_linear_insert(_RandomAccessIterator __last,
+     .           			      _Compare __comp)
+     .               {
+     .                 typename iterator_traits<_RandomAccessIterator>::value_type
+     .           	__val = _GLIBCXX_MOVE(*__last);
+     .                 _RandomAccessIterator __next = __last;
+     .                 --__next;
+17,748 ( 0.00%)        while (__comp(__val, __next))
+     .           	{
+ 2,035 ( 0.00%)  	  *__last = _GLIBCXX_MOVE(*__next);
+     .           	  __last = __next;
+     .           	  --__next;
+     .           	}
+13,678 ( 0.00%)        *__last = _GLIBCXX_MOVE(__val);
+     .               }
+     .           
+     .             /// This is a helper function for the sort routine.
+     .             template<typename _RandomAccessIterator, typename _Compare>
+     .               _GLIBCXX20_CONSTEXPR
+     .               void
+     .               __insertion_sort(_RandomAccessIterator __first,
+     .           		     _RandomAccessIterator __last, _Compare __comp)
+     .               {
+     .                 if (__first == __last) return;
+     .           
+62,300 ( 0.02%)        for (_RandomAccessIterator __i = __first + 1; __i != __last; ++__i)
+     .           	{
+21,156 ( 0.01%)  	  if (__comp(__i, __first))
+     .           	    {
+     .           	      typename iterator_traits<_RandomAccessIterator>::value_type
+     .           		__val = _GLIBCXX_MOVE(*__i);
+     .           	      _GLIBCXX_MOVE_BACKWARD3(__first, __i, __i + 1);
+ 3,739 ( 0.00%)  	      *__first = _GLIBCXX_MOVE(__val);
+     .           	    }
+     .           	  else
+     .           	    std::__unguarded_linear_insert(__i,
+     .           				__gnu_cxx::__ops::__val_comp_iter(__comp));
+     .           	}
+     .               }
+     .           
+     .             /// This is a helper function for the sort routine.
+-- line 1791 ----------------------------------------
+-- line 1808 ----------------------------------------
+     .           
+     .             /// This is a helper function for the sort routine.
+     .             template<typename _RandomAccessIterator, typename _Compare>
+     .               _GLIBCXX20_CONSTEXPR
+     .               void
+     .               __final_insertion_sort(_RandomAccessIterator __first,
+     .           			   _RandomAccessIterator __last, _Compare __comp)
+     .               {
+24,600 ( 0.01%)        if (__last - __first > int(_S_threshold))
+     .           	{
+     .           	  std::__insertion_sort(__first, __first + int(_S_threshold), __comp);
+     .           	  std::__unguarded_insertion_sort(__first + int(_S_threshold), __last,
+     .           					  __comp);
+     .           	}
+     .                 else
+     .           	std::__insertion_sort(__first, __last, __comp);
+     .               }
+-- line 1824 ----------------------------------------
+-- line 1869 ----------------------------------------
+     .                 std::__heap_select(__first, __middle, __last, __comp);
+     .                 std::__sort_heap(__first, __middle, __comp);
+     .               }
+     .           
+     .             /// This is a helper function for the sort routine.
+     .             template<typename _RandomAccessIterator, typename _Size, typename _Compare>
+     .               _GLIBCXX20_CONSTEXPR
+     .               void
+12,300 ( 0.00%)      __introsort_loop(_RandomAccessIterator __first,
+     .           		     _RandomAccessIterator __last,
+     .           		     _Size __depth_limit, _Compare __comp)
+     .               {
+24,600 ( 0.01%)        while (__last - __first > int(_S_threshold))
+     .           	{
+     .           	  if (__depth_limit == 0)
+     .           	    {
+     .           	      std::__partial_sort(__first, __last, __last, __comp);
+     .           	      return;
+     .           	    }
+     .           	  --__depth_limit;
+     .           	  _RandomAccessIterator __cut =
+-- line 1889 ----------------------------------------
+-- line 1896 ----------------------------------------
+     .             // sort
+     .           
+     .             template<typename _RandomAccessIterator, typename _Compare>
+     .               _GLIBCXX20_CONSTEXPR
+     .               inline void
+     .               __sort(_RandomAccessIterator __first, _RandomAccessIterator __last,
+     .           	   _Compare __comp)
+     .               {
+41,232 ( 0.01%)        if (__first != __last)
+     .           	{
+73,800 ( 0.02%)  	  std::__introsort_loop(__first, __last,
+73,800 ( 0.02%)  => /usr/include/c++/15/bits/stl_algo.h:void std::__introsort_loop<__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<std::ranges::__detail::__make_comp_proj<std::ranges::less, std::identity>(std::ranges::less&, std::identity&)::{lambda(auto:1&&, auto:2&&)#1}> >(__gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long> > >, __gnu_cxx::__normal_iterator<unsigned long*, std::vector<unsigned long, std::allocator<unsigned long> > >, long, __gnu_cxx::__ops::_Iter_comp_iter<std::ranges::__detail::__make_comp_proj<std::ranges::less, std::identity>(std::ranges::less&, std::identity&)::{lambda(auto:1&&, auto:2&&)#1}>) (12,300x)
+     .           				std::__lg(__last - __first) * 2,
+     .           				__comp);
+     .           	  std::__final_insertion_sort(__first, __last, __comp);
+     .           	}
+     .               }
+     .           
+     .             template<typename _RandomAccessIterator, typename _Size, typename _Compare>
+     .               _GLIBCXX20_CONSTEXPR
+-- line 1914 ----------------------------------------
+-- line 5776 ----------------------------------------
+     .                 __glibcxx_requires_irreflexive_pred(__l.begin(), __l.end(), __comp);
+     .                 return *_GLIBCXX_STD_A::__min_element(__l.begin(), __l.end(),
+     .           	  __gnu_cxx::__ops::__iter_comp_iter(__comp));
+     .               }
+     .           
+     .             template<typename _Tp>
+     .               _GLIBCXX14_CONSTEXPR
+     .               inline _Tp
+    84 ( 0.00%)      max(initializer_list<_Tp> __l)
+     .               {
+     .                 __glibcxx_requires_irreflexive(__l.begin(), __l.end());
+     .                 return *_GLIBCXX_STD_A::__max_element(__l.begin(), __l.end(),
+     .           	  __gnu_cxx::__ops::__iter_less_iter());
+     .               }
+     .           
+     .             template<typename _Tp, typename _Compare>
+     .               _GLIBCXX14_CONSTEXPR
+-- line 5792 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: common/include/collision_rules.hpp
+--------------------------------------------------------------------------------
+Ir               
+
+      .           #ifndef COMMON_COLLISION_RULES_HPP
+      .           #define COMMON_COLLISION_RULES_HPP
+      .           
+      .           #include "particle_record.hpp"
+      .           #include "point.hpp"
+      .           #include <cmath>
+      .           namespace common{
+      .               [[nodiscard]] inline bool checkcollision(point p1,double r1,point p2, double r2){
+228,450 ( 0.06%)          return((r1+r2)>sqrt(((p1.x-p2.x)*(p1.x-p2.x))+((p1.y-p2.y)*(p1.y-p2.y))));
+      .           }
+      .           inline void merge_particles(particle_record & absorber, particle_record const & absorbed) {
+     60 ( 0.00%)    absorber.mass += absorbed.mass;
+     90 ( 0.00%)      absorber.vel.setx(absorber.vel.getx() + absorbed.vel.getx());
+      .               absorber.vel.sety(absorber.vel.gety() + absorbed.vel.gety());
+      .           }}
+      .           #endif
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/15/bits/stl_vector.h
+--------------------------------------------------------------------------------
+Ir                  
+
+-- line 98 ----------------------------------------
+         .                 struct _Vector_impl_data
+         .                 {
+         .           	pointer _M_start;
+         .           	pointer _M_finish;
+         .           	pointer _M_end_of_storage;
+         .           
+         .           	_GLIBCXX20_CONSTEXPR
+         .           	_Vector_impl_data() _GLIBCXX_NOEXCEPT
+       129 ( 0.00%)  	: _M_start(), _M_finish(), _M_end_of_storage()
+         .           	{ }
+         .           
+         .           #if __cplusplus >= 201103L
+         .           	_GLIBCXX20_CONSTEXPR
+         .           	_Vector_impl_data(_Vector_impl_data&& __x) noexcept
+         4 ( 0.00%)  	: _M_start(__x._M_start), _M_finish(__x._M_finish),
+         4 ( 0.00%)  	  _M_end_of_storage(__x._M_end_of_storage)
+         6 ( 0.00%)  	{ __x._M_start = __x._M_finish = __x._M_end_of_storage = pointer(); }
+         .           #endif
+         .           
+         .           	_GLIBCXX20_CONSTEXPR
+         .           	void
+         .           	_M_copy_data(_Vector_impl_data const& __x) _GLIBCXX_NOEXCEPT
+         .           	{
+        21 ( 0.00%)  	  _M_start = __x._M_start;
+        21 ( 0.00%)  	  _M_finish = __x._M_finish;
+         .           	  _M_end_of_storage = __x._M_end_of_storage;
+         .           	}
+         .           
+         .           	_GLIBCXX20_CONSTEXPR
+         .           	void
+         .           	_M_swap_data(_Vector_impl_data& __x) _GLIBCXX_NOEXCEPT
+         .           	{
+         .           	  // Do not use std::swap(_M_start, __x._M_start), etc as it loses
+-- line 130 ----------------------------------------
+-- line 368 ----------------------------------------
+         .                 : _M_impl(_Tp_alloc_type(__a), std::move(__x._M_impl))
+         .                 { }
+         .           #endif
+         .           
+         .                 _GLIBCXX20_CONSTEXPR
+         .                 ~_Vector_base() _GLIBCXX_NOEXCEPT
+         .                 {
+         .           	_M_deallocate(_M_impl._M_start,
+       341 ( 0.00%)  		      _M_impl._M_end_of_storage - _M_impl._M_start);
+         .                 }
+         .           
+         .               public:
+         .                 _Vector_impl _M_impl;
+         .           
+         .                 _GLIBCXX20_CONSTEXPR
+         .                 pointer
+         .                 _M_allocate(size_t __n)
+         .                 {
+         .           	typedef __gnu_cxx::__alloc_traits<_Tp_alloc_type> _Tr;
+        84 ( 0.00%)  	return __n != 0 ? _Tr::allocate(_M_impl, __n) : pointer();
+         .                 }
+         .           
+         .                 _GLIBCXX20_CONSTEXPR
+         .                 void
+         .                 _M_deallocate(pointer __p, size_t __n)
+         .                 {
+         .           	typedef __gnu_cxx::__alloc_traits<_Tp_alloc_type> _Tr;
+       360 ( 0.00%)  	if (__p)
+         .           	  _Tr::deallocate(_M_impl, __p, __n);
+         .                 }
+         .           
+         .               protected:
+         .           
+         .                 _GLIBCXX20_CONSTEXPR
+         .                 void
+         .                 _M_create_storage(size_t __n)
+         .                 {
+        60 ( 0.00%)  	this->_M_impl._M_start = this->_M_allocate(__n);
+         .           	this->_M_impl._M_finish = this->_M_impl._M_start;
+        61 ( 0.00%)  	this->_M_impl._M_end_of_storage = this->_M_impl._M_start + __n;
+         .                 }
+         .           
+         .           #if __glibcxx_containers_ranges // C++ >= 23
+         .                 // Called by insert_range, and indirectly by assign_range, append_range.
+         .                 // Initializes new elements in storage at __ptr and updates __ptr to
+         .                 // point after the last new element.
+         .                 // Provides strong exception safety guarantee.
+         .                 // Requires [ptr, ptr+distance(rg)) is a valid range.
+-- line 415 ----------------------------------------
+-- line 792 ----------------------------------------
+         .           
+         .                 /**
+         .                  *  The dtor only erases the elements, and note that if the
+         .                  *  elements themselves are pointers, the pointed-to memory is
+         .                  *  not touched in any way.  Managing the pointer is the user's
+         .                  *  responsibility.
+         .                  */
+         .                 _GLIBCXX20_CONSTEXPR
+         5 ( 0.00%)        ~vector() _GLIBCXX_NOEXCEPT
+         .                 {
+         2 ( 0.00%)  	std::_Destroy(this->_M_impl._M_start, this->_M_impl._M_finish,
+         .           		      _M_get_Tp_allocator());
+         .           	_GLIBCXX_ASAN_ANNOTATE_BEFORE_DEALLOC;
+         3 ( 0.00%)        }
+         .           
+         .                 /**
+         .                  *  @brief  %Vector assignment operator.
+         .                  *  @param  __x  A %vector of identical element and allocator types.
+         .                  *
+         .                  *  All the elements of @a __x are copied, but any unused capacity in
+         .                  *  @a __x will not be copied.
+         .                  *
+-- line 813 ----------------------------------------
+-- line 1109 ----------------------------------------
+         .                 crend() const noexcept
+         .                 { return const_reverse_iterator(begin()); }
+         .           #endif
+         .           
+         .                 // [23.2.4.2] capacity
+         .                 /**  Returns the number of elements in the %vector.  */
+         .                 _GLIBCXX_NODISCARD _GLIBCXX20_CONSTEXPR
+         .                 size_type
+    39,261 ( 0.01%)        size() const _GLIBCXX_NOEXCEPT
+         .                 {
+   957,511 ( 0.27%)  	ptrdiff_t __dif = this->_M_impl._M_finish - this->_M_impl._M_start;
+         .           	if (__dif < 0)
+         .           	   __builtin_unreachable ();
+       124 ( 0.00%)  	return size_type(__dif);
+         .                 }
+         .           
+         .                 /**  Returns the size() of the largest possible %vector.  */
+         .                 _GLIBCXX_NODISCARD _GLIBCXX20_CONSTEXPR
+         .                 size_type
+         .                 max_size() const _GLIBCXX_NOEXCEPT
+         .                 { return _S_max_size(_M_get_Tp_allocator()); }
+         .           
+-- line 1130 ----------------------------------------
+-- line 1256 ----------------------------------------
+         .                  *  out_of_range lookups are not defined. (For checked lookups
+         .                  *  see at().)
+         .                  */
+         .                 _GLIBCXX_NODISCARD _GLIBCXX20_CONSTEXPR
+         .                 reference
+         .                 operator[](size_type __n) _GLIBCXX_NOEXCEPT
+         .                 {
+         .           	__glibcxx_requires_subscript(__n);
+   140,138 ( 0.04%)  	return *(this->_M_impl._M_start + __n);
+         .                 }
+         .           
+         .                 /**
+         .                  *  @brief  Subscript access to the data contained in the %vector.
+         .                  *  @param __n The index of the element for which data should be
+         .                  *  accessed.
+         .                  *  @return  Read-only (constant) reference to data.
+         .                  *
+-- line 1272 ----------------------------------------
+-- line 1275 ----------------------------------------
+         .                  *  out_of_range lookups are not defined. (For checked lookups
+         .                  *  see at().)
+         .                  */
+         .                 _GLIBCXX_NODISCARD _GLIBCXX20_CONSTEXPR
+         .                 const_reference
+         .                 operator[](size_type __n) const _GLIBCXX_NOEXCEPT
+         .                 {
+         .           	__glibcxx_requires_subscript(__n);
+         3 ( 0.00%)  	return *(this->_M_impl._M_start + __n);
+         .                 }
+         .           
+         .               protected:
+         .                 /// Safety check used only from at().
+         .                 _GLIBCXX20_CONSTEXPR
+         .                 void
+         .                 _M_range_check(size_type __n) const
+         .                 {
+20,329,370 ( 5.66%)  	if (__n >= this->size())
+         .           	  __throw_out_of_range_fmt(__N("vector::_M_range_check: __n "
+         .           				       "(which is %zu) >= this->size() "
+         .           				       "(which is %zu)"),
+         .           				   __n, this->size());
+         .                 }
+         .           
+         .               public:
+         .                 /**
+-- line 1300 ----------------------------------------
+-- line 1393 ----------------------------------------
+         .                 _GLIBCXX_NODISCARD _GLIBCXX20_CONSTEXPR
+         .                 _Tp*
+         .                 data() _GLIBCXX_NOEXCEPT
+         .                 { return _M_data_ptr(this->_M_impl._M_start); }
+         .           
+         .                 _GLIBCXX_NODISCARD _GLIBCXX20_CONSTEXPR
+         .                 const _Tp*
+         .                 data() const _GLIBCXX_NOEXCEPT
+   182,303 ( 0.05%)        { return _M_data_ptr(this->_M_impl._M_start); }
+         .           
+         .                 // [23.2.4.3] modifiers
+         .                 /**
+         .                  *  @brief  Add data to the end of the %vector.
+         .                  *  @param  __x  Data to be added.
+         .                  *
+         .                  *  This is a typical stack operation.  The function creates an
+         .                  *  element at the end of the %vector and assigns the given data
+-- line 1409 ----------------------------------------
+-- line 1410 ----------------------------------------
+         .                  *  to it.  Due to the nature of a %vector this operation can be
+         .                  *  done in constant time if the %vector has preallocated space
+         .                  *  available.
+         .                  */
+         .                 _GLIBCXX20_CONSTEXPR
+         .                 void
+         .                 push_back(const value_type& __x)
+         .                 {
+   137,714 ( 0.04%)  	if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
+         .           	  {
+         .           	    _GLIBCXX_ASAN_ANNOTATE_GROW(1);
+         .           	    _Alloc_traits::construct(this->_M_impl, this->_M_impl._M_finish,
+         .           				     __x);
+    69,153 ( 0.02%)  	    ++this->_M_impl._M_finish;
+         .           	    _GLIBCXX_ASAN_ANNOTATE_GREW(1);
+         .           	  }
+         .           	else
+         .           	  _M_realloc_append(__x);
+         .                 }
+         .           
+         .           #if __cplusplus >= 201103L
+         .                 _GLIBCXX20_CONSTEXPR
+-- line 1431 ----------------------------------------
+-- line 1856 ----------------------------------------
+         .                  *  Erases all the elements.  Note that this function only erases the
+         .                  *  elements, and that if the elements themselves are pointers, the
+         .                  *  pointed-to memory is not touched in any way.  Managing the pointer is
+         .                  *  the user's responsibility.
+         .                  */
+         .                 _GLIBCXX20_CONSTEXPR
+         .                 void
+         .                 clear() _GLIBCXX_NOEXCEPT
+    20,616 ( 0.01%)        { _M_erase_at_end(this->_M_impl._M_start); }
+         .           
+         .               private:
+         .                 // RAII guard for allocated storage.
+         .                 struct _Guard_alloc
+         .                 {
+         .           	pointer _M_storage;	    // Storage to deallocate
+         .           	size_type _M_len;
+         .           	_Base& _M_vect;
+-- line 1872 ----------------------------------------
+-- line 1874 ----------------------------------------
+         .           	_GLIBCXX20_CONSTEXPR
+         .           	_Guard_alloc(pointer __s, size_type __l, _Base& __vect)
+         .           	: _M_storage(__s), _M_len(__l), _M_vect(__vect)
+         .           	{ }
+         .           
+         .           	_GLIBCXX20_CONSTEXPR
+         .           	~_Guard_alloc()
+         .           	{
+       190 ( 0.00%)  	  if (_M_storage)
+         .           	    _M_vect._M_deallocate(_M_storage, _M_len);
+         .           	}
+         .           
+         .           	_GLIBCXX20_CONSTEXPR
+         .           	pointer
+         .           	_M_release()
+         .           	{
+         .           	  pointer __res = _M_storage;
+-- line 1890 ----------------------------------------
+-- line 1978 ----------------------------------------
+         .                 template<typename _Iterator, typename _Sentinel>
+         .           	_GLIBCXX20_CONSTEXPR
+         .           	void
+         .           	_M_range_initialize_n(_Iterator __first, _Sentinel __last,
+         .           			      size_type __n)
+         .           	{
+         .           	  pointer __start =
+         .           	    this->_M_allocate(_S_check_init_len(__n, _M_get_Tp_allocator()));
+         3 ( 0.00%)  	  this->_M_impl._M_start = this->_M_impl._M_finish = __start;
+         2 ( 0.00%)  	  this->_M_impl._M_end_of_storage = __start + __n;
+         .           	  this->_M_impl._M_finish
+         1 ( 0.00%)  	      = std::__uninitialized_copy_a(_GLIBCXX_MOVE(__first), __last,
+         .           					    __start, _M_get_Tp_allocator());
+         .           	}
+         .           
+         .                 // Called by the first initialize_dispatch above and by the
+         .                 // vector(n,value,a) constructor.
+         .                 _GLIBCXX20_CONSTEXPR
+         .                 void
+         .                 _M_fill_initialize(size_type __n, const value_type& __value)
+         .                 {
+        20 ( 0.00%)  	this->_M_impl._M_finish =
+         .           	  std::__uninitialized_fill_n_a(this->_M_impl._M_start, __n, __value,
+         .           					_M_get_Tp_allocator());
+         .                 }
+         .           
+         .           #if __cplusplus >= 201103L
+         .                 // Called by the vector(n) constructor.
+         .                 _GLIBCXX20_CONSTEXPR
+         .                 void
+-- line 2007 ----------------------------------------
+-- line 2196 ----------------------------------------
+         .                 { return _M_insert_rval(__position, std::move(__v)); }
+         .           #endif
+         .           
+         .                 // Called by _M_fill_insert, _M_insert_aux etc.
+         .                 _GLIBCXX20_CONSTEXPR
+         .                 size_type
+         .                 _M_check_len(size_type __n, const char* __s) const
+         .                 {
+       348 ( 0.00%)  	if (max_size() - size() < __n)
+         .           	  __throw_length_error(__N(__s));
+         .           
+       179 ( 0.00%)  	const size_type __len = size() + (std::max)(size(), __n);
+       285 ( 0.00%)  	return (__len < size() || __len > max_size()) ? max_size() : __len;
+         .                 }
+         .           
+         .                 // Called by constructors to check initial size.
+         .                 static _GLIBCXX20_CONSTEXPR size_type
+         .                 _S_check_init_len(size_type __n, const allocator_type& __a)
+         .                 {
+       129 ( 0.00%)  	if (__n > _S_max_size(_Tp_alloc_type(__a)))
+         .           	  __throw_length_error(
+         .           	      __N("cannot create std::vector larger than max_size()"));
+         .           	return __n;
+         .                 }
+         .           
+         .                 static _GLIBCXX20_CONSTEXPR size_type
+         .                 _S_max_size(const _Tp_alloc_type& __a) _GLIBCXX_NOEXCEPT
+         .                 {
+-- line 2223 ----------------------------------------
+-- line 2233 ----------------------------------------
+         .                 // Internal erase functions follow.
+         .           
+         .                 // Called by erase(q1,q2), clear(), resize(), _M_fill_assign,
+         .                 // _M_assign_aux.
+         .                 _GLIBCXX20_CONSTEXPR
+         .                 void
+         .                 _M_erase_at_end(pointer __pos) _GLIBCXX_NOEXCEPT
+         .                 {
+    41,232 ( 0.01%)  	if (size_type __n = this->_M_impl._M_finish - __pos)
+         .           	  {
+         .           	    std::_Destroy(__pos, this->_M_impl._M_finish,
+         .           			  _M_get_Tp_allocator());
+    12,317 ( 0.00%)  	    this->_M_impl._M_finish = __pos;
+         .           	    _GLIBCXX_ASAN_ANNOTATE_SHRINK(__n);
+         .           	  }
+         .                 }
+         .           
+         .                 _GLIBCXX20_CONSTEXPR
+         .                 iterator
+         .                 _M_erase(iterator __position);
+         .           
+-- line 2253 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: aos/src/collisions.cpp
+--------------------------------------------------------------------------------
+Ir               
+
+-- line 11 ----------------------------------------
+      .           namespace aos {
+      .           
+      .             namespace {
+      .           
+      .               // Merges an overlapping pair: the heavier particle absorbs the other; ties go to the larger
+      .               // radius, then to the lower id. The absorbed one is marked with mass 0.
+      .               void merge_pair(particle & first, particle & second) {
+      .                 bool const second_wins =
+     96 ( 0.00%)            second.mass > first.mass or
+      .                     (second.mass == first.mass and
+      .                      (second.radius > first.radius or
+      .                       (second.radius == first.radius and second.id < first.id)));
+      .                 if (second_wins) {
+      .                   common::merge_particles(second, first);
+     36 ( 0.00%)          first.mass = 0.0;
+      .                 } else {
+      .                   common::merge_particles(first, second);
+     12 ( 0.00%)          second.mass = 0.0;
+      .                 }
+      .               }
+      .           
+      .             }  // namespace
+      .           
+      .             // Merges every overlapping pair in one pass, checking pairs in index (= id) order.
+      .             // An absorbed particle is marked with mass 0 and skipped; all of them are erased once at the end.
+      .             // Same result as restarting the scan after every merge: a merge never moves the survivor or
+      .             // changes its radius, so every pair checked earlier still does not overlap.
+      .             // Only the pairs the grid finds near each other are checked; nothing moves during the pass, so
+      .             // one grid is valid for all of it.
+    168 ( 0.00%)    void particle_system::process_collisions() {
+     42 ( 0.00%)      if (particles_.size() < 2) { return; }
+      .               std::vector<common::point> centres;
+      .               centres.reserve(particles_.size());
+      .               std::ranges::transform(particles_, std::back_inserter(centres), &particle::pos);
+      .               double const max_radius = std::ranges::max(particles_, {}, &particle::radius).radius;
+    105 ( 0.00%)      common::collision_grid const grid{centres, max_radius};
+3,317,394 ( 0.92%)  => /home/alumnos/a0616912/project-1/2d-gravity-simulator/common/src/collision_grid.cpp:common::collision_grid::collision_grid(std::span<common::point const, 18446744073709551615ul>, double) (21x)
+      .           
+     63 ( 0.00%)      std::vector<std::size_t> later;
+     21 ( 0.00%)      bool any_merged = false;
+ 61,932 ( 0.02%)      for (std::size_t i = 0; i < particles_.size(); ++i) {
+ 82,506 ( 0.02%)        grid.later_neighbours(i, later);  // ascending, so the same order as checking every j > i
+9,669,662 ( 2.69%)  => /home/alumnos/a0616912/project-1/2d-gravity-simulator/common/src/collision_grid.cpp:common::collision_grid::later_neighbours(unsigned long, std::vector<unsigned long, std::allocator<unsigned long> >&) const (20,616x)
+153,303 ( 0.04%)        for (std::size_t const j : later) {
+      .                   particle & first  = particles_.at(i);
+      .                   particle & second = particles_.at(j);
+ 68,616 ( 0.02%)          if (first.mass <= 0.0) { break; }  // first is gone: the rest of its row is skipped
+114,273 ( 0.03%)          if (second.mass <= 0.0 or
+ 45,690 ( 0.01%)              !common::checkcollision(first.pos, first.radius, second.pos, second.radius)) {
+      .                     continue;
+      .                   }
+      .                   merge_pair(first, second);
+     30 ( 0.00%)          any_merged = true;
+      .                 }
+      .               }
+     42 ( 0.00%)      if (any_merged) {
+      .                 std::erase_if(particles_, [](particle const & p) { return p.mass <= 0.0; });
+      .               }
+    147 ( 0.00%)    }
+      .           
+      .           }  // namespace aos
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: common/include/vector.hpp
+--------------------------------------------------------------------------------
+Ir                  
+
+-- line 9 ----------------------------------------
+         .                   public:
+         .                    double x;
+         .                   double y;
+         .                   constexpr vec2d(double x_val=0,double y_val=0):
+         .                       x(x_val), y(y_val){
+         .           
+         .                   }
+         .           
+    23,532 ( 0.01%)          [[nodiscard]] constexpr double getx() const noexcept{return x;}
+     3,910 ( 0.00%)          [[nodiscard]] constexpr double gety() const noexcept{return y;}
+         .                   [[nodiscard]]  double norm2d() const noexcept {return std::sqrt(x*x+y*y);}
+         .           
+         .                   constexpr vec2d& setx(double newX) noexcept {
+    78,540 ( 0.02%)          x = newX;
+         .                   return *this;}
+         .           
+         .                   constexpr vec2d& sety(double newY) noexcept {
+        34 ( 0.00%)          y = newY;
+         .                   return *this;
+         .               }
+         .           
+         .           
+         .               };
+         .           
+         .           [[nodiscard]] constexpr vec2d operator-(point const & a, point const & b) noexcept{
+28,848,783 ( 8.03%)      return vec2d{a.getx()-b.getx(),a.gety()-b.gety()};
+         .           }
+         .           [[nodiscard]] constexpr point operator+(point const & a, vec2d const & v) noexcept{
+         .               return point{a.getx()+v.getx(),a.gety()+v.gety()};
+         .           }
+         .           [[nodiscard]] constexpr vec2d operator+(vec2d const & a, vec2d const & b) noexcept{
+         .               return vec2d{a.getx()+b.getx(),a.gety()+b.gety()};
+         .           }
+         .           [[nodiscard]] constexpr vec2d operator*(vec2d const & a, double b) noexcept{
+19,232,522 ( 5.36%)      return vec2d{a.getx()*b,a.gety()*b};
+         .           }
+         .           [[nodiscard]] constexpr vec2d operator*(double b, vec2d const & a ) noexcept{
+         .               return vec2d{a.getx()*b,a.gety()*b};
+         .           }
+         .           
+         .           }
+         .           
+         .           #endif
+-- line 51 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/15/bits/basic_string.tcc
+--------------------------------------------------------------------------------
+Ir              
+
+-- line 140 ----------------------------------------
+     .             template<typename _CharT, typename _Traits, typename _Alloc>
+     .               _GLIBCXX20_CONSTEXPR
+     .               typename basic_string<_CharT, _Traits, _Alloc>::pointer
+     .               basic_string<_CharT, _Traits, _Alloc>::
+     .               _M_create(size_type& __capacity, size_type __old_capacity)
+     .               {
+     .                 // _GLIBCXX_RESOLVE_LIB_DEFECTS
+     .                 // 83.  String::npos vs. string::max_size()
+ 5,877 ( 0.00%)        if (__capacity > max_size())
+     .           	std::__throw_length_error(__N("basic_string::_M_create"));
+     .           
+     .                 // The below implements an exponential growth policy, necessary to
+     .                 // meet amortized linear time requirements of the library: see
+     .                 // http://gcc.gnu.org/ml/libstdc++/2001-07/msg00085.html.
+ 5,881 ( 0.00%)        if (__capacity > __old_capacity && __capacity < 2 * __old_capacity)
+     .           	{
+     3 ( 0.00%)  	  __capacity = 2 * __old_capacity;
+     .           	  // Never allocate a string bigger than max_size.
+     2 ( 0.00%)  	  if (__capacity > max_size())
+ 5,877 ( 0.00%)  	    __capacity = max_size();
+     .           	}
+     .           
+     .                 // NB: Need an array of char_type[__capacity], plus a terminating
+     .                 // null char_type() element.
+ 4,962 ( 0.00%)        return _S_allocate(_M_get_allocator(), __capacity + 1);
+     .               }
+     .           
+     .             // NB: This is the special case for Input Iterators, used in
+     .             // istreambuf_iterators, etc.
+     .             // Input Iterators have a cost structure very different from
+     .             // pointers, calling for a different coding style.
+     .             template<typename _CharT, typename _Traits, typename _Alloc>
+     .               template<typename _InIterator>
+-- line 172 ----------------------------------------
+-- line 225 ----------------------------------------
+     .                 _GLIBCXX20_CONSTEXPR
+     .                 void
+     .                 basic_string<_CharT, _Traits, _Alloc>::
+     .                 _M_construct(_InIterator __beg, _InIterator __end,
+     .           		   std::forward_iterator_tag)
+     .                 {
+     .           	size_type __dnew = static_cast<size_type>(std::distance(__beg, __end));
+     .           
+ 2,016 ( 0.00%)  	if (__dnew > size_type(_S_local_capacity))
+     .           	  {
+     .           	    _M_data(_M_create(__dnew, size_type(0)));
+     .           	    _M_capacity(__dnew);
+     .           	  }
+     .           	else
+     .           	  _M_init_local_buf();
+     .           
+     .           	// Check for out_of_range and length_error exceptions.
+-- line 241 ----------------------------------------
+-- line 348 ----------------------------------------
+     .                 _M_dispose();
+     .                 _M_data(__tmp);
+     .                 _M_capacity(__res);
+     .               }
+     .           
+     .             template<typename _CharT, typename _Traits, typename _Alloc>
+     .               _GLIBCXX20_CONSTEXPR
+     .               void
+19,590 ( 0.01%)      basic_string<_CharT, _Traits, _Alloc>::
+     .               _M_mutate(size_type __pos, size_type __len1, const _CharT* __s,
+     .           	      size_type __len2)
+     .               {
+ 3,918 ( 0.00%)        const size_type __how_much = length() - __pos - __len1;
+     .           
+ 5,877 ( 0.00%)        size_type __new_capacity = length() + __len2 - __len1;
+     .                 pointer __r = _M_create(__new_capacity, capacity());
+     .           
+ 7,836 ( 0.00%)        if (__pos)
+     .           	this->_S_copy(__r, _M_data(), __pos);
+ 7,836 ( 0.00%)        if (__s && __len2)
+ 1,959 ( 0.00%)  	this->_S_copy(__r + __pos, __s, __len2);
+ 3,918 ( 0.00%)        if (__how_much)
+     .           	this->_S_copy(__r + __pos + __len2,
+     .           		      _M_data() + __pos + __len1, __how_much);
+     .           
+     .                 _M_dispose();
+     .                 _M_data(__r);
+     .                 _M_capacity(__new_capacity);
+15,672 ( 0.00%)      }
+     .           
+     .             template<typename _CharT, typename _Traits, typename _Alloc>
+     .               _GLIBCXX20_CONSTEXPR
+     .               void
+     .               basic_string<_CharT, _Traits, _Alloc>::
+     .               _M_erase(size_type __pos, size_type __n)
+     .               {
+     .                 const size_type __how_much = length() - __pos - __n;
+-- line 384 ----------------------------------------
+-- line 439 ----------------------------------------
+     .               }
+     .           
+     .             template<typename _CharT, typename _Traits, typename _Alloc>
+     .               _GLIBCXX20_CONSTEXPR
+     .               basic_string<_CharT, _Traits, _Alloc>&
+     .               basic_string<_CharT, _Traits, _Alloc>::
+     .               _M_append(const _CharT* __s, size_type __n)
+     .               {
+ 1,957 ( 0.00%)        const size_type __len = __n + this->size();
+     .           
+ 3,914 ( 0.00%)        if (__len <= this->capacity())
+     .           	{
+     .           	  if (__n)
+     .           	    this->_S_copy(this->_M_data() + this->size(), __s, __n);
+     .           	}
+     .                 else
+ 7,828 ( 0.00%)  	this->_M_mutate(this->size(), size_type(0), __s, __n);
+248,543 ( 0.07%)  => /usr/include/c++/15/bits/basic_string.tcc:std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_mutate(unsigned long, unsigned long, char const*, unsigned long) (1,957x)
+     .           
+     .                 this->_M_set_length(__len);
+     .                 return *this;
+     .               }
+     .           
+     .             template<typename _CharT, typename _Traits, typename _Alloc>
+     .               template<typename _InputIterator>
+     .                 _GLIBCXX20_CONSTEXPR
+-- line 463 ----------------------------------------
+
+--------------------------------------------------------------------------------
+The following files chosen for auto-annotation could not be found:
+--------------------------------------------------------------------------------
+  ./elf/../sysdeps/generic/dl-new-hash.h
+  ./elf/../sysdeps/x86_64/dl-machine.h
+  ./elf/./elf/dl-lookup.c
+  ./elf/./elf/dl-reloc.c
+  ./elf/./elf/do-rel.h
+  ./malloc/./malloc/malloc.c
+  ./stdlib/../sysdeps/ieee754/dbl-64/mpn2dbl.c
+  ./stdlib/../sysdeps/x86_64/lshift.S
+  ./stdlib/../sysdeps/x86_64/mul_1.S
+  ./stdlib/./stdlib/mul.c
+  ./stdlib/./stdlib/strtod_l.c
+  ./string/../sysdeps/x86_64/multiarch/../multiarch/strcmp-sse2.S
+  ./string/../sysdeps/x86_64/multiarch/memchr-avx2.S
+  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S
+  ./string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+  ./string/../sysdeps/x86_64/multiarch/strlen-avx2.S
+
+--------------------------------------------------------------------------------
+Ir                   
+--------------------------------------------------------------------------------
+329,123,778 (91.65%)  events annotated
+

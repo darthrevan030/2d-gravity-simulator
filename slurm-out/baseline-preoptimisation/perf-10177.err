@@ -1,0 +1,5 @@
+  scale_n    aos  n=6000   it=100   rep 1/5    83.243 s     712.50 J     8.56 W
+  scale_n    aos  n=6000   it=100   rep 2/5    83.251 s     717.64 J     8.62 W
+  scale_n    aos  n=6000   it=100   rep 3/5    83.250 s     715.15 J     8.59 W
+  scale_n    aos  n=6000   it=100   rep 4/5    83.228 s     713.88 J     8.58 W
+  scale_n    aos  n=6000   it=100   rep 5/5    83.304 s     712.93 J     8.56 W

@@ -1,0 +1,27 @@
+==61782== Cachegrind, a high-precision tracing profiler
+==61782== Copyright (C) 2002-2024, and GNU GPL'd, by Nicholas Nethercote et al.
+==61782== Using Valgrind-3.26.0 and LibVEX; rerun with -h for copyright info
+==61782== Command: /home/alumnos/a0616912/project-1/2d-gravity-simulator/out/build/default/aos/Release/grav-aos 20 1000 1000 0.25
+==61782== Parent PID: 61780
+==61782== 
+--61782-- warning: L3 cache found, using its data for the LL simulation.
+==61782== 
+==61782== I refs:        712,021,091
+==61782== I1  misses:         27,441
+==61782== LLi misses:          2,782
+==61782== I1  miss rate:        0.00%
+==61782== LLi miss rate:        0.00%
+==61782== 
+==61782== D refs:        179,886,120  (156,143,888 rd   + 23,742,232 wr)
+==61782== D1  misses:     13,692,046  ( 13,682,158 rd   +      9,888 wr)
+==61782== LLd misses:         11,810  (      8,380 rd   +      3,430 wr)
+==61782== D1  miss rate:         7.6% (        8.8%     +        0.0%  )
+==61782== LLd miss rate:         0.0% (        0.0%     +        0.0%  )
+==61782== 
+==61782== LL refs:        13,719,487  ( 13,709,599 rd   +      9,888 wr)
+==61782== LL misses:          14,592  (     11,162 rd   +      3,430 wr)
+==61782== LL miss rate:          0.0% (        0.0%     +        0.0%  )
+==61782== 
+==61782== Branches:       74,907,535  ( 74,599,001 cond +    308,534 ind)
+==61782== Mispredicts:       307,458  (    211,093 cond +     96,365 ind)
+==61782== Mispred rate:          0.4% (        0.3%     +       31.2%   )

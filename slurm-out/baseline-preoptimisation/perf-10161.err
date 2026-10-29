@@ -1,0 +1,5 @@
+  scale_n    aos  n=500    it=100   rep 1/5     0.328 s       2.25 J     6.85 W
+  scale_n    aos  n=500    it=100   rep 2/5     0.315 s       2.22 J     7.04 W
+  scale_n    aos  n=500    it=100   rep 3/5     0.819 s       3.13 J     3.82 W
+  scale_n    aos  n=500    it=100   rep 4/5     0.336 s       2.26 J     6.72 W
+  scale_n    aos  n=500    it=100   rep 5/5     0.298 s       2.22 J     7.44 W

@@ -1,0 +1,12 @@
+==80419== Callgrind, a call-graph generating cache profiler
+==80419== Copyright (C) 2002-2017, and GNU GPL'd, by Josef Weidendorfer et al.
+==80419== Using Valgrind-3.26.0 and LibVEX; rerun with -h for copyright info
+==80419== Command: /home/alumnos/a0616912/baseline-perf-check/out/build/default/soa/Release/grav-soa 20 1000 1000 0.25
+==80419== Parent PID: 80408
+==80419== 
+==80419== For interactive control, run 'callgrind_control -h'.
+==80419== 
+==80419== Events    : Ir
+==80419== Collected : 1002064677
+==80419== 
+==80419== I   refs:      1,002,064,677

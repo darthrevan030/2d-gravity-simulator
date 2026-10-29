@@ -1,0 +1,18 @@
+CMake Warning at cmake/TestUtils.cmake:145 (message):
+  gcovr not found.  Coverage targets for utcommon will not be available.
+Call Stack (most recent call first):
+  utcommon/CMakeLists.txt:17 (add_unit_test_target)
+
+
+CMake Warning at cmake/TestUtils.cmake:145 (message):
+  gcovr not found.  Coverage targets for utaos will not be available.
+Call Stack (most recent call first):
+  utaos/CMakeLists.txt:15 (add_unit_test_target)
+
+
+CMake Warning at cmake/TestUtils.cmake:145 (message):
+  gcovr not found.  Coverage targets for utsoa will not be available.
+Call Stack (most recent call first):
+  utsoa/CMakeLists.txt:17 (add_unit_test_target)
+
+

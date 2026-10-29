@@ -1,0 +1,12 @@
+==61791== Callgrind, a call-graph generating cache profiler
+==61791== Copyright (C) 2002-2017, and GNU GPL'd, by Josef Weidendorfer et al.
+==61791== Using Valgrind-3.26.0 and LibVEX; rerun with -h for copyright info
+==61791== Command: /home/alumnos/a0616912/project-1/2d-gravity-simulator/out/build/default/soa/Release/grav-soa 20 1000 1000 0.25
+==61791== Parent PID: 61780
+==61791== 
+==61791== For interactive control, run 'callgrind_control -h'.
+==61791== 
+==61791== Events    : Ir
+==61791== Collected : 1002064898
+==61791== 
+==61791== I   refs:      1,002,064,898

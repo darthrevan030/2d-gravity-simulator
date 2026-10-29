@@ -1,0 +1,5 @@
+  scale_iter soa  n=1000   it=1000  rep 1/5     2.785 s      24.32 J     8.73 W
+  scale_iter soa  n=1000   it=1000  rep 2/5     2.781 s      24.38 J     8.77 W
+  scale_iter soa  n=1000   it=1000  rep 3/5     2.808 s      24.43 J     8.70 W
+  scale_iter soa  n=1000   it=1000  rep 4/5     2.845 s      24.53 J     8.62 W
+  scale_iter soa  n=1000   it=1000  rep 5/5     2.801 s      24.41 J     8.71 W

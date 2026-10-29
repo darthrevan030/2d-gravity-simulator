@@ -1,0 +1,5 @@
+  reference  aos  n=10000  it=100   rep 1/5    16.452 s     150.85 J     9.17 W
+  reference  aos  n=10000  it=100   rep 2/5    17.077 s     152.24 J     8.92 W
+  reference  aos  n=10000  it=100   rep 3/5    16.435 s     151.90 J     9.24 W
+  reference  aos  n=10000  it=100   rep 4/5    16.417 s     151.89 J     9.25 W
+  reference  aos  n=10000  it=100   rep 5/5    16.443 s     151.83 J     9.23 W

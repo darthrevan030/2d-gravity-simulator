@@ -1,0 +1,5 @@
+tag,impl,scenario,n,iterations,reps,time_s,time_rsd_pct,energy_j,energy_rsd_pct,power_w,final_objects
+optimisation-1,aos,reference,1000,500,5,2.570332,0.46,21.8560,0.09,8.503,478
+optimisation-1,soa,reference,1000,500,5,2.138481,0.95,18.4000,0.27,8.604,478
+optimisation-1,aos,reference,10000,100,5,40.630173,0.01,349.0380,0.02,8.591,3623
+optimisation-1,soa,reference,10000,100,5,33.193010,0.03,300.1380,0.10,9.042,3623

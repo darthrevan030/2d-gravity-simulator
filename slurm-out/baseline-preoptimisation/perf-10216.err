@@ -1,0 +1,5 @@
+  scale_iter aos  n=1000   it=100   rep 1/5     1.090 s       8.68 J     7.96 W
+  scale_iter aos  n=1000   it=100   rep 2/5     1.109 s       8.72 J     7.86 W
+  scale_iter aos  n=1000   it=100   rep 3/5     1.091 s       8.67 J     7.95 W
+  scale_iter aos  n=1000   it=100   rep 4/5     1.144 s       8.75 J     7.65 W
+  scale_iter aos  n=1000   it=100   rep 5/5     1.082 s       8.63 J     7.98 W

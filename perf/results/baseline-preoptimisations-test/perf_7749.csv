@@ -1,0 +1,3 @@
+tag,impl,scenario,n,iterations,reps,time_s,time_rsd_pct,energy_j,energy_rsd_pct,power_w,final_objects
+run,aos,reference,1000,500,5,2.876829,0.18,23.0700,0.08,8.019,478
+run,soa,reference,1000,500,5,2.098148,0.35,18.1800,0.09,8.665,478

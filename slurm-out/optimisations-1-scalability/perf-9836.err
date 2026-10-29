@@ -1,0 +1,5 @@
+  scale_n    soa  n=2000   it=100   rep 1/5     2.760 s      25.06 J     9.08 W
+  scale_n    soa  n=2000   it=100   rep 2/5     2.795 s      25.24 J     9.03 W
+  scale_n    soa  n=2000   it=100   rep 3/5     2.770 s      25.16 J     9.08 W
+  scale_n    soa  n=2000   it=100   rep 4/5     2.776 s      24.97 J     9.00 W
+  scale_n    soa  n=2000   it=100   rep 5/5     2.779 s      25.06 J     9.02 W

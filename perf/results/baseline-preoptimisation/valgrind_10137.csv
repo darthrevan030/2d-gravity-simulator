@@ -1,0 +1,3 @@
+impl,cache,I1,D1,LL,iterations,I_refs,D_refs,D1_misses,D1_miss_rate_pct,LLd_misses,LL_miss_rate_pct,branches,mispredicts,mispred_rate_pct
+aos,host,"","","",20,775764392,151111794,13664779,9.0,11562,0.0,69102168,306243,0.4
+soa,host,"","","",20,1021563175,291909037,2879360,1.0,11837,0.0,127256535,326151,0.3
