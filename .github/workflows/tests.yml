@@ -23,8 +23,20 @@ jobs:
       - name: Configure
         run: cmake --preset default
 
+      # Warnings do not fail the build, but the statement allows none
       - name: Build
-        run: cmake --build --preset ${{ matrix.config }}
+        run: |
+          cmake --build --preset ${{ matrix.config }} 2>&1 | tee build.log
+          if grep -q 'warning:' build.log; then
+            echo '::error::compiler warnings found'
+            grep 'warning:' build.log
+            exit 1
+          fi
 
       - name: Test
         run: ctest --preset ${{ matrix.config }} --output-on-failure
+
+      # The real executables against the instructor's references, including the 10K case
+      - name: Functional tests
+        if: matrix.config == 'release'
+        run: scripts/ftest.sh --no-build --full
