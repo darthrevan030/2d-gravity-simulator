@@ -6,4 +6,3 @@ perf/
 !perf/results/**
 slurm-out/**
 *.zip
-out/**
