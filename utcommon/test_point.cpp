@@ -18,7 +18,7 @@ TEST(test_point, getters) {
 
 TEST(test_point, setters_chain) {
   common::point p;
-  common::point & ref = p.setx(3.0).sety(4.0);
+  const common::point & ref = p.setx(3.0).sety(4.0);
   EXPECT_EQ(&ref, &p);
   EXPECT_EQ(p.getx(), 3.0);
   EXPECT_EQ(p.gety(), 4.0);
@@ -37,7 +37,7 @@ TEST(test_point, constexpr_usable) {
     q.setx(1.0).sety(2.0);
     return q;
   }();
-  static_assert(p.getx() == 1.0 && p.gety() == 2.0);
+  static_assert(p.getx() == 1.0 and p.gety() == 2.0);
   SUCCEED();
 }
 
