@@ -1,6 +1,3 @@
-# grav-sim-template
-Template for gravity simulation project
-
 # 2D Gravity Simulator
 
 Sequential C++23 simulation of gravitationally interacting objects in a closed
@@ -31,6 +28,9 @@ cmake --build --preset release
 Other build presets: `debug`, `clang-tidy-debug` and `clang-tidy-release`
 (the last two need `cmake --preset clang-tidy` first and also run clang-tidy).
 
+The release build uses `-O3 -DNDEBUG -fno-math-errno -fassociative-math
+-fno-signed-zeros -fno-trapping-math` (see `CMakePresets.json`).
+
 ## Run
 
 ```bash
@@ -47,8 +47,26 @@ the current directory.
 ## Test
 
 ```bash
-ctest --preset release --output-on-failure
+scripts/utest.sh [release|debug]        # build + all unit tests (same as ctest --preset release)
+scripts/ftest.sh [--no-build] [--full]  # functional tests on the real executables
+scripts/check_coverage.sh [common|aos|soa]  # coverage report for one unit test target
 ```
+
+`ftest.sh` runs error cases, hand-made cases (`ftest/cases/`) and the instructor's
+reference cases (`ftest/reference/`), comparing outputs with `tools/compare.py`
+(values within 0.001). `--full` also runs the 10K reference case (about 1 minute).
+
+## Performance
+
+Time and energy are measured on the avignon cluster with slurm:
+
+```bash
+scripts/run_build_perf.sh --reps 3 --tag mytag   # build, then submit the perf jobs
+scripts/run_perf.sh --ref-only                   # perf jobs only (release build must exist)
+python3 tools/plot.py [perf_<jobid>.csv ...]     # plots (needs matplotlib)
+```
+
+Results are in `perf/results/`.
 
 ## Project layout
 
@@ -58,3 +76,7 @@ ctest --preset release --output-on-failure
 | `aos/`, `soa/` | the two implementations, each with its `main.cpp` |
 | `utcommon/`, `utaos/`, `utsoa/` | unit tests (GoogleTest) |
 | `input/` | example input files |
+| `ftest/` | functional test cases and reference outputs |
+| `scripts/` | build, test, coverage and cluster performance scripts |
+| `tools/` | output comparison (`compare.py`) and plotting (`plot.py`) |
+| `perf/` | performance results |
