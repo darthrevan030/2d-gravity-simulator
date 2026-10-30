@@ -2,81 +2,199 @@
 
 Sequential C++23 simulation of gravitationally interacting objects in a closed
 2D enclosure, for the Computer Architecture course at UC3M. There are two
-implementations of the same simulation:
+implementations of the same simulation, built from the same repository:
 
-- `grav-aos`: particles stored as an array of structures
-- `grav-soa`: particles stored as a structure of arrays
+| Executable | Particle storage |
+|---|---|
+| `grav-aos` | array of structures (one `particle` struct per object) |
+| `grav-soa` | structure of arrays (one vector per attribute) |
 
 The program is sequential. No threads or parallelism are used.
 
+## Quick start
+
+```bash
+CXX=g++-15 cmake --preset default      # configure (downloads GSL and GoogleTest)
+cmake --build --preset release         # builds grav-aos and grav-soa
+
+mkdir -p run/input && cp input/input1K.txt run/input/input.txt
+cd run
+../out/build/default/aos/Release/grav-aos 500 1000 1000 0.25
+../out/build/default/soa/Release/grav-soa 500 1000 1000 0.25
+```
+
+Run the programs from a directory that contains `input/input.txt`. They write
+`init_config.txt` and `final_config.txt` into that same directory.
+
 ## Requirements
 
-- g++-15
+- g++-15 (set `CXX=g++-15` if it is not your default compiler)
 - CMake 4.0 or newer
-- Ninja
+- Ninja (the presets use the Ninja Multi-Config generator)
 - clang-tidy (optional, for static analysis)
 
-Dependencies (GSL and GoogleTest) are downloaded automatically at configure time.
+GSL (v5.0.0) and GoogleTest (v1.18.0) are downloaded automatically at configure time.
+Python 3 is needed for `tools/compare.py` (used by the functional tests); matplotlib
+is needed only for `tools/plot.py`.
 
 ## Build
 
 ```bash
 cmake --preset default
-cmake --build --preset release
+cmake --build --preset release          # or: debug
 ```
 
-Other build presets: `debug`, `clang-tidy-debug` and `clang-tidy-release`
-(the last two need `cmake --preset clang-tidy` first and also run clang-tidy).
+| Preset | Kind | What it does |
+|---|---|---|
+| `default` | configure | Ninja Multi-Config, Release and Debug configurations, build tree in `out/build/default/` |
+| `clang-tidy` | configure | same as `default` with clang-tidy enabled |
+| `release`, `debug` | build and test | build (or test) the Release / Debug configuration of `default` |
+| `clang-tidy-release`, `clang-tidy-debug` | build | build with clang-tidy (run `cmake --preset clang-tidy` first) |
 
-The release build uses `-O3 -DNDEBUG -fno-math-errno -fassociative-math
--fno-signed-zeros -fno-trapping-math` (see `CMakePresets.json`).
+Release flags: `-O3 -DNDEBUG -fno-math-errno -fassociative-math -fno-signed-zeros
+-fno-trapping-math` (set in `CMakePresets.json`). All builds use `-Wall -Wextra
+-Wpedantic -Wconversion -Wsign-conversion` with warnings treated as errors.
+
+Without presets, the equivalent manual commands are:
+
+```bash
+cmake -S . -B out/build/default -G "Ninja Multi-Config" \
+  -DCMAKE_CXX_COMPILER=g++-15 \
+  -DCMAKE_CXX_FLAGS_RELEASE="-O3 -DNDEBUG -fno-math-errno -fassociative-math -fno-signed-zeros -fno-trapping-math"
+cmake --build out/build/default --config Release
+ctest --test-dir out/build/default -C Release --output-on-failure
+```
+
+### Where the binaries end up
+
+Build tree: `out/build/default/<folder>/<Configuration>/<target>`
+
+| Target | Kind | Source folder | Release binary |
+|---|---|---|---|
+| `grav-aos` | executable | `aos/` | `out/build/default/aos/Release/grav-aos` |
+| `grav-soa` | executable | `soa/` | `out/build/default/soa/Release/grav-soa` |
+| `common` | static library | `common/` | linked into both executables |
+| `utcommon` | unit tests | `utcommon/` | `out/build/default/utcommon/Release/utcommon` |
+| `utaos` | unit tests | `utaos/` | `out/build/default/utaos/Release/utaos` |
+| `utsoa` | unit tests | `utsoa/` | `out/build/default/utsoa/Release/utsoa` |
+
+Naming: `grav-<layout>` for the simulators and `ut<folder>` for the unit-test
+executables (`ut` + `common`, `aos` or `soa`). Replace `Release` with `Debug` for the debug build.
 
 ## Run
 
-```bash
-./out/build/default/aos/Release/grav-aos <num_iterations> <width> <height> <time_step>
+```
+grav-aos <num_iterations> <width> <height> <time_step>
+grav-soa <num_iterations> <width> <height> <time_step>
 ```
 
-Example: `./grav-aos 100 1000 1000 0.25`
+| Argument | Meaning |
+|---|---|
+| `num_iterations` | number of time steps to simulate |
+| `width`, `height` | size of the enclosure |
+| `time_step` | duration of one step |
 
-The program reads `input/input.txt` from the current directory. Each line has
-six values: mass, radius, x, y, vx, vy. It writes `init_config.txt` (after the
-initial collision pass) and `final_config.txt` (after the last iteration) to
-the current directory.
+Example: `grav-aos 100 1000 1000 0.25`
+
+**Input:** `input/input.txt` in the current directory. One object per line, six
+values: mass, radius, x, y, vx, vy. Invalid objects are dropped.
+**Output**, written to the current directory:
+
+| File | Contents |
+|---|---|
+| `init_config.txt` | state after the initial collision pass, before the first iteration |
+| `final_config.txt` | state after the last iteration |
+
+Both start with a header line `width height time_step count`, followed by one line
+per object: `id: m r x y vx vy`. Both executables produce the same results.
+On wrong arguments or missing input they exit with a non-zero code and print a
+message prefixed `grav-aos:` / `grav-soa:` on stderr.
+
+Example inputs in the repository's `input/` folder: `input1.txt`, `input1K.txt`
+(1,000 objects) and `input10K.txt` (10,000 objects). Copy one to `input/input.txt`
+in your run directory.
 
 ## Test
 
 ```bash
-scripts/utest.sh [release|debug]        # build + all unit tests (same as ctest --preset release)
-scripts/ftest.sh [--no-build] [--full]  # functional tests on the real executables
-scripts/check_coverage.sh [common|aos|soa]  # coverage report for one unit test target
+ctest --preset release --output-on-failure      # all unit tests (or: --preset debug)
 ```
 
-`ftest.sh` runs error cases, hand-made cases (`ftest/cases/`) and the instructor's
-reference cases (`ftest/reference/`), comparing outputs with `tools/compare.py`
-(values within 0.001). `--full` also runs the 10K reference case (about 1 minute).
+To run one test executable directly, for example
+`out/build/default/utaos/Release/utaos` (also accepts `--gtest_filter=...`).
 
-## Performance
+| Test | Where | Notes |
+|---|---|---|
+| Unit tests (GoogleTest) | `utcommon/`, `utaos/`, `utsoa/`, helpers in `testutil/` | one executable per folder, registered with ctest |
+| Functional tests | `ftest/cases/<name>/` | small hand-made cases; each has `args`, `input.txt`, `expected/{init,final}_config.txt` |
+| Reference cases | `ftest/reference/{1k,10k}/` | the instructor's inputs and outputs |
 
-Time and energy are measured on the avignon cluster with slurm:
+To check a functional case by hand, run an executable with the case's `args` in a
+directory whose `input/input.txt` is the case's `input.txt`, then compare the outputs with
+`expected/` (`python3 tools/compare.py <ours> <expected>` accepts values within 0.001).
 
-```bash
-scripts/run_build_perf.sh --reps 3 --tag mytag   # build, then submit the perf jobs
-scripts/run_perf.sh --ref-only                   # perf jobs only (release build must exist)
-python3 tools/plot.py [perf_<jobid>.csv ...]     # plots (needs matplotlib)
-```
+The helper scripts are in `scripts/` and are not needed to build or run:
+`utest.sh`, `ftest.sh` (all functional cases plus error cases), `check_coverage.sh`
+(coverage), and `build.sh`, `run_perf.sh`, `run_build_perf.sh` (slurm jobs for the avignon
+cluster; measurements are in `perf/results/`, plots made with `tools/plot.py`).
+CI (`.github/workflows/`) builds Debug and Release with g++-15 and runs the tests and
+clang-tidy on pull requests.
 
-Results are in `perf/results/`.
+## Design
+
+Component diagram:
+
+![Component diagram](docs/component-diagram.png)
+
+Main loop:
+
+![Main loop](docs/main-loop-diagram.png)
+
+Class diagram:
+
+![Class diagram](docs/class-diagram.png)
+
+Sequence diagram, one run:
+
+![Sequence diagram, one run](docs/sequence-diagram-one-run.png)
+
+Sequence diagram, one iteration:
+
+![Sequence diagram, one iteration](docs/sequence-diagram-one-iteration.png)
+
+Collision pass:
+
+![Collision pass](docs/collision-pass-diagram.png)
+
+Life of a particle:
+
+![Life of a particle](docs/partical-lifetime-diagram.png)
 
 ## Project layout
 
-| Folder | Contents |
-|---|---|
-| `common/` | code shared by both versions: argument parsing, input parser, config writer, physics and collision rules |
-| `aos/`, `soa/` | the two implementations, each with its `main.cpp` |
-| `utcommon/`, `utaos/`, `utsoa/` | unit tests (GoogleTest) |
-| `input/` | example input files |
-| `ftest/` | functional test cases and reference outputs |
-| `scripts/` | build, test, coverage and cluster performance scripts |
-| `tools/` | output comparison (`compare.py`) and plotting (`plot.py`) |
-| `perf/` | performance results |
+```
+.
+├── CMakeLists.txt, CMakePresets.json, cmake/   build configuration (presets, test helper)
+├── common/        static library shared by both versions
+│   ├── include/   progargs, input_parser, config_writer, physics, collision_rules,
+│   │              collision_grid, point, vector, enclosure, particle_record, constants
+│   └── src/       progargs, input_parser, config_writer, collision_grid
+├── aos/           grav-aos
+│   ├── include/   particle, particle_system
+│   └── src/       main, particle_system, integrate, collisions
+├── soa/           grav-soa
+│   ├── include/   particle_system
+│   └── src/       main, particle_system, integrate, collisions, file_io
+├── utcommon/, utaos/, utsoa/   unit tests (GoogleTest), one folder per library/executable
+├── testutil/      helpers shared by the unit tests
+├── ftest/         functional tests: cases/ (hand-made) and reference/ (instructor's 1k, 10k)
+├── scripts/       build.sh, utest.sh, ftest.sh, check_coverage.sh, run_perf.sh, run_build_perf.sh
+├── tools/         compare.py (output comparison), plot.py (performance plots)
+├── input/         example inputs: input1.txt, input1K.txt, input10K.txt
+├── perf/results/  performance measurements
+├── docs/          design diagrams (images)
+└── .github/       CI workflows (tests, clang-tidy)
+```
+
+Generated, not tracked: `out/` (build tree and binaries).
+
