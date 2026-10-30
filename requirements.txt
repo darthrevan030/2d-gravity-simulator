@@ -1,0 +1,3 @@
+# Python dependencies for the helper tools (tools/plot*.py).
+# tools/compare.py (used by the functional tests) needs only the standard library.
+matplotlib>=3.8
