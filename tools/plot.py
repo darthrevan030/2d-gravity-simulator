@@ -5,7 +5,7 @@ Meant to run locally on a copy of the CSVs from the cluster (needs matplotlib:
 pip install matplotlib). Works from any directory.
 
 Usage:
-    perf/plot.py [perf_<jobid>.csv ...] [-o OUTDIR]
+    tools/plot.py [perf_<jobid>.csv ...] [-o OUTDIR] [--log]
 With no CSV it uses the newest perf/results/perf_*.csv; with no -o the plots go
 to perf/results/plots. CSVs from different jobs that share a tag are told apart
 by their job id.
@@ -43,8 +43,14 @@ def value(row, col):
     return float(row[col]) if col and row.get(col) not in (None, "") else 0.0
 
 
+def fmt(y):
+    return f"{y:.3g}"
+
+
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--log", action="store_true",
+                    help="log-scale axes (scalability: both, reference bars: y) to separate small values")
     ap.add_argument("csv", nargs="*", help="default: newest perf/results/perf_*.csv")
     ap.add_argument("-o", "--outdir", default=str(ROOT / "perf" / "results" / "plots"))
     ns = ap.parse_args()
@@ -91,8 +97,12 @@ def main():
                 pts = {int(r["n"]): r for r in ref if (r["impl"], r["tag"]) == (impl, tag)}
                 ys = [value(pts[n], col) if n in pts else 0 for n in sizes]
                 errs = [value(pts[n], rsd) / 100 * y if n in pts else 0 for n, y in zip(sizes, ys)]
-                ax.bar([i + k * width for i in range(len(sizes))], ys, width,
-                       yerr=errs if rsd else None, capsize=3, label=label(impl, tag))
+                bars = ax.bar([i + k * width for i in range(len(sizes))], ys, width,
+                              yerr=errs if rsd else None, capsize=3, label=label(impl, tag))
+                ax.bar_label(bars, labels=[fmt(y) for y in ys], fontsize=6, padding=2, rotation=90)
+            ax.margins(y=0.2)
+            if ns.log:
+                ax.set_yscale("log")
             ax.set_xticks([i + width * (len(series) - 1) / 2 for i in range(len(sizes))])
             ax.set_xticklabels([f"{n // 1000}K" for n in sizes])
             ax.set_ylabel(ylabel)
@@ -115,7 +125,16 @@ def main():
                 xs = [int(r[xcol]) for r in pts]
                 ys = [value(r, col) for r in pts]
                 errs = [value(r, rsd) / 100 * y for r, y in zip(pts, ys)] if rsd else None
-                ax.errorbar(xs, ys, yerr=errs, marker="o", capsize=3, label=label(impl, tag))
+                line = ax.errorbar(xs, ys, yerr=errs, marker="o", capsize=3, label=label(impl, tag))
+                above = series.index((impl, tag)) % 2 == 0  # alternate sides so series don't overlap
+                for x, y in zip(xs, ys):  # value label on every point, so small ones stay readable
+                    ax.annotate(fmt(y), (x, y), textcoords="offset points",
+                                xytext=(0, 6 if above else -10), ha="center", fontsize=6,
+                                color=line[0].get_color())
+            ax.margins(y=0.15)
+            if ns.log:
+                ax.set_xscale("log")
+                ax.set_yscale("log")
             ax.set_xlabel(xlabel)
             ax.set_ylabel(ylabel)
             ax.set_title(f"{xlabel}: {ylabel.split(' (')[0].lower()}")
